@@ -18,6 +18,7 @@ $padding: 10px;
     background-position: center center;
 
     &.animated{
+        pointer-events: none;
         position: absolute;
         width: calc((100vw - 17px)/#{$cardsPerPage} - #{$padding}*2);
         height: calc(100vw/#{$cardsPerPage} - 1px - #{$padding}*2);

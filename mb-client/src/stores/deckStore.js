@@ -32,6 +32,24 @@ export class DeckStore {
     }
 
     /**
+     * Remove a card from the deck. Returns TRUE if the card was remove correctly
+     * @param card
+     * @returns {boolean}
+     */
+    @action removeCard(card) {
+        const c = _.find(this.cardsList, {id_card: card.id_card});
+        if(c && c.count > 1){
+            c.count--;
+            return true;
+        }
+        else if(c){
+            this.cardsList.splice(this.cardsList.indexOf(c), 1);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Return the count of cards in a deck
      * @param card
      * @returns {number}

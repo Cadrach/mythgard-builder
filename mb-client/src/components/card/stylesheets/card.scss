@@ -1,11 +1,13 @@
-$cardsPerPage: 6;
+$cardsPerPage: 4;
+$padding: 10px;
 
 #container{
     width: calc((100vw - 17px)/#{$cardsPerPage});
     height: calc(100vw/#{$cardsPerPage} - 1px);
-    padding: 10px;
-    overflow: hidden;
+    padding: $padding;
+    //overflow: hidden;
     float: left;
+    //position: relative;
 }
 
 #card{
@@ -14,4 +16,9 @@ $cardsPerPage: 6;
     background-size:     contain;
     background-repeat:   no-repeat;
     background-position: center center;
+
+    &.animated{
+        position: relative;
+        top: calc(-100vw/#{$cardsPerPage} + 1px + 2*#{$padding});
+    }
 }

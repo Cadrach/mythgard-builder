@@ -1,8 +1,7 @@
 #container {
-  width: calc((100vw - 17px)/6);
-  height: calc(100vw/6 - 1px);
+  width: calc((100vw - 17px)/4);
+  height: calc(100vw/4 - 1px);
   padding: 10px;
-  overflow: hidden;
   float: left; }
 
 #card {
@@ -11,3 +10,6 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center; }
+  #card.animated {
+    position: relative;
+    top: calc(-100vw/4 + 1px + 2*10px); }

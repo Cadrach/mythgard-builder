@@ -17,6 +17,9 @@ class Card extends Model
     const TYPE_ARTIFACT = 'Artifact';
 
     protected $appends = ['card_image'];
+    protected $casts = [
+        'card_keywords' => 'array',
+    ];
 
     public function getCardImageAttribute() {
         return strtolower($this->card_name_clean) . '.png';

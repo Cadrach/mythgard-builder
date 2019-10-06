@@ -1,4 +1,5 @@
 import {observable, action, computed, autorun} from 'mobx';
+import axios from '../axios';
 // import uuid from 'node-uuid';
 
 export class CardStore {
@@ -16,9 +17,9 @@ export class CardStore {
 
 
     $req = async () => {
-        const response = await fetch('api/cards');
-        const cards = await response.json();
-        return cards;
+        //const response = await fetch(process.env.REACT_APP_SERVER_ROOT + 'api/cards', {mode: 'no-cors'});
+        const {data} = await axios.get('api/cards');
+        return data;
     }
 
     @action loadCards() {

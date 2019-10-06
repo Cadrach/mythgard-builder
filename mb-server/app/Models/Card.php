@@ -16,13 +16,25 @@ class Card extends Model
     const TYPE_SPELL = 'Spell';
     const TYPE_ARTIFACT = 'Artifact';
 
-    protected $appends = ['card_image'];
+    protected $appends = [
+        'card_image',
+        'card_max_in_deck',
+    ];
     protected $casts = [
         'card_keywords' => 'array',
     ];
 
     public function getCardImageAttribute() {
         return strtolower($this->card_name_clean) . '.png';
+    }
+
+    public function getCardMaxInDeckAttribute() {
+        return [
+            self::RARITY_COMMON => 4,
+            self::RARITY_UNCOMMON => 3,
+            self::RARITY_RARE => 2,
+            self::RARITY_MYTHIC => 1,
+        ][$this->card_rarity];
     }
 
 }

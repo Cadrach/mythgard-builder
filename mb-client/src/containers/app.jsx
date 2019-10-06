@@ -6,13 +6,11 @@ import User from "../components/user/user";
 
 // Import Common Stylesheets
 import "../stylesheets/common.css";
-import Card from "../components/card/card";
 
 const App = () => (
   <div id="app">
     <DevTools />
     <Header />
-        <Card/>
   </div>
 );
 

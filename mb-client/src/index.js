@@ -9,9 +9,12 @@ import UserStore from './stores/user';
 import LanguageStore from './stores/language';
 import UIStore from './stores/ui';
 
+//Stores
+import CardStore from "./stores/cardStore";
+import DeckStore from "./stores/deckStore";
+
 // Import Components
 import App from './containers/app';
-import CardStore from "./stores/cardStore";
 import Cards from "./containers/cards";
 
 // Execute the ServiceWorker
@@ -28,12 +31,14 @@ const userStore = UserStore.create({
 const languageStore = LanguageStore.create({ language: 'en' });
 const uiStore = UIStore.create({ borderRadius: 3, textColor: 'white' });
 const cardStore = CardStore;
+const deckStore = DeckStore;
 
 const store = {
   user: userStore,
   language: languageStore,
   ui: uiStore,
   cardStore: cardStore,
+  deckStore: deckStore,
 };
 
 const router = (

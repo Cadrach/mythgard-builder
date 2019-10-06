@@ -17,7 +17,6 @@ export class CardStore {
 
 
     $req = async () => {
-        //const response = await fetch(process.env.REACT_APP_SERVER_ROOT + 'api/cards', {mode: 'no-cors'});
         const {data} = await axios.get('api/cards');
         return data;
     }
@@ -27,8 +26,6 @@ export class CardStore {
         this.isLoading = true;
         return this.$req().then((cards) => {
             this.cardsRegistry = cards;
-            // console.log(cards)
-            // cards.forEach((c) => this.cardsRegistry.set(c.id_card, c));
         }).finally(action(() => { this.isLoading = false; }))
     }
 }

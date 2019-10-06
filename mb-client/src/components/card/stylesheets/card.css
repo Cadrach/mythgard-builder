@@ -11,5 +11,6 @@
   background-repeat: no-repeat;
   background-position: center center; }
   #card.animated {
-    position: relative;
-    top: calc(-100vw/4 + 1px + 2*10px); }
+    position: absolute;
+    width: calc((100vw - 17px)/4 - 10px*2);
+    height: calc(100vw/4 - 1px - 10px*2); }

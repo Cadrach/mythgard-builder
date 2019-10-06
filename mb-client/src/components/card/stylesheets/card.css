@@ -1,0 +1,7 @@
+#container {
+  width: calc((100vw - 17px)/10);
+  height: calc(10vw - 1px);
+  padding: 10px;
+  overflow: hidden;
+  float: left;
+  background: red; }

@@ -47,6 +47,7 @@ class CardsTableSeeder extends Seeder
                 'ide_faction' => $factions[$card->faction],
                 'id_rhino' => $card->cardid,
                 'card_name' => $card->cardname,
+                'card_name_export' => $card->cardnameclean,
                 'card_name_clean' => $this->normalize(ucwords($card->cardnameclean, ' -')),
                 'card_text' => $card->text,
                 'card_text_flavor' => $card->flavor,

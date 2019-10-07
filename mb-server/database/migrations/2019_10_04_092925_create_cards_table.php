@@ -21,6 +21,7 @@ class CreateCardsTable extends Migration
             $table->unsignedTinyInteger('ide_faction')->index();
 
             $table->string('card_name');
+            $table->string('card_name_export');
             $table->string('card_name_clean');
             $table->string('card_set');
             $table->enum('card_type', [Card::TYPE_CREATURE, Card::TYPE_SPELL, Card::TYPE_LANE_ENCHANTMENT, Card::TYPE_ARTIFACT]);

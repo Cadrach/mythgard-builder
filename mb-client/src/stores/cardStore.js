@@ -17,7 +17,7 @@ export class CardStore {
 
 
     $req = async () => {
-        const {data} = await axios.get('api/cards');
+        const {data} = await axios.get('json/cards');
         return data;
     }
 

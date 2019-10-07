@@ -5,7 +5,7 @@ import Header from "../components/header/header";
 import User from "../components/user/user";
 
 // Import Common Stylesheets
-import "../stylesheets/common.css";
+import "../stylesheets/imports.css";
 
 const App = () => (
   <div id="app">

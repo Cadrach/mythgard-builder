@@ -1,16 +1,15 @@
 import React from "react";
 
 // Stylesheet Imports
-import "./stylesheets/card.css";
-import {inject, observer} from "mobx-react";
-import deckStore from "../../stores/deckStore";
+import "./card.css";
+import {inject} from "mobx-react";
 
 @inject('deckStore')
 class Card extends React.Component {
     constructor(props) {
         super(props);
         this.state = {animatedCards: []};
-        this.card = this.props.data;
+        this.card = props.data;
         this.cardElement = <div id="card" style={{backgroundImage: 'url(images/cards/s/'+this.card.card_image+')'}}></div>;
 
         // This binding is necessary to make `this` work in the callback

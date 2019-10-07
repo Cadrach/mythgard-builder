@@ -1,63 +1,69 @@
-import {observable, action, computed, autorun} from 'mobx';
-import _ from 'lodash';
-// import uuid from 'node-uuid';
+import { types } from 'mobx-state-tree';
 
-export class DeckStore {
+/**
+ * Mobx State Tree Store
+ * The store recieves 3 parameters
+ *  1st one is the Store Name
+ *  2nd is an object with the Props and Computed values
+ *  3rd is and object with the Actions
+ **/
 
-    @observable cardsList = [];
+const DeckLine = types.model('DeckLine',{
+    id_card: types.number,
+    count: types.number,
+});
 
-    @computed get cards() {
-        return this.cardsList;
-    };
-
-    /**
-     * Add card to deck. Returns TRUE if the card was added
-     * @param card
-     * @returns {boolean}
-     */
-    @action addCard(card) {
-        const c = _.find(this.cardsList, {id_card: card.id_card});
-        if(c && c.count < card.card_max_in_deck){
-            c.count++;
-            return true;
+const DeckStore = types
+    .model('DeckStore', {
+        cardsList: types.array(DeckLine),
+    })
+    .views(self => ({
+        get cards() {
+            return self.cardsList;
+        },
+        get sum(){
+            return _.sumBy(self.cardsList, 'count');
         }
-        else if(!c){
-            this.cardsList.push({
-                id_card: card.id_card,
-                count: 1,
-            });
-            return true;
-        }
-        return false;
-    }
+    }))
+    .actions(self => ({
 
-    /**
-     * Remove a card from the deck. Returns TRUE if the card was remove correctly
-     * @param card
-     * @returns {boolean}
-     */
-    @action removeCard(card) {
-        const c = _.find(this.cardsList, {id_card: card.id_card});
-        if(c && c.count > 1){
-            c.count--;
+        /**
+         * Add a card to the deck.
+         * Returns TRUE if the card was added
+         * @param card
+         * @returns {boolean}
+         */
+        addCard(card) {
+            const line = _.find(self.cardsList, {id_card: card.id_card});
+            if(line && line.count >= card.card_max_in_deck) return false; //cannot add, exit false
+            else if( ! line) self.cardsList.push({id_card: card.id_card, count: 1}); //create line
+            else line.count++; //add count
             return true;
-        }
-        else if(c){
-            this.cardsList.splice(this.cardsList.indexOf(c), 1);
+        },
+
+        /**
+         * Remove a card from the deck.
+         * Returns TRUE if the card was removed
+         * @param card
+         * @returns {boolean}
+         */
+        removeCard(card) {
+            const line = _.find(self.cardsList, {id_card: card.id_card});
+            if( ! line) return false; //no card, nothing to remove
+            else if(line && line.count > 1) line.count--; //decrease
+            else self.cardsList.splice(self.cardsList.indexOf(line), 1) //last card, remove
             return true;
+        },
+
+        /**
+         * Count occurences of a specific card in the deck
+         * @param card
+         * @returns {number}
+         */
+        countCard(card) {
+            const c = _.find(self.cardsList, {id_card: card.id_card})
+            return c ? c.count:0;
         }
-        return false;
-    }
+    }));
 
-    /**
-     * Return the count of cards in a deck
-     * @param card
-     * @returns {number}
-     */
-    countCard(card) {
-        const c = _.find(this.cardsList, {id_card: card.id_card})
-        return c ? c.count:0;
-    }
-}
-
-export default new DeckStore();
+export default DeckStore;

@@ -1,10 +1,12 @@
-`composer install`
+Install PHP libs `composer install`
 
-`edit .env`
+Edit configuration `edit .env`
 
-`php artisan migrate --seed`
+Install DB `php artisan migrate --seed`
 
-`yarn install`
+Generate key `php artisan key:generate`
+
+Install node libs `yarn install`
 
 Generate .js:
 `yarn dev`

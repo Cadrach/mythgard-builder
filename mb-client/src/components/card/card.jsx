@@ -1,7 +1,7 @@
 import React from "react";
 
 // Stylesheet Imports
-import "./card.css";
+import "./card.scss";
 import {inject} from "mobx-react";
 
 @inject('deckStore')
@@ -24,6 +24,9 @@ class Card extends React.Component {
         if(this.props.deckStore.addCard(this.card)){
             this.addAnimatedCard('fadeOutRight');
         }
+        else{
+            this.addAnimatedCard('shake fast');
+        }
     }
 
     /**
@@ -33,6 +36,9 @@ class Card extends React.Component {
     handleRightClick = (e) => {
         if(this.props.deckStore.removeCard(this.card)){
             this.addAnimatedCard('fadeInRight', true);
+        }
+        else{
+            this.addAnimatedCard('shake fast');
         }
         e.preventDefault();
     }

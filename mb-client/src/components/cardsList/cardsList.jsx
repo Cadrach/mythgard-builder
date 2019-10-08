@@ -18,6 +18,7 @@ const CardsList = (props) => (
         }}
         style={{margin: 16}}
         dataSource={props.cards}
+        rowKey={item => item.id_card}
         renderItem={item => (
             <List.Item>
                 <Card data={item} deckStore={props.deckStore}/>

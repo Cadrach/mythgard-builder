@@ -9,7 +9,7 @@ export default class MyCards extends React.Component {
 
     render() {
         return (
-            <CardsList cards={this.props.cardStore.cards}/>
+            <CardsList cards={this.props.cardStore.cards} shavedHeight={64}/>
         );
     }
 }

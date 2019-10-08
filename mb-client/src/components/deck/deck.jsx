@@ -16,7 +16,7 @@ export default class Deck extends React.Component {
                     rowKey={'id_card'}
                     dataSource={deckStore.cards}
                     renderItem={item => (
-                        <List.Item>{cardStore.cardById(item.id_card).card_name} <Badge count={item.count} /></List.Item>
+                        <List.Item><Badge count={item.count} /> {cardStore.cardById(item.id_card).card_name}</List.Item>
                     )}
                 />
             </div>

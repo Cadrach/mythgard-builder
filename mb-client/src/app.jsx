@@ -11,6 +11,7 @@ const { SubMenu } = Menu;
 // Import Common Stylesheets
 import "./stylesheets/imports.css";
 import DeckBuilder from "./containers/deckBuilder";
+import MyCards from "./containers/myCards";
 
 const App = () => (
     <Layout>
@@ -23,9 +24,15 @@ const App = () => (
                     selectedKeys={[useLocation().pathname]}
                     style={{lineHeight: '64px'}}
                 >
-                    <Menu.Item key="/"><NavLink to="/">Home</NavLink></Menu.Item>
-                    <Menu.Item key="/deck-builder"><NavLink to="/deck-builder">My Decks</NavLink></Menu.Item>
-                    <Menu.Item key="/cards"><NavLink to="/cards">My Cards</NavLink></Menu.Item>
+                    <Menu.Item key="/">
+                        <NavLink to="/">Home</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="/cards" style={{float: 'right'}}>
+                        <NavLink to="/cards">My Cards</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="/deck-builder" style={{float: 'right'}}>
+                        <NavLink to="/deck-builder">My Decks</NavLink>
+                    </Menu.Item>
                     {/*<Menu.Item key="3">nav 3</Menu.Item>*/}
                 </Menu>
             </Header>
@@ -33,6 +40,7 @@ const App = () => (
         <Layout style={{marginTop: 64}}>
             <div>
                 <Route exact path="/deck-builder" component={DeckBuilder} />
+                <Route exact path="/cards" component={MyCards} />
             </div>
         </Layout>
     </Layout>

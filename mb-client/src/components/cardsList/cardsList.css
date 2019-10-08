@@ -1,0 +1,17 @@
+#container {
+  width: calc((100vw - 17px)/4);
+  height: calc(100vw/4 - 1px);
+  padding: 10px;
+  float: left; }
+
+#card {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center; }
+  #card.animated {
+    pointer-events: none;
+    position: absolute;
+    width: calc((100vw - 17px)/4 - 10px*2);
+    height: calc(100vw/4 - 1px - 10px*2); }

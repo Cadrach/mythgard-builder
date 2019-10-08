@@ -4,7 +4,6 @@ import React from "react";
 import "./card.scss";
 import {inject} from "mobx-react";
 
-@inject('deckStore')
 class Card extends React.Component {
     constructor(props) {
         super(props);
@@ -21,11 +20,13 @@ class Card extends React.Component {
      * @param e
      */
     handleClick = (e) => {
-        if(this.props.deckStore.addCard(this.card)){
-            this.addAnimatedCard('fadeOutRight');
-        }
-        else{
-            this.addAnimatedCard('shake fast');
+        if(this.props.deckStore) {
+            if (this.props.deckStore.addCard(this.card)) {
+                this.addAnimatedCard('fadeOutRight');
+            }
+            else {
+                this.addAnimatedCard('shake fast');
+            }
         }
     }
 
@@ -34,13 +35,15 @@ class Card extends React.Component {
      * @param e
      */
     handleRightClick = (e) => {
-        if(this.props.deckStore.removeCard(this.card)){
-            this.addAnimatedCard('fadeInRight', true);
+        if(this.props.deckStore){
+            if(this.props.deckStore.removeCard(this.card)){
+                this.addAnimatedCard('fadeInRight', true);
+            }
+            else{
+                this.addAnimatedCard('shake fast');
+            }
+            e.preventDefault();
         }
-        else{
-            this.addAnimatedCard('shake fast');
-        }
-        e.preventDefault();
     }
 
     /**
@@ -66,7 +69,7 @@ class Card extends React.Component {
             <div id="container" onClick={this.handleClick} onContextMenu={this.handleRightClick}>
                 {animatedCards.map(c => c)}
                 {this.cardElement}
-                {this.props.deckStore.countCard(this.card)}
+                {this.props.deckStore ? this.props.deckStore.countCard(this.card):null}
             </div>
         )
     }

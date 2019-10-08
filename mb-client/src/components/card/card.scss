@@ -1,29 +1,33 @@
 $cardsPerPage: 4;
 $padding: 10px;
 
-#container{
-    width: calc((100vw - 17px)/#{$cardsPerPage});
-    height: calc(100vw/#{$cardsPerPage} - 1px);
-    padding: $padding;
-    //overflow: hidden;
-    float: left;
-    //position: relative;
+#container-aspect-ratio{
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: calc(139% + 30px);
 }
 
-#card{
+#container{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#cardImage{
+    //position: absolute;
+    padding-bottom: 139%;
     width: 100%;
-    height: 100%;
     background-size:     contain;
     background-repeat:   no-repeat;
     background-position: center center;
 
-    //box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.33);
-
     &.animated{
+        position: absolute;
+        top: 0;
         pointer-events: none;
         position: absolute;
-        width: calc((100vw - 17px)/#{$cardsPerPage} - #{$padding}*2);
-        height: calc(100vw/#{$cardsPerPage} - 1px - #{$padding}*2);
-        //top: calc(-100vw/#{$cardsPerPage} + 1px + 2*#{$padding});
     }
 }

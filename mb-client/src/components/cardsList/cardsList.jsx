@@ -9,13 +9,14 @@ const CardsList = (props) => (
     <List
         grid={{
             gutter: 16,
-            xs: 1,
-            sm: 2,
+            xs: 2,
+            sm: 3,
             md: 4,
             lg: 4,
-            xl: 6,
+            xl: 4,
             xxl: 3,
         }}
+        style={{margin: 16}}
         dataSource={props.cards}
         renderItem={item => (
             <List.Item>

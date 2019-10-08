@@ -3,13 +3,16 @@ import React from "react";
 // Stylesheet Imports
 import "./card.scss";
 import {inject} from "mobx-react";
+import {Rate} from "antd";
+import {Icon} from "react-fa/lib";
+
 
 class Card extends React.Component {
     constructor(props) {
         super(props);
         this.state = {animatedCards: []};
         this.card = props.data;
-        this.cardElement = <div id="card" style={{backgroundImage: 'url(images/cards/s/'+this.card.card_image+')'}}></div>;
+        this.cardImage = <div id="cardImage" style={{backgroundImage: 'url(images/cards/s/'+this.card.card_image+')'}}></div>;
 
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
@@ -53,7 +56,7 @@ class Card extends React.Component {
      */
     addAnimatedCard = (animation, onBottom) => {
         const {animatedCards} = this.state;
-        const newAnimatedCard = React.cloneElement(this.cardElement, {className: 'animated ' + animation, key: _.uniqueId('acard_')});
+        const newAnimatedCard = React.cloneElement(this.cardImage, {className: 'animated ' + animation, key: _.uniqueId('acard_')});
         this.setState({animatedCards: onBottom ? [...animatedCards, newAnimatedCard]:[newAnimatedCard, ...animatedCards]});
         setTimeout(() => {
             const newAnimatedCards = [...this.state.animatedCards];
@@ -64,12 +67,28 @@ class Card extends React.Component {
 
     render(){
         const {animatedCards} = this.state;
+        let rate;
+
+        //Display number of cards (if deckStore provided)
+        if(this.props.deckStore){
+            rate = <div style={{textAlign:'center'}}>
+                <Rate
+                    disabled
+                    value={this.props.deckStore.countCard(this.card)}
+                    count={this.card.card_max_in_deck}
+                    character={<Icon name="circle"/>}
+                    style={{color: 'red'}}
+                />
+            </div>;
+        }
 
         return (
-            <div id="container" onClick={this.handleClick} onContextMenu={this.handleRightClick}>
-                {animatedCards.map(c => c)}
-                {this.cardElement}
-                {this.props.deckStore ? this.props.deckStore.countCard(this.card):null}
+            <div id="container-aspect-ratio" onClick={this.handleClick} onContextMenu={this.handleRightClick}>
+                <div id="container">
+                    {this.cardImage}
+                    {animatedCards.map(c => c)}
+                    {rate ? rate : null}
+                </div>
             </div>
         )
     }

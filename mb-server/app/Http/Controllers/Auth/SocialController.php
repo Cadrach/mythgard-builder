@@ -24,7 +24,7 @@ class SocialController extends Controller
         $userSocial  =   Socialite::driver($provider)->stateless()->user();
         $users       =   User::where(['email' => $userSocial->getEmail()])->first();
         if($users){
-            Auth::login($users);
+            Auth::login($users, true);
             return redirect('/');
         }else{
             $user = User::create([

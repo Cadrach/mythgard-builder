@@ -8,7 +8,6 @@ export default class Deck extends React.Component {
 
     render(){
         const {deckStore, cardStore} = this.props;
-        console.log(deckStore.cards)
         return (
             <div>
                 <div>{deckStore.sum}/40</div>

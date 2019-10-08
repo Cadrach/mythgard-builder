@@ -1,6 +1,5 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
-import { withRouter, NavLink } from 'react-router-dom'
 import Card from "../components/card/card";
 import {Row, Col, Affix} from "antd";
 import Deck from "../components/deck/deck";
@@ -8,9 +7,8 @@ import Deck from "../components/deck/deck";
 // const cards = [{id_card: 1, card_name: '1'},{id_card: 2, card_name: '2'},{id_card: 3, card_name: '3'}];
 
 @inject('cardStore', 'deckStore')
-@withRouter
 @observer
-export default class Cards extends React.Component {
+export default class DeckBuilder extends React.Component {
 
     render() {
         const {cards} = this.props.cardStore;
@@ -25,6 +23,9 @@ export default class Cards extends React.Component {
                         <Deck/>
                     </Affix>
                 </Col>
+                <Affix offsetBottom={0}>
+                    <div>Hellow world</div>
+                </Affix>
             </Row>
         );
     }

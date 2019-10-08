@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import { Provider } from 'mobx-react';
 // Service Worker for PWA
 import serviceWorkerRegister from './registerServiceWorker';
@@ -14,8 +14,7 @@ import CardStore from "./stores/cardStore";
 import DeckStore from "./stores/deckStore";
 
 // Import Components
-import App from './containers/app';
-import Cards from "./containers/cards";
+import App from './app';
 
 // Execute the ServiceWorker
 serviceWorkerRegister();
@@ -43,12 +42,9 @@ const store = {
 
 const router = (
   <Provider {...store}>
-    <Router>
-      <div>
-        <Route exact path="/" component={App} />
-        <Route exact path="/cards" component={Cards} />
-      </div>
-    </Router>
+      <Router>
+          <App/>
+      </Router>
   </Provider>
 );
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import {Row, Col, Affix, Layout, Rate} from "antd";
 import Deck from "../components/deck/deck";
 import CardsList from "../components/cardsList/cardsList"
@@ -39,9 +40,11 @@ export default class DeckBuilder extends React.Component {
                         <CardsList cards={filteredCards} deckStore={this.props.deckStore} shavedWidth={300} shavedHeight={64+89}/>
                     </Layout.Content>
 
-                    <Layout.Sider width={300} style={{background: 'transparent', padding: 8}}>
-                        <Deck/>
-                    </Layout.Sider>
+                    <PerfectScrollbar>
+                        <Layout.Sider width={300} style={{background: 'transparent', padding: 8, height: 'calc(100vh - 64px - 89px)'}}>
+                            <Deck/>
+                        </Layout.Sider>
+                    </PerfectScrollbar>
                 </Layout>
 
                 <Layout.Footer>

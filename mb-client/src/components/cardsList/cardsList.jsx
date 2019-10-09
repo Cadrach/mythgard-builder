@@ -4,11 +4,11 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Card from "../card/card";
 
 
-const columnCount = 4;
 const spacer = 32;
 
 const Cell = (props, { columnIndex, rowIndex, style }) => {
 
+    const {columnCount} = props;
     const index = rowIndex * columnCount + columnIndex;
     const card = props.cards.length >= index && props.cards[index] ? props.cards[index] : null;
 
@@ -30,9 +30,12 @@ const Cell = (props, { columnIndex, rowIndex, style }) => {
 const CardsList = (props) => {
     const {width, height} = useWindowDimensions();
 
+    const columnCount = width>1600 ? 6 : (width>1200 ? 5 : (width>900 ? 4: (width>700 ? 3:1)));
     const widthModified = width - (props.shavedWidth ? props.shavedWidth:0);
     const columnWidth = (widthModified - spacer*2) / columnCount - spacer;
-    const cellHeight = columnWidth * 1.39 + 30;
+    const cellHeight = columnWidth * 1.39 + (props.deckStore ? 30 : 0);
+
+    const cellProps = {...props, columnCount};
 
     return (<Grid
         className="Grid"
@@ -45,7 +48,7 @@ const CardsList = (props) => {
         width={widthModified}
         style={{overflowX: 'hidden'}}
     >
-        {Cell.bind(this, props)}
+        {Cell.bind(this, cellProps)}
     </Grid>)
 };
 

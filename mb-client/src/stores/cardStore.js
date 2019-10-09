@@ -42,16 +42,17 @@ export class CardStore {
     }
 
     @action applyFilters(filters){
-        const {colors} = filters;
+        const {colors, types} = filters;
         this.cardsRegistryFiltered = this.cardsRegistry.filter(card => {
             // console.log(_.intersection(card.card_gems.split(''), colors))
             if(! _.intersection(card.card_gems.split(''), colors).length){
                 return false;
             }
+            if(types.indexOf(card.card_type)<0){
+                return false;
+            }
             return true;
         })
-
-        console.log('FILTERED', colors, this.cardsRegistryFiltered.length)
     }
 }
 

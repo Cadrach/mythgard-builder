@@ -5,7 +5,8 @@ import Deck from "../components/deck/deck";
 import CardsList from "../components/cardsList/cardsList"
 import constants from "../constants";
 import FilterColor from "../components/filters/filterColor";
-import useWindowDimensions from "../hooks/useWindowDimensions";
+import FilterIcon from "../components/filters/filterIcon";
+import Icon from 'react-fa';
 
 // const cards = [{id_card: 1, card_name: '1'},{id_card: 2, card_name: '2'},{id_card: 3, card_name: '3'}];
 
@@ -18,6 +19,7 @@ export default class DeckBuilder extends React.Component {
 
         this.filters = {
             colors: Object.keys(constants.colors).map(c => c[0]),
+            types: ['Creature', 'Spell', 'LaneEnchantment', 'Artifact']
         }
     }
 
@@ -36,6 +38,7 @@ export default class DeckBuilder extends React.Component {
                     <Layout.Content>
                         <CardsList cards={filteredCards} deckStore={this.props.deckStore} shavedWidth={300} shavedHeight={64+89}/>
                     </Layout.Content>
+
                     <Layout.Sider width={300} style={{background: 'transparent', padding: 8}}>
                         <Deck/>
                     </Layout.Sider>
@@ -45,7 +48,12 @@ export default class DeckBuilder extends React.Component {
                     {Object.keys(constants.colors).map(key => (
                         <FilterColor key={key} color={key} onChange={(number) => this.onChangeFilter('colors', key[0], !!number)}/>
                     ))}
+                    <FilterIcon icon={<Icon name="male" size="2x"/>} color="#000" onChange={(number) => this.onChangeFilter('types', 'Creature', !!number)}/>
+                    <FilterIcon icon={<Icon name="magic" size="2x"/>} color="#000" onChange={(number) => this.onChangeFilter('types', 'Spell', !!number)}/>
+                    <FilterIcon icon={<Icon name="bookmark" size="2x"/>} color="#000" onChange={(number) => this.onChangeFilter('types', 'LaneEnchantment', !!number)}/>
+                    <FilterIcon icon={<Icon name="trophy" size="2x"/>} color="#000" onChange={(number) => this.onChangeFilter('types', 'Artifact', !!number)}/>
                 </Layout.Footer>
+
             </Layout>
         );
     }

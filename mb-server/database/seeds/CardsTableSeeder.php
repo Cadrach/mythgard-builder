@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use \App\Models\Card;
 
 class CardsTableSeeder extends Seeder
 {
@@ -41,10 +42,18 @@ class CardsTableSeeder extends Seeder
             'yellow' => 6,
         ];
 
+        //Default values
         $cards = [];
+
+        //Fill rarities index with 0 for each rarity
+        $rarityIndex = array_combine(Card::getConstants()['RARITY'], array_fill(0, count(Card::getConstants()['RARITY']), 0));
+
+        //Sort by rhino id to always create the cards in the same order
+        $json = collect($json)->sortBy('cardid')->toArray();
         foreach($json as $card){
             $cards[] = [
                 'ide_faction' => $factions[$card->faction],
+                'card_rarity_index' => $rarityIndex[$card->rarity]++,
                 'id_rhino' => $card->cardid,
                 'card_name' => $card->cardname,
                 'card_name_export' => $card->cardnameclean,
@@ -63,6 +72,7 @@ class CardsTableSeeder extends Seeder
             ];
         }
 
+        //Sort cards
         DB::table('cards')->truncate();
         DB::table('cards')->insert($cards);
 

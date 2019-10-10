@@ -57,7 +57,7 @@ class DeckSeeder extends Seeder
 
             //Insert
             Deck::insert(array_merge([
-                'ide_user' => 1,
+                'ide_user' => rand(1,1000),
                 'dck_name' => "Deck $decksToBuild",
                 'dck_version' => "0.16.2",
                 'dck_cards' => json_encode($deck),

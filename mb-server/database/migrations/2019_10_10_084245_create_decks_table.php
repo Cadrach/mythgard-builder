@@ -30,7 +30,7 @@ class CreateDecksTable extends Migration
             $constants = \App\Models\Card::getConstants();
 //            $table->enum("dck_path");
 //            $table->enum("dck_power");
-            $table->json("dck_cards");
+            $table->text("dck_cards");
 
             //Searches
             $table->binary("dck_bin_common")->nullable();

@@ -27,4 +27,8 @@ Route::get('login/{provider}/callback','Auth\\SocialController@callback');
 
 Route::middleware('auth:web')->prefix('json')->group(function () {
     Route::get('/cards', 'CardController@getList');
+
+    //Deck
+    Route::get('/my-decks', 'DeckController@getMyDecks');
+
 });

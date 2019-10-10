@@ -11,7 +11,7 @@ import UIStore from './stores/ui';
 
 //Stores
 import CardStore from "./stores/cardStore";
-import DeckStore from "./stores/deckStore";
+import {DeckStore, Deck} from "./stores/deckStore";
 
 // Import Components
 import App from './app';
@@ -30,7 +30,7 @@ const userStore = UserStore.create({
 const languageStore = LanguageStore.create({ language: 'en' });
 const uiStore = UIStore.create({ borderRadius: 3, textColor: 'white' });
 const cardStore = CardStore;
-const deckStore = DeckStore.create();
+const deckStore = DeckStore.create({});
 
 const store = {
   user: userStore,

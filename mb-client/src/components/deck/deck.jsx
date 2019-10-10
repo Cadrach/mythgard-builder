@@ -10,11 +10,11 @@ export default class Deck extends React.Component {
         const {deckStore, cardStore} = this.props;
         return (
             <div>
-                <div>{deckStore.sum}/40</div>
+                <div>{deckStore.selectedDeck.sum}/40</div>
                 <List
                     bordered
                     rowKey={'id_card'}
-                    dataSource={deckStore.cards}
+                    dataSource={deckStore.selectedDeck.cards}
                     renderItem={item => (
                         <List.Item><Badge count={item.count} /> {cardStore.cardById(item.id_card).card_name}</List.Item>
                     )}

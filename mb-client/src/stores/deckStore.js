@@ -1,4 +1,4 @@
-import { types } from 'mobx-state-tree';
+import {resolveIdentifier, types} from 'mobx-state-tree';
 
 /**
  * Mobx State Tree Store
@@ -13,9 +13,10 @@ const DeckLine = types.model('DeckLine',{
     count: types.number,
 });
 
-const DeckStore = types
-    .model('DeckStore', {
-        cardsList: types.array(DeckLine),
+export const Deck = types
+    .model('Deck', {
+        id_deck: types.identifierNumber,
+        cardsList: types.optional(types.array(DeckLine), []),
     })
     .views(self => ({
         get cards() {
@@ -66,4 +67,11 @@ const DeckStore = types
         }
     }));
 
-export default DeckStore;
+export const DeckStore = types
+    .model('DeckStore', {
+        myDecks: types.optional(types.array(Deck), [{id_deck: 0}]),
+        selectedDeck: types.optional(types.safeReference(Deck), 0), //default selected deck is an empty deck
+    })
+    .views(self => ({
+    }))
+;

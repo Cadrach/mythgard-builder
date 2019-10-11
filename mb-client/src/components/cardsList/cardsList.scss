@@ -1,0 +1,16 @@
+.cardList{
+  position: relative;
+  &:before{
+    content: ' ';
+    position: absolute;
+    width: calc(100% - 16px);
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+
+
+    -webkit-box-shadow: inset 0px 0px 35px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 0px 35px 0px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 0px 35px 0px rgba(0,0,0,0.75);
+  }
+}

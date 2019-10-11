@@ -156,3 +156,13 @@ body {
 .green{       color: #29ba7a;}
 .purple{      color: #bd4cf8;}
 .yellow{      color: #e3e410;}
+
+.logo{
+  float: left;
+  height: 100%;
+  width: 79px;
+  background-size: 48px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url(/images/logo.png);
+}

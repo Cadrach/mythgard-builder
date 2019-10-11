@@ -16,7 +16,7 @@ import MyCards from "./containers/myCards";
 const App = () => (
     <Layout>
         <Affix>
-            <Header style={{position: 'fixed', zIndex: 1, width: '100%'}}>
+            <Header style={{position: 'fixed', zIndex: 1, width: '100%', paddingLeft: 0}}>
                 <div className="logo" />
                 <Menu
                     theme="dark"

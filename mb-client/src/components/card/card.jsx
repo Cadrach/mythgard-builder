@@ -23,7 +23,7 @@ class Card extends React.Component {
      * @param e
      */
     handleClick = (e) => {
-        if(this.props.deckStore.selectedDeck) {
+        if(this.props.deckStore && this.props.deckStore.selectedDeck) {
             if (this.props.deckStore.selectedDeck.addCard(this.card)) {
                 this.addAnimatedCard('fadeOutRight');
             }
@@ -38,7 +38,7 @@ class Card extends React.Component {
      * @param e
      */
     handleRightClick = (e) => {
-        if(this.props.deckStore.selectedDeck){
+        if(this.props.deckStore && this.props.deckStore.selectedDeck){
             if(this.props.deckStore.selectedDeck.removeCard(this.card)){
                 this.addAnimatedCard('fadeInRight', true);
             }

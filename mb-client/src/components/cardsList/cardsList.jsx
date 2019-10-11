@@ -3,6 +3,7 @@ import { FixedSizeGrid as Grid } from "react-window";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Card from "../card/card";
 
+import './cardsList.scss';
 
 const spacer = 32;
 
@@ -23,7 +24,7 @@ const Cell = (props, { columnIndex, rowIndex, style }) => {
                 height: style.height - spacer
             }}
         >
-            {card ? <Card data={card} deckStore={props.deckStore}/> : null}
+            <Card data={card} deckStore={props.deckStore}/>
         </div>)
 }
 
@@ -37,8 +38,8 @@ const CardsList = (props) => {
 
     const cellProps = {...props, columnCount};
 
-    return (<Grid
-        className="Grid"
+    return (<div className="cardList" style={{width: widthModified + 'px'}}>
+        <Grid
         columnCount={columnCount}
         columnWidth={columnWidth + spacer}
         height={height - (props.shavedHeight?props.shavedHeight:0)}
@@ -49,7 +50,8 @@ const CardsList = (props) => {
         style={{overflowX: 'hidden'}}
     >
         {Cell.bind(this, cellProps)}
-    </Grid>)
+        </Grid>
+    </div>)
 };
 
 const innerElementType = forwardRef(({ style, ...rest }, ref) => (

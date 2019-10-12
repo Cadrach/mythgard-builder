@@ -31,6 +31,8 @@ export default class DeckBuilder extends React.Component {
             siderCollapsedWidth: 80,
             siderWidth: 300,
         }
+
+        props.deckStore.fetchMyDecks();
     }
 
     onToggleSlider(collapsed, type){
@@ -46,8 +48,13 @@ export default class DeckBuilder extends React.Component {
         this.props.cardStore.applyFilters(this.filters);
     }
 
+    onSelectDeck(deck){
+        this.props.deckStore.selectDeck(deck);
+    }
+
     render() {
         const {filteredCards} = this.props.cardStore;
+        const {myDecks} = this.props.deckStore;
         const {leftCollapsed, rightCollapsed, siderCollapsedWidth, siderWidth} = this.state;
         const height = 'calc(100vh - 48px - 48px - 64px)';
         return (
@@ -66,7 +73,10 @@ export default class DeckBuilder extends React.Component {
                             <Menu.Item key="0"><AntIcon type="file-add" /><span>Create new Deck</span></Menu.Item>
                             <Menu.Item key="1"><AntIcon type="copy" /><span>Export</span></Menu.Item>
                             <Menu.Item key="2"><AntIcon type="import" /><span>Import</span></Menu.Item>
-                            <Menu.Item key="3"><AntIcon type="unordered-list" /><span>My Decks</span></Menu.Item>
+
+                            <Menu.SubMenu key="sub0" title={<span><AntIcon type="unordered-list" /><span>My Decks</span></span>}>
+                                {myDecks.map(d => (d.id ? <Menu.Item key={d.id} onClick={() => this.onSelectDeck(d)}>{d.name}</Menu.Item> : null))}
+                            </Menu.SubMenu>
                         </Menu>
 
                 </Layout.Sider>

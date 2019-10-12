@@ -1,4 +1,5 @@
-import {resolveIdentifier, types} from 'mobx-state-tree';
+import {flow, resolveIdentifier, types} from 'mobx-state-tree';
+import axios from '../axios';
 
 /**
  * Mobx State Tree Store
@@ -9,21 +10,21 @@ import {resolveIdentifier, types} from 'mobx-state-tree';
  **/
 
 const DeckLine = types.model('DeckLine',{
-    id_card: types.number,
+    id: types.number,
     count: types.number,
 });
 
 export const Deck = types
     .model('Deck', {
-        id_deck: types.identifierNumber,
-        cardsList: types.optional(types.array(DeckLine), []),
+        id: types.identifierNumber,
+        dck_cards: types.optional(types.array(DeckLine), []),
+        dck_name: types.maybeNull(types.string),
     })
     .views(self => ({
-        get cards() {
-            return self.cardsList;
-        },
+        get cards() {return self.dck_cards;},
+        get name() {return self.dck_name;},
         get sum(){
-            return _.sumBy(self.cardsList, 'count');
+            return _.sumBy(self.dck_cards, 'count');
         }
     }))
     .actions(self => ({
@@ -35,9 +36,9 @@ export const Deck = types
          * @returns {boolean}
          */
         addCard(card) {
-            const line = _.find(self.cardsList, {id_card: card.id_card});
+            const line = _.find(self.dck_cards, {id: card.id_card});
             if(line && line.count >= card.card_max_in_deck) return false; //cannot add, exit false
-            else if( ! line) self.cardsList.push({id_card: card.id_card, count: 1}); //create line
+            else if( ! line) self.dck_cards.push({id: card.id_card, count: 1}); //create line
             else line.count++; //add count
             return true;
         },
@@ -49,10 +50,10 @@ export const Deck = types
          * @returns {boolean}
          */
         removeCard(card) {
-            const line = _.find(self.cardsList, {id_card: card.id_card});
+            const line = _.find(self.dck_cards, {id: card.id_card});
             if( ! line) return false; //no card, nothing to remove
             else if(line && line.count > 1) line.count--; //decrease
-            else self.cardsList.splice(self.cardsList.indexOf(line), 1) //last card, remove
+            else self.dck_cards.splice(self.dck_cards.indexOf(line), 1) //last card, remove
             return true;
         },
 
@@ -62,16 +63,25 @@ export const Deck = types
          * @returns {number}
          */
         countCard(card) {
-            const c = _.find(self.cardsList, {id_card: card.id_card})
+            const c = _.find(self.dck_cards, {id: card.id_card})
             return c ? c.count:0;
         }
     }));
 
 export const DeckStore = types
     .model('DeckStore', {
-        myDecks: types.optional(types.array(Deck), [{id_deck: 0}]),
+        myDecks: types.optional(types.array(Deck), [{id: 0}]),
         selectedDeck: types.optional(types.safeReference(Deck), 0), //default selected deck is an empty deck
     })
     .views(self => ({
+    }))
+    .actions(self => ({
+        fetchMyDecks: flow(function* fetchMyDecks(){
+            const myDecks = yield axios.get('json/my-decks').then(({data}) => (data));
+            self.myDecks = [...self.myDecks, ...myDecks];
+        }),
+        selectDeck(deck) {
+            self.selectedDeck = deck;
+        },
     }))
 ;

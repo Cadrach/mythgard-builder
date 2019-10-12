@@ -32,7 +32,6 @@ export class CardStore {
     }
 
     @action loadCards() {
-        console.log('load')
         this.isLoading = true;
         return this.$req().then((cards) => {
             this.cardsRegistry = cards;

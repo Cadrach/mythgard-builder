@@ -1,0 +1,12 @@
+.ant-list[theme="dark"] {
+  color: rgba(255, 255, 255, 0.65);
+  background: #001529; }
+  .ant-list[theme="dark"] .ant-list-item {
+    cursor: pointer;
+    border-bottom-color: rgba(255, 255, 255, 0.65); }
+    .ant-list[theme="dark"] .ant-list-item:hover {
+      background: #002f5c; }
+    .ant-list[theme="dark"] .ant-list-item span.selected {
+      font-weight: bold; }
+    .ant-list[theme="dark"] .ant-list-item span.empty {
+      font-style: italic; }

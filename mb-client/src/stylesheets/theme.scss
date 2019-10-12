@@ -1,0 +1,14 @@
+$darkText: hsla(0,0%,100%,.65);
+$darkBackground: rgb(0, 21, 41);
+
+.ant-list[theme="dark"]{
+    color: $darkText;
+    background: $darkBackground;
+    .ant-list-item{
+      cursor: pointer;
+      border-bottom-color: $darkText;
+      &:hover{background: lighten($darkBackground, 10)}
+      span.selected{font-weight: bold;}
+      span.empty{font-style: italic;}
+    }
+}

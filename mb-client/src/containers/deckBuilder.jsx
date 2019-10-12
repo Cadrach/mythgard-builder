@@ -1,7 +1,7 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import {Row, Col, Affix, Layout, Rate, Button, Menu, Icon as AntIcon, Divider} from "antd";
+import {Row, Col, Affix, Layout, Rate, Button, Menu, Icon as AntIcon, Divider, List} from "antd";
 import Deck from "../components/deck/deck";
 import CardsList from "../components/cardsList/cardsList"
 import constants from "../constants";
@@ -10,6 +10,7 @@ import FilterIcon from "../components/filters/filterIcon";
 import Icon from 'react-fa';
 
 import './stylesheets/deckBuilder.scss';
+import Title from "antd/es/typography/Title";
 
 // const cards = [{id_card: 1, card_name: '1'},{id_card: 2, card_name: '2'},{id_card: 3, card_name: '3'}];
 
@@ -36,7 +37,6 @@ export default class DeckBuilder extends React.Component {
     }
 
     onToggleSlider(collapsed, type){
-        console.log('toggle')
         const state = {...this.state};
         state.leftCollapsed = !state.leftCollapsed;
         state.rightCollapsed = !state.rightCollapsed;
@@ -50,11 +50,12 @@ export default class DeckBuilder extends React.Component {
 
     onSelectDeck(deck){
         this.props.deckStore.selectDeck(deck);
+        this.onToggleSlider();
     }
 
     render() {
         const {filteredCards} = this.props.cardStore;
-        const {myDecks} = this.props.deckStore;
+        const {myDecks, selectedDeck} = this.props.deckStore;
         const {leftCollapsed, rightCollapsed, siderCollapsedWidth, siderWidth} = this.state;
         const height = 'calc(100vh - 48px - 48px - 64px)';
         return (
@@ -67,18 +68,31 @@ export default class DeckBuilder extends React.Component {
                     collapsed={leftCollapsed}
                     collapsedWidth={siderCollapsedWidth}
                     onCollapse={this.onToggleSlider.bind(this)}
-                    style={{background: 'rgba(0,0,0,0.05)'}}>
+                    >
 
-                        <Menu className="menu" mode="inline" selectable={false} theme="dark" style={{height: '100%'}}>
+                        <Menu className="menu" mode="inline" selectable={false} theme="dark">
                             <Menu.Item key="0"><AntIcon type="file-add" /><span>Create new Deck</span></Menu.Item>
                             <Menu.Item key="1"><AntIcon type="copy" /><span>Export</span></Menu.Item>
                             <Menu.Item key="2"><AntIcon type="import" /><span>Import</span></Menu.Item>
-
-                            <Menu.SubMenu key="sub0" title={<span><AntIcon type="unordered-list" /><span>My Decks</span></span>}>
-                                {myDecks.map(d => (d.id ? <Menu.Item key={d.id} onClick={() => this.onSelectDeck(d)}>{d.name}</Menu.Item> : null))}
-                            </Menu.SubMenu>
+                            <Menu.Item key="3" onClick={this.onToggleSlider.bind(this)}><AntIcon type="unordered-list" /><span>My Decks</span><AntIcon type="down" style={{float: 'right', marginTop: 14}}/></Menu.Item>
                         </Menu>
 
+                    {!leftCollapsed ?
+                        <PerfectScrollbar style={{height: 'calc(100vh - 64px - (48px * 4) - 48px)'}}>
+                                <List
+                                    itemLayout="horizontal"
+                                    size="small"
+                                    theme="dark"
+                                    dataSource={myDecks}
+                                    renderItem={deck =>
+                                        <List.Item key={deck.id} onClick={() => this.onSelectDeck(deck)}>
+                                            <span className={(!deck.id ? 'empty':'')+ ' ' + (deck===selectedDeck?'selected':'')}>
+                                                &nbsp;&nbsp;&nbsp;{deck.id ? deck.name:<span><AntIcon type="plus-square"/> New Deck</span>}
+                                            </span>
+                                        </List.Item>
+                                    }/>
+                        </PerfectScrollbar>
+                    :null}
                 </Layout.Sider>
 
                 {/*CARDS LIST + FOOTER */}

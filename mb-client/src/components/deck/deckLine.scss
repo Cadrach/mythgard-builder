@@ -1,0 +1,7 @@
+.deckLine{
+    &>*{float: left;}
+    .gems{width: 60px; text-align: center}
+    .cost{width: 20px;}
+    .name{width: calc(100% - 85px); text-transform: capitalize;}
+    .rarity{width: 5px;}
+}

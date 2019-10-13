@@ -1,6 +1,7 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
 import {Badge, List} from "antd";
+import DeckLine from "./deckLine";
 
 @inject('deckStore', 'cardStore')
 @observer
@@ -17,7 +18,7 @@ export default class Deck extends React.Component {
                     rowKey={'id'}
                     dataSource={deckStore.selectedDeck.cards}
                     renderItem={item => (
-                        <List.Item><Badge count={item.count} /> {cardStore.cardById(item.id).card_name}</List.Item>
+                        <List.Item><DeckLine item={item}/></List.Item>
                     )}
                 />
             </div>

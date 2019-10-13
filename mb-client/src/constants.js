@@ -6,6 +6,14 @@ const constants = {
         green: '#29ba7a',
         orange: '#ff7d00',
         purple: '#bd4cf8',
+    },
+    gems: {
+        b: '#01bded',
+        y: '#e8e80e',
+        r: '#e41312',
+        g: '#29ba7a',
+        o: '#ff7d00',
+        p: '#bd4cf8',
     }
 }
 export default constants;

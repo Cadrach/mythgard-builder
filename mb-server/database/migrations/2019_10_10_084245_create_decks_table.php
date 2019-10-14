@@ -33,10 +33,10 @@ class CreateDecksTable extends Migration
             $table->text("dck_cards");
 
             //Searches
-            $table->binary("dck_bin_common")->nullable();
-            $table->binary("dck_bin_uncommon")->nullable();
-            $table->binary("dck_bin_rare")->nullable();
-            $table->binary("dck_bin_mythic")->nullable();
+            $table->text("test_dck_bin_common")->nullable();
+            $table->text("test_dck_bin_uncommon")->nullable();
+            $table->text("test_dck_bin_rare")->nullable();
+            $table->text("test_dck_bin_mythic")->nullable();
 
             //Social
             $table->integer("dck_views")->unsigned()->default(0);
@@ -52,6 +52,18 @@ class CreateDecksTable extends Migration
             $table->index('dck_cost');
 //            $table->index(['dck_bin_common', 'dck_bin_uncommon', 'dck_bin_rare', 'dck_bin_mythic'], 'bin_index');
         });
+
+        //Add varbinary fields
+        DB::statement('ALTER TABLE `decks` ADD `dck_bin_common` VARBINARY(1000)');
+        DB::statement('ALTER TABLE `decks` ADD `dck_bin_uncommon` VARBINARY(1000)');
+        DB::statement('ALTER TABLE `decks` ADD `dck_bin_rare` VARBINARY(1000)');
+        DB::statement('ALTER TABLE `decks` ADD `dck_bin_mythic` VARBINARY(1000)');
+
+        //Test mysql version
+        $version = DB::select("SELECT @@version as V")[0]->V;
+        if(explode('.', $version)[0] != '8'){
+            throw new \Exception('Must use MySQL 8 otherwise the large VARBINARY will not work with bitwise operation. Tested on MySQL 8.0.18. Not working on MariaDB 10.1.40-MariaDB');
+        }
     }
 
     /**

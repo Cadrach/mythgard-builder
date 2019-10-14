@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use \App\Models\Deck;
 use \App\Models\Card;
+use Illuminate\Support\Facades\DB;
 
 class DeckSeeder extends Seeder
 {
@@ -55,14 +56,25 @@ class DeckSeeder extends Seeder
             //Generate binary fields
             $binaries = \App\Models\Helper::deckToBinaries($deck);
 
-            //Insert
-            Deck::insert(array_merge([
+            $data = [
                 'ide_user' => rand(1,1000),
-                'dck_name' => "Deck $decksToBuild",
-                'dck_version' => "0.16.2",
-                'dck_cards' => json_encode($deck),
-                'dck_factions' => json_encode($colors),
-            ], $binaries));
+                'dck_name' => "'Deck $decksToBuild'",
+                'dck_version' => "'0.16.2'",
+                'dck_cards' => "'".json_encode($deck)."'",
+                'dck_factions' => "'".json_encode($colors)."'",
+                'dck_bin_common' => "b'{$binaries['dck_bin_common']}'",
+                'dck_bin_uncommon' => "b'{$binaries['dck_bin_uncommon']}'",
+                'dck_bin_rare' => "b'{$binaries['dck_bin_rare']}'",
+                'dck_bin_mythic' => "b'{$binaries['dck_bin_mythic']}'",
+                'test_dck_bin_common' => "'{$binaries['dck_bin_common']}'",
+                'test_dck_bin_uncommon' => "'{$binaries['dck_bin_uncommon']}'",
+                'test_dck_bin_rare' => "'{$binaries['dck_bin_rare']}'",
+                'test_dck_bin_mythic' => "'{$binaries['dck_bin_mythic']}'",
+            ];
+
+            //Raw insert to be able to use binaries
+            DB::statement("INSERT INTO decks (".implode(',', array_keys($data)).") VALUES (".implode(',', $data).")");
+
 
             echo str_pad("Decks remaining $decksToBuild", 50) . "\r";
         }

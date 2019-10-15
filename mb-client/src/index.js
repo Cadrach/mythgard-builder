@@ -30,7 +30,9 @@ const userStore = UserStore.create({
 const languageStore = LanguageStore.create({ language: 'en' });
 const uiStore = UIStore.create({ borderRadius: 3, textColor: 'white' });
 const cardStore = CardStore;
-const deckStore = DeckStore.create({});
+const deckStore = DeckStore.create({}, {
+    cardStore: cardStore,
+});
 
 const store = {
   user: userStore,

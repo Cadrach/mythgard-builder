@@ -5,15 +5,12 @@ import constants from "../../constants";
 import Gem from "../gem/gem";
 import './deckLine.scss';
 
-@inject('cardStore')
 export default class DeckLine extends React.Component {
 
     render(){
         const {cardStore, item} = this.props;
-        const {id, count} = item;
-        const card = cardStore.cardById(id);
-        const {gems, colors} = constants;
-        console.log(card)
+        const {id, count, card} = item;
+        // console.log(card)
         return (
             <span className="deckLine">
                 <div className="cost">

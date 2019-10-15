@@ -77,7 +77,7 @@ export default class DeckBuilder extends React.Component {
                             <Menu.Item key="3" onClick={this.onToggleSlider.bind(this)}><AntIcon type="unordered-list" /><span>My Decks</span><AntIcon type="down" style={{float: 'right', marginTop: 14}}/></Menu.Item>
                         </Menu>
 
-                    {!leftCollapsed ?
+                    { ! leftCollapsed ?
                         <PerfectScrollbar style={{height: 'calc(100vh - 64px - (48px * 4) - 48px)'}}>
                                 <List
                                     itemLayout="horizontal"

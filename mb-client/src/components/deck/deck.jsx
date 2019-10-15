@@ -2,6 +2,7 @@ import React from "react";
 import {inject, observer} from "mobx-react";
 import {Badge, List} from "antd";
 import DeckLine from "./deckLine";
+import Gem from "../gem/gem";
 
 @inject('deckStore', 'cardStore')
 @observer
@@ -12,11 +13,14 @@ export default class Deck extends React.Component {
         const {selectedDeck} = deckStore;
         return (
             <div>
-                <div>{deckStore.selectedDeck.sum}/40</div>
+                <div>
+                    {selectedDeck.sum}/40
+                    <Gem string={selectedDeck.colors}/>
+                </div>
                 <List
                     bordered
                     rowKey={'id'}
-                    dataSource={deckStore.selectedDeck.cards}
+                    dataSource={selectedDeck.cards}
                     renderItem={item => (
                         <List.Item><DeckLine item={item}/></List.Item>
                     )}

@@ -1,5 +1,6 @@
-import {flow, resolveIdentifier, types} from 'mobx-state-tree';
+import {flow, resolveIdentifier, getEnv, types} from 'mobx-state-tree';
 import axios from '../axios';
+import _ from 'lodash';
 
 /**
  * Mobx State Tree Store
@@ -12,7 +13,9 @@ import axios from '../axios';
 const DeckLine = types.model('DeckLine',{
     id: types.number,
     count: types.number,
-});
+}).views(self => ({
+    get card() {return getEnv(self).cardStore.cardById(self.id)},
+}));
 
 export const Deck = types
     .model('Deck', {
@@ -25,6 +28,9 @@ export const Deck = types
         get name() {return self.dck_name;},
         get sum(){
             return _.sumBy(self.dck_cards, 'count');
+        },
+        get colors(){
+            return _.chain(self.cards).map('card').map('card_gems').join('').split('').uniq().join('').value();
         }
     }))
     .actions(self => ({

@@ -72,13 +72,17 @@ export const DeckStore = types
     .model('DeckStore', {
         myDecks: types.optional(types.array(Deck), [{id: 0}]),
         selectedDeck: types.optional(types.safeReference(Deck), 0), //default selected deck is an empty deck
+        loaded: types.optional(types.boolean, false),
     })
     .views(self => ({
     }))
     .actions(self => ({
         fetchMyDecks: flow(function* fetchMyDecks(){
-            const myDecks = yield axios.get('json/my-decks').then(({data}) => (data));
-            self.myDecks = [...self.myDecks, ...myDecks];
+            if(self.loaded === false){
+                self.loaded = true;
+                const myDecks = yield axios.get('json/my-decks').then(({data}) => (data));
+                self.myDecks = [...self.myDecks, ...myDecks];
+            }
         }),
         selectDeck(deck) {
             self.selectedDeck = deck;

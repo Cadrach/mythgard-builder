@@ -63,7 +63,7 @@ export default class DeckBuilder extends React.Component {
 
                 {/*LEFT SIDER + MENU*/}
                 <Layout.Sider
-                    width={siderWidth}
+                    width={siderWidth + siderCollapsedWidth}
                     collapsible={true}
                     collapsed={leftCollapsed}
                     collapsedWidth={siderCollapsedWidth}
@@ -126,7 +126,7 @@ export default class DeckBuilder extends React.Component {
                     width={siderWidth}
                     collapsible={true}
                     collapsed={rightCollapsed}
-                    collapsedWidth={siderCollapsedWidth}
+                    collapsedWidth={0}
                     onCollapse={this.onToggleSlider.bind(this)}
 
                     trigger={null}

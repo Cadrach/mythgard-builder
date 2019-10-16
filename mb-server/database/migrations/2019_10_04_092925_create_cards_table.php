@@ -18,7 +18,7 @@ class CreateCardsTable extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $constants = \App\Models\Card::getConstants();
 
-            $table->bigIncrements('id_card');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('id_rhino')->unique();
             $table->unsignedTinyInteger('ide_faction')->index();
 
@@ -28,10 +28,12 @@ class CreateCardsTable extends Migration
             $table->string('card_name');
             $table->string('card_name_export');
             $table->string('card_name_clean');
+            $table->string('card_image');
             $table->string('card_set');
             $table->enum('card_type', $constants['TYPE']);//[Card::TYPE_CREATURE, Card::TYPE_SPELL, Card::TYPE_LANE_ENCHANTMENT, Card::TYPE_ARTIFACT]);
             $table->string('card_subtype');
             $table->enum('card_rarity', $constants['RARITY']);// [Card::RARITY_COMMON, Card::RARITY_UNCOMMON, Card::RARITY_RARE, Card::RARITY_MYTHIC]);
+            $table->tinyInteger('card_max_in_deck');
             $table->unsignedTinyInteger('card_cost');
             $table->string('card_gems', 10);
             $table->unsignedTinyInteger('card_attack');

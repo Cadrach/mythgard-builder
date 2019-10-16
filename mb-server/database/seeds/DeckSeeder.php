@@ -44,7 +44,7 @@ class DeckSeeder extends Seeder
                 $k = array_rand($set);
                 $n = rand(1, $allowed[$set[$k]['card_rarity']]);
                 $count+=$n;
-                $deck[] = ['id' => $set[$k]['id_card'], 'count' => $n];
+                $deck[] = ['id' => $set[$k]['id'], 'count' => $n];
                 $colors[] = $set[$k]['ide_faction'];
                 array_splice($set, $k, 1);
             }

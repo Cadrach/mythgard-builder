@@ -25,21 +25,9 @@ class Card extends Model
         self::RARITY_MYTHIC => 1,
     ];
 
-    protected $appends = [
-        'card_image',
-        'card_max_in_deck',
-    ];
     protected $casts = [
         'card_keywords' => 'array',
     ];
-
-    public function getCardImageAttribute() {
-        return strtolower($this->card_name_clean) . '.png';
-    }
-
-    public function getCardMaxInDeckAttribute() {
-        return self::$costs[$this->card_rarity];
-    }
 
     public static function getCosts(){
         return self::$costs;

@@ -17,7 +17,7 @@ class Helper extends Model
      */
     public static function deckToBinaries(array $deck){
         if(self::$cards === null){
-            self::$cards = Card::select('id_card', 'card_rarity', 'card_rarity_index')->get()->keyBy('id_card');
+            self::$cards = Card::select('id', 'card_rarity', 'card_rarity_index')->get()->keyBy('id');
             self::$cardCountByRarities = self::$cards->groupBy('card_rarity')->map(function($v){return count($v);});
         }
 

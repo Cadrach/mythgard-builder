@@ -16,8 +16,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Home page (logged in)
-Route::get('/home', 'HomeController@index')->name('home');
+//Dictionaries
+Route::get('/json/dictionaries', 'HomeController@getDictionaries');
 
 //Authentication
 Auth::routes();
@@ -25,7 +25,15 @@ Route::get('login/{provider}', 'Auth\\SocialController@redirect');
 Route::get('login/{provider}/callback','Auth\\SocialController@callback');
 
 
+//Authenticated pages
+Route::middleware('auth:web')->group(function(){
+    //Home page (logged in)
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+
+//Authenticated pages under "json" prefix
 Route::middleware('auth:web')->prefix('json')->group(function () {
+
     Route::get('/cards', 'CardController@getList');
 
     //Deck

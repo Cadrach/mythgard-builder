@@ -72,7 +72,7 @@ class CardsTableSeeder extends Seeder
             ];
         }
 
-        //Sort cards
+        //Insert cards
         DB::table('cards')->truncate();
         DB::table('cards')->insert($cards);
 

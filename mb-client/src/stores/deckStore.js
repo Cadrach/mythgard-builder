@@ -42,9 +42,9 @@ export const Deck = types
          * @returns {boolean}
          */
         addCard(card) {
-            const line = _.find(self.dck_cards, {id: card.id_card});
+            const line = _.find(self.dck_cards, {id: card.id});
             if(line && line.count >= card.card_max_in_deck) return false; //cannot add, exit false
-            else if( ! line) self.dck_cards.push({id: card.id_card, count: 1}); //create line
+            else if( ! line) self.dck_cards.push({id: card.id, count: 1}); //create line
             else line.count++; //add count
             return true;
         },
@@ -56,7 +56,7 @@ export const Deck = types
          * @returns {boolean}
          */
         removeCard(card) {
-            const line = _.find(self.dck_cards, {id: card.id_card});
+            const line = _.find(self.dck_cards, {id: card.id});
             if( ! line) return false; //no card, nothing to remove
             else if(line && line.count > 1) line.count--; //decrease
             else self.dck_cards.splice(self.dck_cards.indexOf(line), 1) //last card, remove
@@ -69,7 +69,7 @@ export const Deck = types
          * @returns {number}
          */
         countCard(card) {
-            const c = _.find(self.dck_cards, {id: card.id_card})
+            const c = _.find(self.dck_cards, {id: card.id})
             return c ? c.count:0;
         }
     }));

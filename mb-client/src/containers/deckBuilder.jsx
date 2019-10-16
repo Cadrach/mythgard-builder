@@ -10,9 +10,6 @@ import FilterIcon from "../components/filters/filterIcon";
 import Icon from 'react-fa';
 
 import './stylesheets/deckBuilder.scss';
-import Title from "antd/es/typography/Title";
-
-// const cards = [{id_card: 1, card_name: '1'},{id_card: 2, card_name: '2'},{id_card: 3, card_name: '3'}];
 
 @inject('cardStore', 'deckStore')
 @observer

@@ -36,7 +36,7 @@ export class CardStore {
         return this.$req().then((cards) => {
             this.cardsRegistry = cards;
             this.cardsRegistryFiltered = cards;
-            this.cardsById = _.keyBy(cards, 'id_card');
+            this.cardsById = _.keyBy(cards, 'id');
         }).finally(action(() => { this.isLoading = false; }))
     }
 

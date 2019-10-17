@@ -1,6 +1,10 @@
 .gem{
-    margin: 0px 2px;
+    margin: 2px 2px;
+    display: inline-block;
     &>.fa{
         margin: 0 1px;
+        -webkit-text-shadow: 0px 0px 1px rgba(0,0,0,0.75);
+        -moz-text-shadow: 0px 0px 1px rgba(0,0,0,0.75);
+        text-shadow: 0px 0px 1px rgba(0,0,0,0.75);
     }
 }

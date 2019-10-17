@@ -22,6 +22,7 @@ export const Deck = types
         id: types.identifierNumber,
         dck_cards: types.optional(types.array(DeckLine), []),
         dck_name: types.maybeNull(types.string),
+        saved: types.optional(types.boolean, true),
     })
     .views(self => ({
         get cards() {return self.dck_cards;},
@@ -76,7 +77,7 @@ export const Deck = types
 
 export const DeckStore = types
     .model('DeckStore', {
-        myDecks: types.optional(types.array(Deck), [{id: 0}]),
+        myDecks: types.optional(types.array(Deck), [{id: 0, saved: false}]),
         selectedDeck: types.optional(types.safeReference(Deck), 0), //default selected deck is an empty deck
         loaded: types.optional(types.boolean, false),
     })

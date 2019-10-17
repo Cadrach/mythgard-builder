@@ -130,9 +130,7 @@ export default class DeckBuilder extends React.Component {
                     theme="light"
                     style={{background: 'rgba(0,0,0,0.01)'}}
                 >
-                    <PerfectScrollbar style={{maxHeight: 400}}>
-                        <Deck/>
-                    </PerfectScrollbar>
+                <Deck/>
                 </Layout.Sider>
             </Layout>
         );

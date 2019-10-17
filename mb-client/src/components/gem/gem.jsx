@@ -12,9 +12,9 @@ const Gem = (props) => {
 
     return (
 
-        <span className="gem">
+        <span className="gem" style={props.style}>
             {[...string].map((g, k) => (
-                <Icon key={k} name="circle" style={{color: constants.gems[g]}}/>
+                <Icon key={k} name="circle" style={{color: constants.gems[g]}} size={props.size}/>
             ))}
         </span>
     )

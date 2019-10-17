@@ -33,9 +33,6 @@ Route::middleware('auth:web')->group(function(){
 
 //Authenticated pages under "json" prefix
 Route::middleware('auth:web')->prefix('json')->group(function () {
-
-    Route::get('/cards', 'CardController@getList');
-
     //Deck
     Route::get('/my-decks', 'DeckController@getMyDecks');
 

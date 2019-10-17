@@ -8,7 +8,7 @@ import './deckLine.scss';
 export default class DeckLine extends React.Component {
 
     render(){
-        const {cardStore, item} = this.props;
+        const {item} = this.props;
         const {id, count, card} = item;
         // console.log(card)
         return (
@@ -17,10 +17,10 @@ export default class DeckLine extends React.Component {
                     <Badge count={count} />
                 </div>
                 <div className="gems">
-                  <Gem string={card.card_gems}/>
+                  <Gem string={card.gems}/>
                 </div>
                 <div className="name">
-                    {card.card_name}
+                    {card.name}
                 </div>
                 <div className="rarity">
                 </div>

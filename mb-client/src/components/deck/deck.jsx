@@ -4,12 +4,12 @@ import {Badge, List} from "antd";
 import DeckLine from "./deckLine";
 import Gem from "../gem/gem";
 
-@inject('deckStore', 'cardStore')
+@inject('deckStore')
 @observer
 export default class Deck extends React.Component {
 
     render(){
-        const {deckStore, cardStore} = this.props;
+        const {deckStore} = this.props;
         const {selectedDeck} = deckStore;
         return (
             <div>

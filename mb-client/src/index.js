@@ -15,6 +15,7 @@ import {DeckStore, Deck} from "./stores/deckStore";
 
 // Import Components
 import App from './app';
+import Dictionary from "./stores/dictionary";
 
 // Execute the ServiceWorker
 serviceWorkerRegister();
@@ -29,17 +30,17 @@ const userStore = UserStore.create({
 });
 const languageStore = LanguageStore.create({ language: 'en' });
 const uiStore = UIStore.create({ borderRadius: 3, textColor: 'white' });
-const cardStore = CardStore;
+const dictionary = Dictionary;
 const deckStore = DeckStore.create({}, {
-    cardStore: cardStore,
+    cardStore: dictionary.cards,
 });
 
 const store = {
-  user: userStore,
-  language: languageStore,
-  ui: uiStore,
-  cardStore: cardStore,
-  deckStore: deckStore,
+    user: userStore,
+    language: languageStore,
+    ui: uiStore,
+    dictionary: dictionary,
+    deckStore: deckStore,
 };
 
 const router = (

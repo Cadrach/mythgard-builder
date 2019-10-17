@@ -12,7 +12,7 @@ class Card extends React.Component {
         super(props);
         this.state = {animatedCards: []};
         this.card = props.data;
-        this.cardImage = <div id="cardImage" style={{backgroundImage: 'url(images/cards/s/'+this.card.card_image+')'}}></div>;
+        this.cardImage = <div id="cardImage" style={{backgroundImage: 'url(images/cards/s/'+this.card.image+')'}}></div>;
 
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
@@ -75,7 +75,7 @@ class Card extends React.Component {
                 <Rate
                     disabled
                     value={this.props.deckStore.selectedDeck.countCard(this.card)}
-                    count={this.card.card_max_in_deck}
+                    count={this.card.max_in_deck}
                     character={<Icon name="circle"/>}
                     style={{color: 'red'}}
                 />

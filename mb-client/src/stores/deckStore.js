@@ -30,7 +30,7 @@ export const Deck = types
             return _.sumBy(self.dck_cards, 'count');
         },
         get colors(){
-            return _.chain(self.cards).map('card').map('card_gems').join('').split('').uniq().join('').value();
+            return _.chain(self.cards).map('card').map('gems').join('').split('').uniq().join('').value();
         }
     }))
     .actions(self => ({
@@ -43,7 +43,7 @@ export const Deck = types
          */
         addCard(card) {
             const line = _.find(self.dck_cards, {id: card.id});
-            if(line && line.count >= card.card_max_in_deck) return false; //cannot add, exit false
+            if(line && line.count >= card.max_in_deck) return false; //cannot add, exit false
             else if( ! line) self.dck_cards.push({id: card.id, count: 1}); //create line
             else line.count++; //add count
             return true;

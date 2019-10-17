@@ -11,7 +11,7 @@ import Icon from 'react-fa';
 
 import './stylesheets/deckBuilder.scss';
 
-@inject('cardStore', 'deckStore')
+@inject('dictionary', 'deckStore')
 @observer
 export default class DeckBuilder extends React.Component {
 
@@ -42,7 +42,7 @@ export default class DeckBuilder extends React.Component {
 
     onChangeFilter(type, key, value){
         value ? this.filters[type].push(key) : this.filters[type].splice(this.filters[type].indexOf(key), 1)
-        this.props.cardStore.applyFilters(this.filters);
+        this.props.dictionary.cards.applyFilters(this.filters);
     }
 
     onSelectDeck(deck){
@@ -51,7 +51,7 @@ export default class DeckBuilder extends React.Component {
     }
 
     render() {
-        const {filteredCards} = this.props.cardStore;
+        const {cards} = this.props.dictionary;
         const {myDecks, selectedDeck} = this.props.deckStore;
         const {leftCollapsed, rightCollapsed, siderCollapsedWidth, siderWidth} = this.state;
         const height = 'calc(100vh - 48px - 48px - 64px)';
@@ -98,7 +98,7 @@ export default class DeckBuilder extends React.Component {
                     <Layout.Content style={{height}}>
                         <Layout.Content style={{height}}>
                             <CardsList
-                                cards={filteredCards}
+                                cards={cards.filtered}
                                 deckStore={this.props.deckStore}
                                 shavedWidth={300 + 80}
                                 shavedHeight={64+96}

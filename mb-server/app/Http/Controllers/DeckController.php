@@ -4,12 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Models\Deck;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DeckController extends Controller
 {
     public function getMyDecks(){
-        $idUser = Auth::user()->id;
+        $idUser = $this->_user()->id;
         return Deck::where('ide_user', '=', $idUser)->get();
+    }
+
+    /**
+     * Save a deck
+     * @param Request $request
+     * @return Deck
+     */
+    public function postSave(Request $request){
+        $idUser = $this->_user()->id;
+        $data = $request->all();
+
+        if(isset($data['id']) && $data['id']){
+            //Retrieve the owned deck
+            $deck = Deck::where('ide_user', '=', $idUser)->where('id', '=', $data['id'])->firstOrFail();
+            $deck->fill($data);
+            $deck->save();
+        }
+        else{
+            //Create a new deck
+            $deck = new Deck();
+            $deck->fill($data);
+            $deck->ide_user = $idUser;
+            $deck->dck_version = '0.16.2';
+            $deck->dck_factions = [];
+            $deck->save();
+            $deck = $deck->fresh();
+        }
+
+        return $deck;
     }
 }

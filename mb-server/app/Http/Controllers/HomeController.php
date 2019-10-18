@@ -50,6 +50,7 @@ class HomeController extends Controller
                 'card_type',
                 'card_subtype',
                 'card_rarity',
+                'card_max_in_deck',
                 'card_cost',
                 'card_gems',
                 'card_attack',

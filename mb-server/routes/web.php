@@ -35,5 +35,6 @@ Route::middleware('auth:web')->group(function(){
 Route::middleware('auth:web')->prefix('json')->group(function () {
     //Deck
     Route::get('/my-decks', 'DeckController@getMyDecks');
+    Route::post('/deck/save', 'DeckController@postSave');
 
 });

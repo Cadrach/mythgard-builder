@@ -43,6 +43,7 @@ export const Deck = types
          * @returns {boolean}
          */
         addCard(card) {
+            self.saved = false;
             const line = _.find(self.dck_cards, {id: card.id});
             if(line && line.count >= card.max_in_deck) return false; //cannot add, exit false
             else if( ! line) self.dck_cards.push({id: card.id, count: 1}); //create line
@@ -57,11 +58,17 @@ export const Deck = types
          * @returns {boolean}
          */
         removeCard(card) {
+            self.saved = false;
             const line = _.find(self.dck_cards, {id: card.id});
             if( ! line) return false; //no card, nothing to remove
             else if(line && line.count > 1) line.count--; //decrease
             else self.dck_cards.splice(self.dck_cards.indexOf(line), 1) //last card, remove
             return true;
+        },
+
+        reset(){
+            self.dck_cards = [];
+            self.dck_name = "New Deck";
         },
 
         /**
@@ -72,14 +79,15 @@ export const Deck = types
         countCard(card) {
             const c = _.find(self.dck_cards, {id: card.id})
             return c ? c.count:0;
-        }
+        },
     }));
 
 export const DeckStore = types
     .model('DeckStore', {
-        myDecks: types.optional(types.array(Deck), [{id: 0, saved: false}]),
+        myDecks: types.optional(types.array(Deck), [{id: 0, dck_name: 'New Deck', saved: false}]),
         selectedDeck: types.optional(types.safeReference(Deck), 0), //default selected deck is an empty deck
         loaded: types.optional(types.boolean, false),
+        saving: types.optional(types.boolean, false),
     })
     .views(self => ({
     }))
@@ -91,8 +99,45 @@ export const DeckStore = types
                 self.myDecks = [...self.myDecks, ...myDecks];
             }
         }),
+
+        /**
+         * Select a deck and make it the current deck
+         * @param deck
+         */
         selectDeck(deck) {
             self.selectedDeck = deck;
         },
+
+        /**
+         * Save the current deck
+         */
+        saveSelectedDeck(){
+            if( ! self.saving){
+                self.saving = true;
+                const originalDeck = self.selectedDeck;
+                axios.post('json/deck/save', self.selectedDeck).then(({data}) => self.afterSave(originalDeck, data));
+            }
+        },
+
+        /**
+         * What happens after saving
+         * @param deckData
+         */
+        afterSave(originalDeck, deckData){
+            self.saving = false;
+            originalDeck.saved = true;
+            if(originalDeck.id === 0){
+                //Reset the "new" deck
+                originalDeck.reset();
+
+                //The deck is new, add it and select it
+                const deck = Deck.create(deckData);
+                self.myDecks.push(deck);
+                self.selectDeck(deck);
+            }
+            else{
+                //We could merge what was received from the server, but let's not do it until we need to
+            }
+        }
     }))
 ;

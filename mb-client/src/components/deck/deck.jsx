@@ -10,11 +10,12 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 export default class Deck extends React.Component {
 
     render(){
-        const {selectedDeck} = this.props.deckStore;
+        const {deckStore} = this.props;
+        const {selectedDeck} = deckStore;
         return (
             <div>
                 <div style={{padding: 20, textAlign: 'right'}}>
-                    <Button type="primary" icon="save" size="large" disabled={selectedDeck.saved}>Save</Button>
+                    <Button type="primary" icon="save" size="large" disabled={selectedDeck.saved} onClick={deckStore.saveSelectedDeck}>Save</Button>
                 </div>
 
                 <Statistic value={selectedDeck.sum} suffix="/ 40" style={{float: 'left'}}/>

@@ -45,7 +45,7 @@ class HomeController extends Controller
                 'card_name',
                 'card_name_export',
                 'card_name_clean',
-                'card_image',
+//                'card_image',
                 'card_set',
                 'card_type',
                 'card_subtype',

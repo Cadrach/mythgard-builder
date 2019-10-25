@@ -8,6 +8,7 @@ import constants from "../constants";
 import FilterColor from "../components/filters/filterColor";
 import FilterIcon from "../components/filters/filterIcon";
 import Icon from 'react-fa';
+import _ from 'lodash';
 
 import './stylesheets/deckBuilder.scss';
 
@@ -18,10 +19,14 @@ export default class DeckBuilder extends React.Component {
     constructor(props){
         super(props);
 
-        this.filters = {
+        //Original filters
+        this.defaultFilters = {
             colors: Object.keys(constants.colors).map(c => c[0]),
             types: ['Creature', 'Spell', 'LaneEnchantment', 'Artifact']
         }
+
+        //Current filters
+        this.filters = _.cloneDeep(this.defaultFilters);
 
         this.state = {
             leftCollapsed: true,
@@ -40,8 +45,22 @@ export default class DeckBuilder extends React.Component {
         this.setState(state);
     }
 
-    onChangeFilter(type, key, value){
-        value ? this.filters[type].push(key) : this.filters[type].splice(this.filters[type].indexOf(key), 1)
+    onChangeFilter(type, key){
+        //Are the filters of this type currently all toggle ON?
+        const allActive = this.defaultFilters[type].length == this.filters[type].length;
+        const isActive = this.filters[type].indexOf(key) >= 0;
+        if(allActive){
+            //If we are toggling the first filter, then simply toggle off everything else
+            this.filters[type] = [key];
+        }
+        else if(this.filters[type].length == 1 && isActive){
+            //Toggling off the last one: toggle on everything
+            this.filters[type] = _.cloneDeep(this.defaultFilters[type]);
+        }
+        else{
+            //Otherwise it is a classic toggle on/off
+            !isActive ? this.filters[type].push(key) : this.filters[type].splice(this.filters[type].indexOf(key), 1)
+        }
         this.props.dictionary.cards.applyFilters(this.filters);
     }
 
@@ -108,13 +127,13 @@ export default class DeckBuilder extends React.Component {
 
                     <Layout.Footer style={{height: 96, padding: '30px 50px', background: 'rgba(0,0,0,0.01)'}}>
                         {Object.keys(constants.colors).map(key => (
-                            <FilterColor key={key} color={key} onChange={(number) => this.onChangeFilter('colors', key[0], !!number)}/>
+                            <FilterColor key={key} color={key} onChange={() => this.onChangeFilter('colors', key[0])}  value={this.filters.colors.indexOf(key[0])>=0 ? 1:0}/>
                         ))}
                         <Divider type="vertical"/>
-                        <FilterIcon icon={<Icon name="male" size="2x"/>} color="#000" onChange={(number) => this.onChangeFilter('types', 'Creature', !!number)}/>
-                        <FilterIcon icon={<Icon name="magic" size="2x"/>} color="#000" onChange={(number) => this.onChangeFilter('types', 'Spell', !!number)}/>
-                        <FilterIcon icon={<Icon name="bookmark" size="2x"/>} color="#000" onChange={(number) => this.onChangeFilter('types', 'LaneEnchantment', !!number)}/>
-                        <FilterIcon icon={<Icon name="trophy" size="2x"/>} color="#000" onChange={(number) => this.onChangeFilter('types', 'Artifact', !!number)}/>
+                        <FilterIcon icon={<Icon name="male" size="2x"/>} color="#000" onChange={() => this.onChangeFilter('types', 'Creature')} value={this.filters.types.indexOf('Creature')>=0 ? 1:0}/>
+                        <FilterIcon icon={<Icon name="magic" size="2x"/>} color="#000" onChange={() => this.onChangeFilter('types', 'Spell')} value={this.filters.types.indexOf('Spell')>=0 ? 1:0}/>
+                        <FilterIcon icon={<Icon name="bookmark" size="2x"/>} color="#000" onChange={() => this.onChangeFilter('types', 'LaneEnchantment')} value={this.filters.types.indexOf('LaneEnchantment')>=0 ? 1:0}/>
+                        <FilterIcon icon={<Icon name="trophy" size="2x"/>} color="#000" onChange={() => this.onChangeFilter('types', 'Artifact')} value={this.filters.types.indexOf('Artifact')>=0 ? 1:0}/>
                     </Layout.Footer>
                 </Layout>
 

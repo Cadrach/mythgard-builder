@@ -7,6 +7,7 @@ import constants from "../../constants";
 const FilterColor = (props) => (
     <Rate
         style={{color: constants.colors[props.color], margin: '0 8px'}}
+        value={props.value}
         count={1}
         defaultValue={1}
         character={<Icon name="circle" size="2x"/>}

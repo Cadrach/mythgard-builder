@@ -1,6 +1,7 @@
 import {flow, resolveIdentifier, getEnv, types} from 'mobx-state-tree';
 import axios from '../axios';
 import _ from 'lodash';
+import {message} from "antd";
 
 /**
  * Mobx State Tree Store
@@ -138,6 +139,7 @@ export const DeckStore = types
             else{
                 //We could merge what was received from the server, but let's not do it until we need to
             }
+            message.success('Deck "'+ deckData.dck_name +'" saved', 5);
         }
     }))
 ;

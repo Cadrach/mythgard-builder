@@ -1,7 +1,7 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import {Row, Col, Affix, Layout, Rate, Button, Menu, Icon as AntIcon, Divider, List} from "antd";
+import {Drawer, Layout, Button, Menu, Icon as AntIcon, Divider, List} from "antd";
 import Deck from "../components/deck/deck";
 import CardsList from "../components/cardsList/cardsList"
 import constants from "../constants";
@@ -11,6 +11,8 @@ import Icon from 'react-fa';
 import _ from 'lodash';
 
 import './stylesheets/deckBuilder.scss';
+import DeckForm from "../components/deck/deckForm";
+import DeckDrawer from "../components/deck/deckDrawer";
 
 @inject('dictionary', 'deckStore')
 @observer
@@ -28,16 +30,24 @@ export default class DeckBuilder extends React.Component {
         //Current filters
         this.filters = _.cloneDeep(this.defaultFilters);
 
+        //Our default state
         this.state = {
             leftCollapsed: true,
             rightCollapsed: false,
             siderCollapsedWidth: 80,
             siderWidth: 300,
+            deckDrawerVisible: false,
         }
 
+        //Fetch our decks
         props.deckStore.fetchMyDecks();
     }
 
+    /**
+     * Toggle the left/right sliders
+     * @param collapsed
+     * @param type
+     */
     onToggleSlider(collapsed, type){
         const state = {...this.state};
         state.leftCollapsed = !state.leftCollapsed;
@@ -45,6 +55,11 @@ export default class DeckBuilder extends React.Component {
         this.setState(state);
     }
 
+    /**
+     * Change a filters (will update the card list)
+     * @param type
+     * @param key
+     */
     onChangeFilter(type, key){
         //Are the filters of this type currently all toggle ON?
         const allActive = this.defaultFilters[type].length == this.filters[type].length;
@@ -64,18 +79,33 @@ export default class DeckBuilder extends React.Component {
         this.props.dictionary.cards.applyFilters(this.filters);
     }
 
+    /**
+     * Select a specific deck
+     * @param deck
+     */
     onSelectDeck(deck){
         this.props.deckStore.selectDeck(deck);
         this.onToggleSlider();
-    }
+    };
+
+    /**
+     * Toggle visibility of the drawer containing the form
+     * @param value
+     */
+    setDrawerVisible(value){
+        this.setState({deckDrawerVisible: value});
+    };
 
     render() {
         const {cards} = this.props.dictionary;
         const {myDecks, selectedDeck} = this.props.deckStore;
-        const {leftCollapsed, rightCollapsed, siderCollapsedWidth, siderWidth} = this.state;
-        const height = 'calc(100vh - 48px - 48px - 64px)';
+        const {leftCollapsed, rightCollapsed, siderCollapsedWidth, siderWidth, deckDrawerVisible} = this.state;
+        const height = 'calc(100vh - 80px - 80px - 64px)';
+
         return (
             <Layout>
+                {/* DRAWER SHOWING DESCRIPTION FORM */}
+                <DeckDrawer visible={deckDrawerVisible} onClose={this.setDrawerVisible.bind(this, false)}/>
 
                 {/*LEFT SIDER + MENU*/}
                 <Layout.Sider
@@ -113,6 +143,11 @@ export default class DeckBuilder extends React.Component {
 
                 {/*CARDS LIST + FOOTER */}
                 <Layout style={{overflowY: 'hidden'}}>
+                    <Layout.Header className="header" style={{height: 80}}>
+                        {selectedDeck.dck_name}
+                        &nbsp;
+                        <Button type="primary" shape="circle" icon="form" onClick={this.setDrawerVisible.bind(this, true)} />
+                    </Layout.Header>
 
                     <Layout.Content style={{height}}>
                         <Layout.Content style={{height}}>
@@ -120,12 +155,12 @@ export default class DeckBuilder extends React.Component {
                                 cards={cards.filtered}
                                 deckStore={this.props.deckStore}
                                 shavedWidth={300 + 80}
-                                shavedHeight={64+96}
+                                shavedHeight={64+80+80}
                             />
                         </Layout.Content>
                     </Layout.Content>
 
-                    <Layout.Footer style={{height: 96, padding: '30px 50px', background: 'rgba(0,0,0,0.01)'}}>
+                    <Layout.Footer className="footer" style={{height: 80}}>
                         {Object.keys(constants.colors).map(key => (
                             <FilterColor key={key} color={key} onChange={() => this.onChangeFilter('colors', key[0])}  value={this.filters.colors.indexOf(key[0])>=0 ? 1:0}/>
                         ))}
@@ -149,7 +184,7 @@ export default class DeckBuilder extends React.Component {
                     theme="light"
                     style={{background: 'rgba(0,0,0,0.01)'}}
                 >
-                <Deck/>
+                    <Deck/>
                 </Layout.Sider>
             </Layout>
         );

@@ -23,6 +23,8 @@ export const Deck = types
         id: types.identifierNumber,
         dck_cards: types.optional(types.array(DeckLine), []),
         dck_name: types.maybeNull(types.string),
+        dck_public: types.optional(types.boolean, false),
+        dck_description: types.maybeNull(types.string),
         saved: types.optional(types.boolean, true),
     })
     .views(self => ({
@@ -67,9 +69,24 @@ export const Deck = types
             return true;
         },
 
+        /**
+         * Reset deck fields
+         */
         reset(){
+            //Could be changed to restore a snapshot that is created after initialization (see "afterCreate" and "getSnapShot")
             self.dck_cards = [];
             self.dck_name = "New Deck";
+            self.dck_description = null;
+            self.dck_public = false;
+        },
+
+        /**
+         * Set values from the form
+         * @param values
+         */
+        setFormValues(values){
+            _.forEach(values, (value, key) => self[key] = value);
+            self.saved = false;
         },
 
         /**

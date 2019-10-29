@@ -29,4 +29,12 @@ class Deck extends Model
         'dck_cards' => 'array',
         'dck_public' => 'boolean',
     ];
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'ide_user');
+    }
 }

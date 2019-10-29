@@ -47,6 +47,7 @@ class DeckController extends Controller
      */
     public function getList(){
         return Deck::where('dck_public','=',1)
+            ->with('user:id,name,image')
             ->orderBy('dck_stars', 'desc')
             ->paginate(10);
     }

@@ -18,7 +18,7 @@ export default class DecksList extends React.Component {
 
     render() {
         return (
-            <Layout>
+            <Layout className="ant-layout-transparent" style={{padding: 20}}>
                 <DecksListTable/>
             </Layout>
         );

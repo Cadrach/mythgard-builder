@@ -14,7 +14,7 @@ import MyCards from "./containers/myCards";
 import DecksList from "./containers/decksList";
 
 const App = () => (
-    <Layout>
+    <Layout className="ant-layout-transparent">
         <Affix>
             <Header style={{position: 'fixed', zIndex: 1, width: '100%', paddingLeft: 0}}>
                 <div className="logo" />
@@ -40,7 +40,7 @@ const App = () => (
                 </Menu>
             </Header>
         </Affix>
-        <Layout style={{marginTop: 64}}>
+        <Layout className="ant-layout-transparent" style={{marginTop: 64}}>
             <div>
                 <Route exact path="/deck-builder" component={DeckBuilder} />
                 <Route exact path="/cards" component={MyCards} />

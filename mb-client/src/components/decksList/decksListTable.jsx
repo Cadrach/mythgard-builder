@@ -1,14 +1,30 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
 import axios from '../../axios';
-import { Table } from "antd";
+import { Table, Icon, Tooltip } from "antd";
 
 const columns = [
     {
         title: 'Name',
         dataIndex: 'dck_name',
+        ellipsis: true,
         sorter: true,
         width: '20%',
+    },
+    {
+        title: <Tooltip title="Favorites"><Icon type="star" style={{fontSize: 16}} theme="filled"/></Tooltip>,
+        dataIndex: 'dck_stars',
+        sorter: true,
+    },
+    {
+        title: <Tooltip title="Views"><Icon type="eye" style={{fontSize: 16}} theme="filled"/></Tooltip>,
+        dataIndex: 'dck_views',
+        sorter: true,
+    },
+    {
+        title: <Tooltip title="Downloads"><Icon type="cloud-download" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: 'dck_downloads',
+        sorter: true,
     },
     // {
     //     title: 'Gender',

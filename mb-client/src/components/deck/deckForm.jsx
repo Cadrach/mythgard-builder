@@ -14,7 +14,7 @@ class DeckForm extends React.Component {
             'dck_description',
             'dck_public',
         ], key => fields[key] = {value: this.props.deckStore.selectedDeck[key]});
-console.log(fields)
+
         //Set the default fields values
         this.props.form.setFields(fields);
     }

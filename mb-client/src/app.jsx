@@ -6,12 +6,12 @@ import { Route, NavLink, useLocation  } from 'react-router-dom';
 // import Header from "../components/header/header";
 import { Layout, Menu, Breadcrumb, Icon, Affix } from 'antd';
 const { Header, Content, Sider } = Layout;
-const { SubMenu } = Menu;
 
 // Import Common Stylesheets
 import "./stylesheets/imports.css";
 import DeckBuilder from "./containers/deckBuilder";
 import MyCards from "./containers/myCards";
+import DecksList from "./containers/decksList";
 
 const App = () => (
     <Layout>
@@ -27,6 +27,9 @@ const App = () => (
                     <Menu.Item key="/">
                         <NavLink to="/">Home</NavLink>
                     </Menu.Item>
+                    <Menu.Item key="/decks-list">
+                        <NavLink to="/decks-list">Decks</NavLink>
+                    </Menu.Item>
                     <Menu.Item key="/cards" style={{float: 'right'}}>
                         <NavLink to="/cards">My Cards</NavLink>
                     </Menu.Item>
@@ -41,6 +44,7 @@ const App = () => (
             <div>
                 <Route exact path="/deck-builder" component={DeckBuilder} />
                 <Route exact path="/cards" component={MyCards} />
+                <Route exact path="/decks-list" component={DecksList} />
             </div>
         </Layout>
     </Layout>

@@ -19,11 +19,14 @@ class Deck extends Model
 
     protected $fillable = [
         'dck_name',
+        'dck_public',
+        'dck_description',
         'dck_cards',
     ];
 
     protected $casts = [
         'dck_factions' => 'array',
         'dck_cards' => 'array',
+        'dck_public' => 'boolean',
     ];
 }

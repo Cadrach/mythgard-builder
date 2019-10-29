@@ -19,6 +19,7 @@ class CreateDecksTable extends Migration
 
             //Info
             $table->string("dck_name", 255);
+            $table->boolean("dck_public")->default(false);
             $table->mediumText("dck_description")->nullable();
             $table->string("dck_version", 10);
 

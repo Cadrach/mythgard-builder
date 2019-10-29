@@ -7,7 +7,7 @@ class CardStore {
 
     @observable cardsRegistry = [];
     @observable cardsRegistryFiltered = [];
-    cardsById = [];
+    cardsById = {};
 
     @computed get all() {
         return this.cardsRegistry;
@@ -15,6 +15,23 @@ class CardStore {
 
     @computed get filtered() {
         return this.cardsRegistryFiltered;
+    };
+
+    /**
+     * Compute statistics of a cards definition from a deck
+     * @param cards
+     */
+    computeStats(cards) {
+        const stats = {
+            types: {},
+            rarities: {},
+        };
+        cards.forEach(card => {
+            const info = this.cardById(card.id);
+            stats.types[info.type] = (stats.types[info.type] ? stats.types[info.type]:0) + card.count;
+            stats.rarities[info.rarity] = (stats.rarities[info.rarity] ? stats.rarities[info.rarity]:0) + card.count;
+        }, this)
+        return stats;
     };
 
     cardById(id) {

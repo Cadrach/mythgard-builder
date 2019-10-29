@@ -1,30 +1,90 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
 import axios from '../../axios';
-import { Table, Icon, Tooltip } from "antd";
+import { Table, Icon as AntIcon, Tooltip } from "antd";
+import Icon from 'react-fa';
+import constants from "../../constants";
+import './stylesheets/decksListTable.scss';
 
+const width = 50;
 const columns = [
     {
-        title: 'Name',
+        title: 'Deck',
         dataIndex: 'dck_name',
         ellipsis: true,
         sorter: true,
-        width: '20%',
     },
     {
-        title: <Tooltip title="Favorites"><Icon type="star" style={{fontSize: 16}} theme="filled"/></Tooltip>,
+        title: 'Player',
+        dataIndex: 'user.name',
+        ellipsis: true,
+    },
+    {
+        className: 'border-left',
+        title: <Tooltip title="Favorites"><AntIcon type="star" style={{fontSize: 16}} theme="filled"/></Tooltip>,
         dataIndex: 'dck_stars',
         sorter: true,
+        width,
     },
     {
-        title: <Tooltip title="Views"><Icon type="eye" style={{fontSize: 16}} theme="filled"/></Tooltip>,
+        title: <Tooltip title="Views"><AntIcon type="eye" style={{fontSize: 16}} theme="filled"/></Tooltip>,
         dataIndex: 'dck_views',
         sorter: true,
+        width,
     },
     {
-        title: <Tooltip title="Downloads"><Icon type="cloud-download" style={{fontSize: 16}}/></Tooltip>,
+        title: <Tooltip title="Downloads"><AntIcon type="cloud-download" style={{fontSize: 16}}/></Tooltip>,
         dataIndex: 'dck_downloads',
         sorter: true,
+        width,
+    },
+    {
+        className: 'border-left text-center',
+        title: <Tooltip title="Creatures"><Icon name="male" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: 'stats.types.Creature',
+        width,
+    },
+    {
+        className: 'text-center',
+        title: <Tooltip title="Spells"><Icon name="magic" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: 'stats.types.Spell',
+        width,
+    },
+    {
+        className: 'text-center',
+        title: <Tooltip title="Enchantments"><Icon name="bookmark" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: 'stats.types.LaneEnchantment',
+        width,
+    },
+    {
+        className: 'text-center',
+        title: <Tooltip title="Artifacts"><Icon name="trophy" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: 'stats.types.Artifact',
+        width,
+    },
+    {
+        className: 'border-left text-center',
+        title: <Tooltip title="Commons"><Icon name="square" style={{fontSize: 16, color: constants.rarities.common}}/></Tooltip>,
+        dataIndex: 'stats.rarities.common',
+        width,
+    },
+    {
+        className: 'text-center',
+        title: <Tooltip title="Uncommons"><Icon name="square" style={{fontSize: 16, color: constants.rarities.uncommon}}/></Tooltip>,
+        dataIndex: 'stats.rarities.uncommon',
+        width,
+    },
+    {
+        className: 'text-center',
+        title: <Tooltip title="Rares"><Icon name="square" style={{fontSize: 16, color: constants.rarities.rare}}/></Tooltip>,
+        dataIndex: 'stats.rarities.rare',
+        width,
+    },
+    {
+        className: 'text-center',
+        title: <Tooltip title="Mythics"><Icon name="square" style={{fontSize: 16, color: constants.rarities.mythic}}/></Tooltip>,
+        dataIndex: 'stats.rarities.mythic',
+        width,
     },
     // {
     //     title: 'Gender',
@@ -38,6 +98,8 @@ const columns = [
     // },
 ];
 
+@inject('dictionary')
+@observer
 export default class DecksListTable extends React.Component {
 
     constructor(props){
@@ -54,30 +116,37 @@ export default class DecksListTable extends React.Component {
     fetchDecks(currentPage) {
         this.setState({loading: true});
         axios.get('json/decks?page=' + currentPage).then(({data}) => {
-            this.setState({
-                data: data.data,
-                pagination: {
-                    current: data.current_page,
-                    pageSize: data.per_page,
-                    total: data.total,
-                },
-                loading: false,
+            const decks = data.data;
+            const dictionary = this.props.dictionary;
+            const cardsStore = dictionary.cards;
+
+            //We must have a loaded dictionary to continue
+            dictionary.promise.then(() => {
+                decks.map(deck => deck.stats = cardsStore.computeStats(deck.dck_cards))
+
+                this.setState({
+                    data: decks,
+                    pagination: {
+                        current: data.current_page,
+                        pageSize: data.per_page,
+                        total: data.total,
+                    },
+                    loading: false,
+                })
             })
         })
     }
 
     handleTableChange = (pagination, filters, sorter) => {
-        console.log(pagination);
         this.fetchDecks(pagination.current);
     };
 
     componentDidMount(){
-        this.fetchDecks(1);
+        this.fetchDecks(1)
     }
 
     render(){
         const { data, loading, pagination } = this.state;
-        console.log(pagination);
         return (
             <div>
 

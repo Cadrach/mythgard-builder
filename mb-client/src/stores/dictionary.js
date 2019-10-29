@@ -9,6 +9,7 @@ class Dictionary {
     @observable cards = {};
     @observable factions;
     @observable isLoading = false;
+    @observable promise;
 
     constructor() {
          this.cards = CardStore;
@@ -22,10 +23,12 @@ class Dictionary {
 
     @action load() {
         this.isLoading = true;
-        return this.$req().then((dictionaries) => {
+        this.promise = this.$req().then((dictionaries) => {
             this.cards.loadCards(dictionaries.cards);
             this.factions = dictionaries.factions;
         }).finally(action(() => { this.isLoading = false; }))
+
+        return this.promise;
     }
 }
 

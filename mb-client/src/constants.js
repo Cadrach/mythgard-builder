@@ -7,6 +7,12 @@ const constants = {
         orange: '#ff7d00',
         purple: '#bd4cf8',
     },
+    rarities: {
+        common: '#8f764c',
+        uncommon: '#adaca9',
+        rare: '#fff300',
+        mythic: '#2ec7f5',
+    },
     gems: {
         b: '#01bded',
         y: '#e8e80e',

@@ -40,6 +40,7 @@ class CreateDecksTable extends Migration
             $table->text("test_dck_bin_mythic")->nullable();
 
             //Social
+            $table->integer("dck_stars")->unsigned()->default(0);
             $table->integer("dck_views")->unsigned()->default(0);
             $table->integer("dck_downloads")->unsigned()->default(0);
 
@@ -48,7 +49,7 @@ class CreateDecksTable extends Migration
 
             //Indexes
             $table->index('ide_user');
-//            $table->index('dck_cards');
+            $table->index(['dck_stars', 'dck_public']);
             $table->index('dck_factions');
             $table->index('dck_cost');
 //            $table->index(['dck_bin_common', 'dck_bin_uncommon', 'dck_bin_rare', 'dck_bin_mythic'], 'bin_index');

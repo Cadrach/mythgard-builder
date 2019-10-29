@@ -61,6 +61,8 @@ class DeckSeeder extends Seeder
                 'dck_name' => "'Deck $decksToBuild'",
                 'dck_version' => "'0.16.2'",
                 'dck_cards' => "'".json_encode($deck)."'",
+                'dck_stars' => rand(0, 5000),
+                'dck_public' => 1,
                 'dck_factions' => "'".json_encode($colors)."'",
                 'dck_bin_common' => "b'{$binaries['dck_bin_common']}'",
                 'dck_bin_uncommon' => "b'{$binaries['dck_bin_uncommon']}'",

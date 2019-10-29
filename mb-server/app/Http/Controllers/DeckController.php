@@ -40,4 +40,14 @@ class DeckController extends Controller
 
         return $deck;
     }
+
+    /**
+     * Get list of decks
+     * @return mixed
+     */
+    public function getList(){
+        return Deck::where('dck_public','=',1)
+            ->orderBy('dck_stars', 'desc')
+            ->paginate(10);
+    }
 }

@@ -56,10 +56,10 @@ class DeckController extends Controller
         foreach($request->get('filters', []) as $key=>$value){
             switch($key){
                 case 'cards':
-                    $binaries = Helper::deckToBinaries($value);
+                    $binaries = Helper::resolveDeckComputedFields($value);
                     foreach($binaries as $field => $bin){
                         if(strpos($bin, '1') !== false){
-                            $decks->whereRaw("BIT_COUNT(b'$bin' & ~$field) = 0");
+                            $decks->whereRaw("BIT_COUNT($bin & ~$field) = 0");
 //                            $decks->whereRaw("test_$field LIKE '".str_replace('0','_', $bin)."'");
                         }
                     }

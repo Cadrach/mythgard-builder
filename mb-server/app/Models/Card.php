@@ -18,19 +18,30 @@ class Card extends Model
 
     protected static $constants = null;
 
-    protected static $costs = [
+    protected static $maxByRarity = [
         self::RARITY_COMMON => 4,
         self::RARITY_UNCOMMON => 3,
         self::RARITY_RARE => 2,
         self::RARITY_MYTHIC => 1,
     ];
 
+    protected static $essenceCostByRarity = [
+        self::RARITY_COMMON => 50,
+        self::RARITY_UNCOMMON => 100,
+        self::RARITY_RARE => 500,
+        self::RARITY_MYTHIC => 2500,
+    ];
+
     protected $casts = [
         'card_keywords' => 'array',
     ];
 
-    public static function getCosts(){
-        return self::$costs;
+    public static function getMaxByRarity(){
+        return self::$maxByRarity;
+    }
+
+    public static function getEssenceCostByRarity(){
+        return self::$essenceCostByRarity;
     }
 
     public static function getConstants(){

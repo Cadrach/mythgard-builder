@@ -31,7 +31,7 @@ class CardsTableSeeder extends Seeder
 
         //Fill rarities index with 0 for each rarity
         $rarityIndex = array_combine(Card::getConstants()['RARITY'], array_fill(0, count(Card::getConstants()['RARITY']), 0));
-        $costIndex = Card::getCosts();
+        $maxByRarityIndex = Card::getMaxByRarity();
 
         //Sort by rhino id to always create the cards in the same order
         $json = collect($json)->sortBy('cardid')->toArray();
@@ -55,7 +55,7 @@ class CardsTableSeeder extends Seeder
                 'card_attack' => $card->attack,
                 'card_health' => $card->health,
                 'card_rarity' => $card->rarity,
-                'card_max_in_deck' => $costIndex[$card->rarity],
+                'card_max_in_deck' => $maxByRarityIndex[$card->rarity],
                 'card_keywords' => !$card->keywords ? null : collect(explode(',', $card->keywords))->map(function($v){return trim($v);})->toJson(),
             ];
         }

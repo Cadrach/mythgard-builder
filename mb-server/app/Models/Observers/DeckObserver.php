@@ -17,19 +17,13 @@ class DeckObserver
     public function saved(Deck $deck)
     {
         //We must update the binaries
-        $binaries = Helper::deckToBinaries($deck->dck_cards);
+        $computedFields = Helper::resolveDeckComputedFields($deck->dck_cards);
 
         //Additional fields we will update
-        $fields = [
+        $fields = array_merge($computedFields, [
             'dck_version' => "'0.16.2'",
             'dck_factions' => "''",
-        ];
-
-        //Compute binaries
-        foreach($binaries as $key=>$bin){
-            $fields[$key] = "b'$bin'";
-            $fields["test_{$key}"] = "'$bin'";
-        }
+        ]);
 
         //Straighten everything
         $sql = [];

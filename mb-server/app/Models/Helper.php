@@ -38,33 +38,56 @@ class Helper extends Model
      * @param array $deck
      * @return array
      */
-    public static function deckToBinaries(array $deck){
+    public static function resolveDeckComputedFields(array $deck){
         if(self::$cards === null){
-            self::$cards = Card::select('id', 'card_rarity', 'card_rarity_index')->get()->keyBy('id');
+            self::$cards = Card::select('id', 'card_gems', 'card_rarity', 'card_rarity_index')->get()->keyBy('id');
             self::$cardCountByRarities = self::$cards->groupBy('card_rarity')->map(function($v){return count($v);});
         }
 
-        $costs = Card::getCosts();
+        $final = [];
+        $maxByRarity = Card::getMaxByRarity();
+        $essenceCostByRarity = Card::getEssenceCostByRarity();
 
         //Fill with zeros
         $binaries = [];
         foreach(self::$cardCountByRarities as $rarity => $count){
-            $binaries[$rarity] = str_repeat('0', $count * $costs[$rarity]);
+            $binaries[$rarity] = str_repeat('0', $count * $maxByRarity[$rarity]);
         }
 
         //Set 1 for each card we own in the correct place
+        $essenceCost = 0;
+        $colors = [];
         foreach($deck as $row){
+            //Card info
             $card = self::$cards[$row['id']];
-            $start = $costs[$card['card_rarity']] * $card['card_rarity_index'];
+
+            //Update deck cost in essence
+            $essenceCost+= $essenceCostByRarity[$card['card_rarity']] * $row['count'];
+
+            //Update colors
+            foreach(array_unique(str_split($card['card_gems'])) as $gem){
+                @$colors[$gem]+=$row['count'];
+            }
+
+            //Update binary rarity field
+            $start = $maxByRarity[$card['card_rarity']] * $card['card_rarity_index'];
             for($i = 0; $i<$row['count']; $i++){
                 $binaries[$card['card_rarity']][$start + $i] = '1';
             }
         }
 
+        //Cost in essence
+        $final['dck_cost'] = $essenceCost;
+
+        //Colors
+        asort($colors, SORT_DESC);
+        $final['dck_colors'] = "'" . implode('', array_keys($colors)) . "'";
+
         //Binary string starts on the right, so reverse everything
-        $final = [];
         foreach($binaries as $k=>$bin){
-            $final["dck_bin_$k"] = strrev($bin);
+            $b = strrev($bin);
+            $final["test_dck_bin_$k"] = "'$b'";
+            $final["dck_bin_$k"] = "b'$b'";
         }
 
         //Return the final array

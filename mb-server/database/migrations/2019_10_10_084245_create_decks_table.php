@@ -25,6 +25,7 @@ class CreateDecksTable extends Migration
 
             //Stats
             $table->string("dck_factions", 50)->default('[]');
+            $table->char("dck_colors", 10)->default('');
             $table->integer("dck_cost")->unsigned()->nullable();
 
             //Data
@@ -50,6 +51,7 @@ class CreateDecksTable extends Migration
             //Indexes
             $table->index('ide_user');
             $table->index(['dck_stars', 'dck_public']);
+            $table->index('dck_colors');
             $table->index('dck_factions');
             $table->index('dck_cost');
 //            $table->index(['dck_bin_common', 'dck_bin_uncommon', 'dck_bin_rare', 'dck_bin_mythic'], 'bin_index');

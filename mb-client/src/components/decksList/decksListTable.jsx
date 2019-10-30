@@ -5,6 +5,7 @@ import { Table, Icon as AntIcon, Tooltip } from "antd";
 import Icon from 'react-fa';
 import constants from "../../constants";
 import './stylesheets/decksListTable.scss';
+import Gem from "../gem/gem";
 
 const width = 50;
 const columns = [
@@ -20,19 +21,35 @@ const columns = [
         ellipsis: true,
     },
     {
-        className: 'border-left',
+        className: 'text-center',
+        title: <Tooltip title="Colors"><Icon name="tint" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: 'dck_colors',
+        render: gems => <Gem string={gems}/>,
+        width: 120,
+    },
+    {
+        className: 'text-center',
+        title: <Tooltip title="Essence Cost"><Icon name="flask" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: 'dck_cost',
+        sorter: true,
+        width,
+    },
+    {
+        className: 'border-left text-center',
         title: <Tooltip title="Favorites"><AntIcon type="star" style={{fontSize: 16}} theme="filled"/></Tooltip>,
         dataIndex: 'dck_stars',
         sorter: true,
         width,
     },
     {
+        className: 'text-center',
         title: <Tooltip title="Views"><AntIcon type="eye" style={{fontSize: 16}} theme="filled"/></Tooltip>,
         dataIndex: 'dck_views',
         sorter: true,
         width,
     },
     {
+        className: 'text-center',
         title: <Tooltip title="Downloads"><AntIcon type="cloud-download" style={{fontSize: 16}}/></Tooltip>,
         dataIndex: 'dck_downloads',
         sorter: true,

@@ -29,7 +29,7 @@ Route::middleware('auth:web')->group(function(){
 
 //Unauthenticated pages under "json" prefix
 Route::prefix('json')->group(function(){
-    Route::get('/decks', 'DeckController@getList');
+    Route::post('/decks', 'DeckController@getList');
     Route::get('/dictionaries', 'HomeController@getDictionaries');
 });
 

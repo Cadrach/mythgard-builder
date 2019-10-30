@@ -29,8 +29,8 @@ class CreateDecksTable extends Migration
 
             //Data
             $constants = \App\Models\Card::getConstants();
-            $table->string("dck_path");
-            $table->string("dck_power");
+            $table->string("dck_path")->nullable();
+            $table->string("dck_power")->nullable();
             $table->text("dck_cards");
 
             //Social

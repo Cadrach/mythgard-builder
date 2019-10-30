@@ -1,7 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {inject, observer} from "mobx-react";
 import {Form, Input, Button, Col, Row} from "antd";
 import Select from 'react-select';
+import _ from 'lodash';
 import './stylesheets/decksListFilters.scss'
 
 @inject('dictionary')
@@ -11,15 +13,23 @@ class DecksListFilters extends React.Component {
     componentDidMount(){}
 
     submit(){
+        //Retrieve values
         const values = this.props.form.getFieldsValue();
-        console.log(values);
+
+        //Format values
+        const finalValues = {
+            ...values,
+            cards: values.cards ? values.cards.map(c => ({id: c.id, count: 1})) : null,
+        };
+
+        //Send values to callback (removing the empty ones)
+        this.props.onSubmit(_.pickBy(finalValues));
     }
 
     render(){
         const { getFieldDecorator } = this.props.form;
         const cards = this.props.dictionary.cards.all;
         const factions = this.props.dictionary.factions;
-        console.log(factions)
 
         const colProps = {span: 8};
         const styleSelect = {
@@ -31,7 +41,7 @@ class DecksListFilters extends React.Component {
                 <Row gutter={20}>
                     <Col {...colProps}>
                         <Form.Item>
-                            {getFieldDecorator('global')(<Input.Search placeholder="By deck name, description or author..." size="large"/>)}
+                            {getFieldDecorator('global')(<Input.Search placeholder="By deck name or description..." size="large"/>)}
                         </Form.Item>
                     </Col>
                     <Col {...colProps}>
@@ -59,15 +69,19 @@ class DecksListFilters extends React.Component {
                     {/*        )}*/}
                     {/*    </Form.Item>*/}
                     {/*</Col>*/}
-                    <Col {...colProps}>
-                        <Button onClick={this.submit.bind(this)} block title="test"/>
+                    <Col {...colProps} span={4}>
+                        <Button type="primary" icon="search" size="large" onClick={this.submit.bind(this)} block>Search</Button>
                     </Col>
                 </Row>
             </Form>
         )
 
     }
+}
 
+//Required props
+DecksListFilters.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
 }
 
 export default Form.create({name: 'decks_list_filters'})(DecksListFilters);

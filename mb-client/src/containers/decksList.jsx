@@ -13,14 +13,22 @@ export default class DecksList extends React.Component {
     constructor(props){
         super(props);
 
+        this.state = {
+            filters: {},
+            sort: {},
+        }
+    }
+
+    onFiltersSubmit(filters){
+        console.log(filters);
+        this.setState({filters});
     }
 
     render() {
         return (
             <Layout className="ant-layout-transparent" style={{padding: 20}}>
-                <DecksListFilters/>
-
-                <DecksListTable/>
+                <DecksListFilters onSubmit={this.onFiltersSubmit.bind(this)}/>
+                <DecksListTable filters={this.state.filters}/>
             </Layout>
         );
     }

@@ -102,9 +102,14 @@ const columns = [
 @observer
 export default class DecksListTable extends React.Component {
 
+    /**
+     * Constructor
+     * @param props
+     */
     constructor(props){
         super(props);
 
+        //Set default state
         this.state = {
             data: [],
             pagination: {},
@@ -113,9 +118,17 @@ export default class DecksListTable extends React.Component {
 
     }
 
+    /**
+     * Fetch the decks for the requested page
+     * - Will apply current filters
+     * - Will apply current sorting
+     * @param currentPage
+     */
     fetchDecks(currentPage) {
         this.setState({loading: true});
-        axios.get('json/decks?page=' + currentPage).then(({data}) => {
+        axios.post('json/decks?page=' + currentPage, {
+            filters: this.props.filters
+        }).then(({data}) => {
             const decks = data.data;
             const dictionary = this.props.dictionary;
             const cardsStore = dictionary.cards;
@@ -141,10 +154,27 @@ export default class DecksListTable extends React.Component {
         this.fetchDecks(pagination.current);
     };
 
+    /**
+     * LIFECYCLE - triggered once after mounting component
+     */
     componentDidMount(){
         this.fetchDecks(1)
     }
 
+    /**
+     * LIFECYCLE - triggered after every props change
+     * @param prevProps
+     */
+    componentDidUpdate(prevProps){
+        if( ! _.isEqual(prevProps.filters, this.props.filters)){
+            this.fetchDecks(1);
+        }
+    }
+
+    /**
+     * LIFECYCLE - render the component
+     * @param prevProps
+     */
     render(){
         const { data, loading, pagination } = this.state;
         return (

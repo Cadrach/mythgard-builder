@@ -21,10 +21,10 @@ class CreateDecksTable extends Migration
             $table->string("dck_name", 255);
             $table->boolean("dck_public")->default(false);
             $table->mediumText("dck_description")->nullable();
-            $table->string("dck_version", 10);
+            $table->string("dck_version", 10)->default('0.0.0');
 
             //Stats
-            $table->string("dck_factions", 50);
+            $table->string("dck_factions", 50)->default('[]');
             $table->integer("dck_cost")->unsigned()->nullable();
 
             //Data

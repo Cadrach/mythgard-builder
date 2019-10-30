@@ -44,36 +44,13 @@ class DeckSeeder extends Seeder
             //Data from the deck
             $deckData = $json['deck'][0]['data']['deck'];
 
-            //Binary info
-            $binaries = Helper::deckToBinaries($deckCards);
-
-            $data = [
-                'ide_user' => $deckData['author']['id'],
-                'dck_name' => "{$deckData['name']} [{$deckData['id']}]",
-                'dck_version' => "0.16.2",
-                'dck_cards' => json_encode($deckCards),
-                'dck_stars' => rand(0, 5000),
-                'dck_public' => 1,
-                'dck_factions' => "''",
-                'test_dck_bin_common' => $binaries['dck_bin_common'],
-                'test_dck_bin_uncommon' => $binaries['dck_bin_uncommon'],
-                'test_dck_bin_rare' => $binaries['dck_bin_rare'],
-                'test_dck_bin_mythic' => $binaries['dck_bin_mythic'],
-            ];
-
-            $keys = array_merge(array_keys($data), [
-                'dck_bin_common', 'dck_bin_uncommon', 'dck_bin_rare', 'dck_bin_mythic',
-            ]);
-            $fields = array_merge(array_fill(0, count($data), '?'), [
-                "b'{$binaries['dck_bin_common']}'","b'{$binaries['dck_bin_uncommon']}'","b'{$binaries['dck_bin_rare']}'","b'{$binaries['dck_bin_mythic']}'",
-            ]);
-
-            //Raw insert to be able to use binaries
-            DB::insert("INSERT INTO decks (".implode(',', $keys).") VALUES (".implode(',', $fields).")", array_values($data));
-
-//            print_r($deckCards);
-            //print_r($json);
-//            if($k>100) die();
+            $deck = new Deck();
+            $deck->ide_user = $deckData['author']['id'];
+            $deck->dck_name = "{$deckData['name']} [{$deckData['id']}]";
+            $deck->dck_cards = $deckCards;
+            $deck->dck_stars = rand(0, 5000);
+            $deck->dck_public = 1;
+            $deck->save();
         }
     }
 

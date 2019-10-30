@@ -29,15 +29,9 @@ class CreateDecksTable extends Migration
 
             //Data
             $constants = \App\Models\Card::getConstants();
-//            $table->enum("dck_path");
-//            $table->enum("dck_power");
+            $table->string("dck_path");
+            $table->string("dck_power");
             $table->text("dck_cards");
-
-            //Searches
-            $table->text("test_dck_bin_common")->nullable();
-            $table->text("test_dck_bin_uncommon")->nullable();
-            $table->text("test_dck_bin_rare")->nullable();
-            $table->text("test_dck_bin_mythic")->nullable();
 
             //Social
             $table->integer("dck_stars")->unsigned()->default(0);
@@ -46,6 +40,12 @@ class CreateDecksTable extends Migration
 
             //Times
             $table->timestamps();
+
+            //Searches
+            $table->text("test_dck_bin_common")->nullable();
+            $table->text("test_dck_bin_uncommon")->nullable();
+            $table->text("test_dck_bin_rare")->nullable();
+            $table->text("test_dck_bin_mythic")->nullable();
 
             //Indexes
             $table->index('ide_user');

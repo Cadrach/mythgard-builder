@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Deck;
 use App\Models\Helper;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Input\Input;
 
 class DeckController extends Controller
 {
+    /**
+     * Returns all the decks I own
+     * @return mixed
+     */
     public function getMyDecks(){
         $idUser = $this->_user()->id;
         return Deck::where('ide_user', '=', $idUser)->get();
@@ -45,6 +47,19 @@ class DeckController extends Controller
     }
 
     /**
+     * Returns the detail of a deck
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Model|static
+     */
+    public function getDetail($id){
+        //TODO: allow to return a private deck, if we are the user logged-in
+        return Deck::with('user:id,name')
+            ->where("dck_public", "=", 1)
+            ->where("id", "=", $id)
+            ->firstOrFail();
+    }
+
+    /**
      * Get list of decks
      * @return mixed
      */
@@ -58,7 +73,7 @@ class DeckController extends Controller
                 case 'cards':
                     $binaries = Helper::resolveDeckComputedFields($value);
                     foreach($binaries as $field => $bin){
-                        if(strpos($bin, '1') !== false){
+                        if(strpos($bin, '1') !== false && strpos($field, 'dck_bin') === 0){
                             $decks->whereRaw("BIT_COUNT($bin & ~$field) = 0");
 //                            $decks->whereRaw("test_$field LIKE '".str_replace('0','_', $bin)."'");
                         }

@@ -16,6 +16,8 @@ class CreateDecksTable extends Migration
         Schema::create('decks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('ide_user');
+            $table->tinyInteger("ide_path")->nullable();
+            $table->tinyInteger("ide_power")->nullable();
 
             //Info
             $table->string("dck_name", 255);
@@ -29,9 +31,6 @@ class CreateDecksTable extends Migration
             $table->integer("dck_cost")->unsigned()->nullable();
 
             //Data
-            $constants = \App\Models\Card::getConstants();
-            $table->string("dck_path")->nullable();
-            $table->string("dck_power")->nullable();
             $table->text("dck_cards");
 
             //Social

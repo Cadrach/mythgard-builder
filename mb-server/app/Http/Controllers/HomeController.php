@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Card;
 use App\Models\Faction;
+use App\Models\Path;
+use App\Models\Power;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +14,7 @@ class HomeController extends Controller
         foreach($fields as $field){
             $select[] = "$field as `" . str_replace($prefix, '', $field) . "`";
         }
-        return $class::selectRaw(implode(', ', $select))->get();
+        return $class::selectRaw(implode(', ', $select));
     }
 
     /**
@@ -60,9 +62,15 @@ class HomeController extends Controller
                 'card_text_flavor',
                 'created_at',
                 'updated_at',
-            ], 'card_'),
+            ], 'card_')
+                ->orderBy('ide_faction')
+                ->orderBy('card_cost')
+                ->orderBy('card_name')
+                ->get(),
 
-            'factions' => $this->_dictionary(Faction::class, ['id', 'fac_code', 'fac_name'], 'fac_'),
+            'factions' => $this->_dictionary(Faction::class, ['id', 'fac_code', 'fac_name'], 'fac_')->get(),
+            'powers' => $this->_dictionary(Power::class, ['id', 'pow_name'], 'pow_')->get(),
+            'paths' => $this->_dictionary(Path::class, ['id', 'pth_name'], 'pth_')->get(),
         ];
     }
 }

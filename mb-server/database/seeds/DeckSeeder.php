@@ -46,6 +46,8 @@ class DeckSeeder extends Seeder
 
             $deck = new Deck();
             $deck->ide_user = $deckData['author']['id'];
+            $deck->ide_power = $deckData['power']['id'];
+            $deck->ide_path = $deckData['path']['id'];
             $deck->dck_name = "{$deckData['name']} [{$deckData['id']}]";
             $deck->dck_cards = $deckCards;
             $deck->dck_stars = rand(0, 5000);

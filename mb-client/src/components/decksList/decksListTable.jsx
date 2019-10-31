@@ -1,7 +1,8 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
+import {NavLink} from 'react-router-dom'
 import axios from '../../axios';
-import { Table, Icon as AntIcon, Tooltip } from "antd";
+import { Table, Icon as AntIcon, Tooltip, Button } from "antd";
 import Icon from 'react-fa';
 import constants from "../../constants";
 import './stylesheets/decksListTable.scss';
@@ -14,14 +15,10 @@ const columns = [
         dataIndex: 'dck_name',
         ellipsis: true,
         sorter: true,
+        render: (dck_name, row) => (<span><b>{dck_name}</b> {row.user ? <span style={{fontStyle:'italic'}}> by {row.user.name}</span> : null}</span>),
     },
     {
-        title: 'Player',
-        dataIndex: 'user.name',
-        ellipsis: true,
-    },
-    {
-        className: 'text-center',
+        className: 'border-left text-center',
         title: <Tooltip title="Colors"><Icon name="tint" style={{fontSize: 16}}/></Tooltip>,
         dataIndex: 'dck_colors',
         render: gems => <Gem string={gems}/>,
@@ -103,12 +100,11 @@ const columns = [
         dataIndex: 'stats.rarities.mythic',
         width,
     },
-    // {
-    //     title: 'Gender',
-    //     dataIndex: 'gender',
-    //     filters: [{ text: 'Male', value: 'male' }, { text: 'Female', value: 'female' }],
-    //     width: '20%',
-    // },
+    {
+        dataIndex: 'id',
+        render: id => <NavLink to={"/decks/" + id}><Button type="primary">Details <AntIcon type="right"/></Button></NavLink>,
+        width: 65,
+    },
     // {
     //     title: 'Email',
     //     dataIndex: 'email',
@@ -117,10 +113,10 @@ const columns = [
 
 @inject('dictionary')
 @observer
-export default class DecksListTable extends React.Component {
+class DecksListTable extends React.Component {
 
     /**
-     * Constructor
+     * LIFECYCLE - Constructor
      * @param props
      */
     constructor(props){
@@ -133,6 +129,23 @@ export default class DecksListTable extends React.Component {
             loading: false,
         }
 
+    }
+
+    /**
+     * LIFECYCLE - triggered once after mounting component
+     */
+    componentDidMount(){
+        this.fetchDecks(1)
+    }
+
+    /**
+     * LIFECYCLE - triggered after every props change
+     * @param prevProps
+     */
+    componentDidUpdate(prevProps){
+        if( ! _.isEqual(prevProps.filters, this.props.filters)){
+            this.fetchDecks(1);
+        }
     }
 
     /**
@@ -172,23 +185,6 @@ export default class DecksListTable extends React.Component {
     };
 
     /**
-     * LIFECYCLE - triggered once after mounting component
-     */
-    componentDidMount(){
-        this.fetchDecks(1)
-    }
-
-    /**
-     * LIFECYCLE - triggered after every props change
-     * @param prevProps
-     */
-    componentDidUpdate(prevProps){
-        if( ! _.isEqual(prevProps.filters, this.props.filters)){
-            this.fetchDecks(1);
-        }
-    }
-
-    /**
      * LIFECYCLE - render the component
      * @param prevProps
      */
@@ -211,3 +207,5 @@ export default class DecksListTable extends React.Component {
     }
 
 }
+
+export default DecksListTable;

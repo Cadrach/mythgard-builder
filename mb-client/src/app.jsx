@@ -1,5 +1,4 @@
 import React from "react";
-// import { withRouter, NavLink } from 'react-router-dom'
 import DevTools from "mobx-react-devtools";
 import { Route, NavLink, useLocation  } from 'react-router-dom';
 
@@ -12,23 +11,26 @@ import "./stylesheets/imports.css";
 import DeckBuilder from "./containers/deckBuilder";
 import MyCards from "./containers/myCards";
 import DecksList from "./containers/decksList";
+import DeckDetail from "./containers/deckDetail";
 
-const App = () => (
-    <Layout className="ant-layout-transparent">
+const App = () => {
+    const rootPathName = '/' + useLocation().pathname.split('/')[1];
+
+    return (<Layout className="ant-layout-transparent">
         <Affix>
             <Header style={{position: 'fixed', zIndex: 1, width: '100%', paddingLeft: 0}}>
-                <div className="logo" />
+                <div className="logo"/>
                 <Menu
                     theme="dark"
                     mode="horizontal"
-                    selectedKeys={[useLocation().pathname]}
+                    selectedKeys={[rootPathName]}
                     style={{lineHeight: '64px'}}
                 >
                     <Menu.Item key="/">
                         <NavLink to="/">Home</NavLink>
                     </Menu.Item>
-                    <Menu.Item key="/decks-list">
-                        <NavLink to="/decks-list">Decks</NavLink>
+                    <Menu.Item key="/decks">
+                        <NavLink to="/decks">Decks</NavLink>
                     </Menu.Item>
                     <Menu.Item key="/cards" style={{float: 'right'}}>
                         <NavLink to="/cards">My Cards</NavLink>
@@ -42,12 +44,13 @@ const App = () => (
         </Affix>
         <Layout className="ant-layout-transparent" style={{marginTop: 64}}>
             <div>
-                <Route exact path="/deck-builder" component={DeckBuilder} />
-                <Route exact path="/cards" component={MyCards} />
-                <Route exact path="/decks-list" component={DecksList} />
+                <Route exact path="/deck-builder" component={DeckBuilder}/>
+                <Route exact path="/cards" component={MyCards}/>
+                <Route exact path="/decks" component={DecksList}/>
+                <Route exact path="/decks/:id" component={DeckDetail}/>
             </div>
         </Layout>
-    </Layout>
-)
+    </Layout>)
+}
 export default App;
 

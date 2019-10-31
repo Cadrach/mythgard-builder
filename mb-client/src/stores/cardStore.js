@@ -23,14 +23,18 @@ class CardStore {
      */
     computeStats(cards) {
         const stats = {
+            total: 0,
             types: {},
             rarities: {},
         };
-        cards.forEach(card => {
-            const info = this.cardById(card.id);
-            stats.types[info.type] = (stats.types[info.type] ? stats.types[info.type]:0) + card.count;
-            stats.rarities[info.rarity] = (stats.rarities[info.rarity] ? stats.rarities[info.rarity]:0) + card.count;
-        }, this)
+        if(cards){
+            cards.forEach(card => {
+                const info = this.cardById(card.id);
+                stats.total+= card.count;
+                stats.types[info.type] = (stats.types[info.type] ? stats.types[info.type]:0) + card.count;
+                stats.rarities[info.rarity] = (stats.rarities[info.rarity] ? stats.rarities[info.rarity]:0) + card.count;
+            }, this)
+        }
         return stats;
     };
 

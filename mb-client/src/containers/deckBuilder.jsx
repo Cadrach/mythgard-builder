@@ -2,7 +2,8 @@ import React from "react";
 import { observer, inject } from "mobx-react";
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {Drawer, Layout, Button, Menu, Icon as AntIcon, Divider, List} from "antd";
-import Deck from "../components/deck/deck";
+import DeckContent from "../components/deck/deckContent";
+import DeckHeader from "../components/deck/deckHeader";
 import CardsList from "../components/cardsList/cardsList"
 import constants from "../constants";
 import FilterColor from "../components/filters/filterColor";
@@ -11,7 +12,6 @@ import Icon from 'react-fa';
 import _ from 'lodash';
 
 import './stylesheets/deckBuilder.scss';
-import DeckForm from "../components/deck/deckForm";
 import DeckDrawer from "../components/deck/deckDrawer";
 
 @inject('dictionary', 'deckStore')
@@ -184,7 +184,11 @@ export default class DeckBuilder extends React.Component {
                     theme="light"
                     style={{background: 'rgba(0,0,0,0.01)'}}
                 >
-                    <Deck/>
+                    <div style={{padding: 20, textAlign: 'right'}}>
+                        <Button type="primary" icon="save" size="large" disabled={selectedDeck.saved} onClick={this.props.deckStore.saveSelectedDeck}>Save</Button>
+                    </div>
+                    <DeckHeader deck={selectedDeck}/>
+                    <DeckContent deck={selectedDeck}/>
                 </Layout.Sider>
             </Layout>
         );

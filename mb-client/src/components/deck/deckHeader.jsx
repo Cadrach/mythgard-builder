@@ -1,6 +1,8 @@
 import React from "react";
 import {Button, List, Statistic} from "antd";
 import Gem from "../gem/gem";
+import BadgePower from "../badge/badgePower";
+import BadgePath from "../badge/badgePath";
 
 export default class DeckHeader extends React.Component {
 
@@ -8,8 +10,11 @@ export default class DeckHeader extends React.Component {
         const {deck} = this.props;
         return (
             <div>
+                <BadgePath id={deck.ide_path}/>
+                <BadgePower id={deck.ide_power}/>
                 <Statistic value={deck.sum} suffix="/ 40" style={{float: 'left'}}/>
                 <Gem string={deck.colors} size="2x" style={{marginTop: 4, marginLeft: 8}}/>
+                <div className="clearfix"/>
             </div>
         )
 

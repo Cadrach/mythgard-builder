@@ -21,6 +21,8 @@ const DeckLine = types.model('DeckLine',{
 export const Deck = types
     .model('Deck', {
         id: types.identifierNumber,
+        ide_path: types.maybeNull(types.integer),
+        ide_power: types.maybeNull(types.integer),
         dck_cards: types.optional(types.array(DeckLine), []),
         dck_name: types.maybeNull(types.string),
         dck_public: types.optional(types.boolean, false),

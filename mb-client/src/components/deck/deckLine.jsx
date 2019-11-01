@@ -3,28 +3,33 @@ import {inject, observer} from "mobx-react";
 import {Badge, List} from "antd";
 import constants from "../../constants";
 import Gem from "../gem/gem";
-import './deckLine.scss';
+import BadgeCardType from "../badge/badgeCardType";
 
 export default class DeckLine extends React.Component {
 
     render(){
         const {item} = this.props;
         const {id, count, card} = item;
-        // console.log(card)
+        const color = constants.gems[card.gems[0]];
+
+        const background = "linear-gradient(90deg, "+color+" 42%, rgba(0,255,255,0) 80%)";
+
         return (
-            <span className="deckLine">
-                <div className="cost">
-                    <Badge count={count} />
+            <div className="deck-line" style={{backgroundImage: 'url(/images/cards/m/'+card.image+')'}}>
+                <div className="gradient" style={{background}}>
+                    <span className="cost">
+                        <Badge count={card.cost} />
+                    </span>&nbsp;
+                    <span className="name">
+                        <BadgeCardType type={card.type}/>&nbsp;&nbsp;{card.name}
+                    </span>
+                    <span className="occurences">
+                        <Badge count={"x " + count} />
+                    </span>&nbsp;
+                    <div className="rarity">
+                    </div>
                 </div>
-                <div className="gems">
-                  <Gem string={card.gems}/>
-                </div>
-                <div className="name">
-                    {card.name}
-                </div>
-                <div className="rarity">
-                </div>
-            </span>
+            </div>
         )
 
     }

@@ -45,16 +45,16 @@ class DeckDetail extends React.Component {
                 <Layout.Header className="header">
                     <h1>{deck.dck_name}</h1>
                 </Layout.Header>
-                <Layout>
+                <Layout className="ant-layout-transparent">
                     <Row>
-                    <Col span={18} style={{height: 8000, background: 'blue'}}>
+                    <Col span={18} style={{height: 8000}}>
                         {deck.dck_description}
                     </Col>
                             <Col span={6}>
                                 {deck ? <Affix offsetTop={64}>
-                                    <div  style={{height: 800, background: 'red', overflow: 'auto'}}>
+                                    <div  style={{height: 800, overflow: 'auto'}}>
                                         <DeckHeader deck={deck}/>
-                                        <DeckContent deck={deck}/>
+                                        <DeckContent cards={deck.cards}/>
                                     </div>
                                 </Affix> : null}
                             </Col>

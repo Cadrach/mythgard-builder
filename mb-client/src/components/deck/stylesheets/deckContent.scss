@@ -1,0 +1,53 @@
+.deck-content{
+  .deck-line{
+    position: relative;
+    height: 48px;
+    margin: 1px 0;
+
+    background-repeat: no-repeat;
+    background-position: calc(100% + 6px) 10%;
+    background-size: 60%;
+
+    border-radius: 3px;
+
+    .gradient{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+//      background: linear-gradient(90deg, rgba(9,9,121,1) 50%, rgba(0,249,255,0) 95%);
+      padding: 8px;
+      line-height: 34px;
+      border-radius: 3px;
+    }
+
+    .name{
+      color: #fff;
+      text-shadow: 0px 0px 3px #000,  0px 0px 3px #000,  0px 0px 3px #000;
+      text-transform: capitalize;
+    }
+
+    .ant-badge-count{
+      background: #000;
+      box-shadow: 0 0 0 2px #999;
+      font-weight: bold;
+    }
+
+    .occurences, .cost{
+      position: relative;
+      top: -2px;
+    }
+
+    .cost{
+      margin-right: 4px;
+    }
+
+    .occurences{
+      float: right;
+      .ant-badge-count{
+        font-size: 18px;
+        height: 22px
+      }
+    }
+  }
+
+}

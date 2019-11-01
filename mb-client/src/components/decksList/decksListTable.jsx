@@ -7,6 +7,8 @@ import Icon from 'react-fa';
 import constants from "../../constants";
 import './stylesheets/decksListTable.scss';
 import Gem from "../gem/gem";
+import BadgePower from "../badge/badgePower";
+
 
 const width = 50;
 const columns = [
@@ -19,6 +21,13 @@ const columns = [
     },
     {
         className: 'border-left text-center',
+        title: <Tooltip title="Power"><Icon name="bolt" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: 'ide_power',
+        render: id => <BadgePower id={id}/>,
+        width,
+    },
+    {
+        className: 'text-center',
         title: <Tooltip title="Colors"><Icon name="tint" style={{fontSize: 16}}/></Tooltip>,
         dataIndex: 'dck_colors',
         render: gems => <Gem string={gems}/>,

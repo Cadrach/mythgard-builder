@@ -6,8 +6,9 @@ import {Layout, Affix, Row, Col} from "antd";
 import {Deck as DeckModel} from "../stores/deckStore";
 import DeckContent from "../components/deck/deckContent";
 import DeckHeader from "../components/deck/deckHeader";
+import {getSnapshot} from "mobx-state-tree";
 
-@inject('dictionary')
+@inject('dictionary', 'deckStore')
 @observer
 class DeckDetail extends React.Component {
 
@@ -23,22 +24,23 @@ class DeckDetail extends React.Component {
         const deckId = this.props.match.params.id;
         this.props.dictionary.promise.then(() => {
             axios.get('json/deck/' + deckId).then(({data})=> {
-                const deck = DeckModel.create(data, {
-                    cardStore: this.props.dictionary.cards,
-                });
-                this.setState({deck})
+                this.previousDeck = this.props.deckStore.selectedDeck;
+                this.props.deckStore.setViewedDeck(data);
+                this.props.deckStore.selectDeck(this.props.deckStore.viewedDeck);
             });
         })
     }
 
+    componentWillUnmount(){
+        //Restore the previously selected deck, maybe a bit ugly?
+        this.props.deckStore.selectDeck(this.previousDeck);
+    }
+
+
     render() {
-        const {deck} = this.state;
+        const deck = this.props.deckStore.selectedDeck;//this.state;
 
         if( ! deck) return <div></div>
-
-        console.log(deck);
-
-        const cardsStore = this.props.dictionary.cards;
 
         return (
             <Layout className="ant-layout-transparent">

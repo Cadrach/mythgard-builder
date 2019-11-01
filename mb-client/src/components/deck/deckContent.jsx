@@ -4,13 +4,16 @@ import DeckLine from "./deckLine";
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import './stylesheets/deckContent.scss';
+import {inject, observer} from "mobx-react";
 
+@inject('deckStore')
+@observer
 export default class DeckContent extends React.Component {
 
     render(){
-        const {cards} = this.props;
+        const deck = this.props.deckStore.selectedDeck;
         return (<div className="deck-content">
-                {cards.map(card => <DeckLine key={card.id} item={card}/>)}
+                {deck.cards.map(card => <DeckLine key={card.id} item={card} count={card.count}/>)}
             </div>
         )
 

@@ -105,6 +105,7 @@ export const Deck = types
 export const DeckStore = types
     .model('DeckStore', {
         myDecks: types.optional(types.array(Deck), [{id: 0, dck_name: 'New Deck', saved: false}]),
+        viewedDeck: types.maybeNull(Deck),
         selectedDeck: types.optional(types.safeReference(Deck), 0), //default selected deck is an empty deck
         loaded: types.optional(types.boolean, false),
         saving: types.optional(types.boolean, false),
@@ -126,6 +127,10 @@ export const DeckStore = types
          */
         selectDeck(deck) {
             self.selectedDeck = deck;
+        },
+
+        setViewedDeck(deck){
+            self.viewedDeck = deck;
         },
 
         /**

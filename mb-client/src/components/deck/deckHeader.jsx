@@ -3,11 +3,14 @@ import {Button, List, Statistic} from "antd";
 import Gem from "../gem/gem";
 import BadgePower from "../badge/badgePower";
 import BadgePath from "../badge/badgePath";
+import {inject, observer} from "mobx-react";
 
+@inject('deckStore')
+@observer
 export default class DeckHeader extends React.Component {
 
     render(){
-        const {deck} = this.props;
+        const deck = this.props.deckStore.selectedDeck;
         return (
             <div>
                 <BadgePath id={deck.ide_path}/>

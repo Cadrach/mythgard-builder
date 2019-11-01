@@ -187,8 +187,8 @@ export default class DeckBuilder extends React.Component {
                     <div style={{padding: 20, textAlign: 'right'}}>
                         <Button type="primary" icon="save" size="large" disabled={selectedDeck.saved} onClick={this.props.deckStore.saveSelectedDeck}>Save</Button>
                     </div>
-                    <DeckHeader deck={selectedDeck}/>
-                    <DeckContent cards={[...selectedDeck.cards]}/>
+                    <DeckHeader/>
+                    <DeckContent/>
                 </Layout.Sider>
             </Layout>
         );

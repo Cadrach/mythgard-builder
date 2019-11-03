@@ -7,6 +7,7 @@ import CardStore from "./cardStore";
 class Dictionary {
 
     @observable cards = {};
+    @observable user = {};
     @observable factions;
     @observable powers;
     @observable paths;
@@ -16,6 +17,10 @@ class Dictionary {
     constructor() {
          this.cards = CardStore;
          this.load();
+    }
+
+    @computed get isConnected(){
+        return !!this.user;
     }
 
     $req = async () => {
@@ -35,6 +40,7 @@ class Dictionary {
             this.paths = dictionaries.paths;
             this.powersById = _.keyBy(dictionaries.powers, 'id');
             this.pathsById = _.keyBy(dictionaries.paths, 'id');
+            this.user = dictionaries.user;
         }).finally(action(() => { this.isLoading = false; }))
 
         return this.promise;

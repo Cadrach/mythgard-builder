@@ -43,7 +43,9 @@
     }
 
     .occurences{
-      float: right;
+      position: absolute;
+      top: 6px;
+      right: 8px;
       .ant-badge-count{
         font-size: 18px;
         height: 22px

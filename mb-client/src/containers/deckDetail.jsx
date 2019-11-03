@@ -3,10 +3,8 @@ import axios from '../axios';
 import { observer, inject } from "mobx-react";
 import {withRouter} from "react-router-dom";
 import {Layout, Affix, Row, Col} from "antd";
-import {Deck as DeckModel} from "../stores/deckStore";
 import DeckContent from "../components/deck/deckContent";
 import DeckHeader from "../components/deck/deckHeader";
-import {getSnapshot} from "mobx-state-tree";
 
 @inject('dictionary', 'deckStore')
 @observer
@@ -49,14 +47,14 @@ class DeckDetail extends React.Component {
                 </Layout.Header>
                 <Layout className="ant-layout-transparent">
                     <Row>
-                    <Col span={18} style={{height: 8000}}>
+                    <Col span={18} style={{height: 400}}>
                         {deck.dck_description}
                     </Col>
                             <Col span={6}>
                                 {deck ? <Affix offsetTop={64}>
-                                    <div  style={{height: 800, overflow: 'auto'}}>
+                                    <div>
                                         <DeckHeader deck={deck}/>
-                                        <DeckContent cards={deck.cards}/>
+                                        <DeckContent height="calc(100vh - 64px - 64px - 128px - 64px)"/>
                                     </div>
                                 </Affix> : null}
                             </Col>

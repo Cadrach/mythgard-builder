@@ -1,6 +1,5 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
-import PerfectScrollbar from 'react-perfect-scrollbar';
 import {Drawer, Layout, Button, Menu, Icon as AntIcon, Divider, List} from "antd";
 import DeckContent from "../components/deck/deckContent";
 import DeckHeader from "../components/deck/deckHeader";
@@ -13,6 +12,7 @@ import _ from 'lodash';
 
 import './stylesheets/deckBuilder.scss';
 import DeckDrawer from "../components/deck/deckDrawer";
+import {Scrollbars} from "react-custom-scrollbars";
 
 @inject('dictionary', 'deckStore')
 @observer
@@ -124,7 +124,7 @@ export default class DeckBuilder extends React.Component {
                         </Menu>
 
                     { ! leftCollapsed ?
-                        <PerfectScrollbar style={{height: 'calc(100vh - 64px - (48px * 4) - 48px)'}}>
+                        <Scrollbars style={{ height: 'calc(100vh - 64px - (48px * 4) - 48px)' }}>
                                 <List
                                     itemLayout="horizontal"
                                     size="small"
@@ -137,7 +137,7 @@ export default class DeckBuilder extends React.Component {
                                             </span>
                                         </List.Item>
                                     }/>
-                        </PerfectScrollbar>
+                        </Scrollbars>
                     :null}
                 </Layout.Sider>
 
@@ -188,7 +188,7 @@ export default class DeckBuilder extends React.Component {
                         <Button type="primary" icon="save" size="large" disabled={selectedDeck.saved} onClick={this.props.deckStore.saveSelectedDeck}>Save</Button>
                     </div>
                     <DeckHeader/>
-                    <DeckContent/>
+                    <DeckContent height="calc(100vh - 64px - 80px - 128px - 80px)"/>
                 </Layout.Sider>
             </Layout>
         );

@@ -3778,7 +3778,7 @@ dom-converter@^0.2:
   dependencies:
     utila "~0.4"
 
-dom-css@^2.0.0:
+dom-css@^2.0.0, dom-css@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/dom-css/-/dom-css-2.1.0.tgz#fdbc2d5a015d0a3e1872e11472bbd0e7b9e6a202"
   integrity sha1-/bwtWgFdCj4YcuEUcrvQ57nmogI=
@@ -9655,6 +9655,11 @@ realpath-native@^1.1.0:
   integrity sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
   dependencies:
     util.promisify "^1.0.0"
+
+rebound@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/rebound/-/rebound-0.1.0.tgz#0638c61a93666bb515a58a03e1cfb34021e88b72"
+  integrity sha1-BjjGGpNma7UVpYoD4c+zQCHoi3I=
 
 recursive-readdir@2.2.2:
   version "2.2.2"

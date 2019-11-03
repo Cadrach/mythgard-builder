@@ -13,7 +13,7 @@ const BadgeCardType = (props) => {
     }
 
     return (
-        <Icon name={types[type]}/>
+        <Icon name={types[type]} fixedWidth={true}/>
     )
 }
 

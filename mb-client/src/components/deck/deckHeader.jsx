@@ -12,7 +12,7 @@ export default class DeckHeader extends React.Component {
     render(){
         const deck = this.props.deckStore.selectedDeck;
         return (
-            <div>
+            <div style={{height: 128}}>
                 <BadgePath id={deck.ide_path}/>
                 <BadgePower id={deck.ide_power}/>
                 <Statistic value={deck.sum} suffix="/ 40" style={{float: 'left'}}/>

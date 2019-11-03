@@ -39,6 +39,7 @@ class HomeController extends Controller
 
     public function getDictionaries(){
         return [
+            'user' => $this->_user(),
             'cards' => $this->_dictionary(Card::class, [
                 'id',
                 'id_rhino',

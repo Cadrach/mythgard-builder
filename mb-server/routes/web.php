@@ -12,14 +12,13 @@
 */
 
 //Welcome page (not logged in)
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 //Authentication
 Auth::routes();
 Route::get('login/{provider}', 'Auth\\SocialController@redirect');
 Route::get('login/{provider}/callback','Auth\\SocialController@callback');
+Route::get('logout','Auth\\LoginController@logout');
 
 //Authenticated pages
 Route::middleware('auth:web')->group(function(){

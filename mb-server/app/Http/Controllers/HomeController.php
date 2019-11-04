@@ -28,13 +28,14 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Homepage
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('home');
+        //Redirect to the home of the React App
+        return redirect(env('EXTERNAL_SERVER_URL'));
     }
 
     public function getDictionaries(){

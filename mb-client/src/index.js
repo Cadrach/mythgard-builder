@@ -33,6 +33,8 @@ const uiStore = UIStore.create({ borderRadius: 3, textColor: 'white' });
 const dictionary = Dictionary;
 const deckStore = DeckStore.create({}, {
     cardStore: dictionary.cards,
+    powersById: dictionary.powersById,
+    pathsById: dictionary.pathsById,
 });
 
 const store = {

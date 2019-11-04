@@ -16,6 +16,11 @@ class Dictionary {
 
     constructor() {
          this.cards = CardStore;
+         this.factions = [];
+         this.powers = [];
+         this.paths = [];
+         this.powersById = {};
+         this.pathsById = {};
          this.load();
     }
 
@@ -35,11 +40,11 @@ class Dictionary {
         this.isLoading = true;
         this.promise = this.$req().then((dictionaries) => {
             this.cards.loadCards(dictionaries.cards);
-            this.factions = dictionaries.factions;
-            this.powers = dictionaries.powers;
-            this.paths = dictionaries.paths;
-            this.powersById = _.keyBy(dictionaries.powers, 'id');
-            this.pathsById = _.keyBy(dictionaries.paths, 'id');
+            this.factions.push(...dictionaries.factions);
+            this.powers.push(...dictionaries.powers);
+            this.paths.push(...dictionaries.paths);
+            _.extend(this.powersById, _.keyBy(dictionaries.powers, 'id'));
+            _.extend(this.pathsById, _.keyBy(dictionaries.paths, 'id'));
             this.user = dictionaries.user;
         }).finally(action(() => { this.isLoading = false; }))
 

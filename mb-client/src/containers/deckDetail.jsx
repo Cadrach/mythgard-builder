@@ -2,9 +2,11 @@ import React from "react";
 import axios from '../axios';
 import { observer, inject } from "mobx-react";
 import {withRouter} from "react-router-dom";
-import {Layout, Affix, Row, Col} from "antd";
+import {Layout, Affix, Row, Col, Button, Tooltip} from "antd";
 import DeckContent from "../components/deck/deckContent";
 import DeckHeader from "../components/deck/deckHeader";
+
+import './stylesheets/deckDetail.scss';
 
 @inject('dictionary', 'deckStore')
 @observer
@@ -14,7 +16,8 @@ class DeckDetail extends React.Component {
         super(props);
 
         this.state = {
-            deck: null
+            deck: null,
+            exportText: null,
         }
     }
 
@@ -33,17 +36,35 @@ class DeckDetail extends React.Component {
         //Restore the previously selected deck, maybe a bit ugly?
         this.props.deckStore.selectDeck(this.previousDeck);
     }
+    
+    /**
+     * Exports deck to clipboard
+     */
+    onClickExport(){
+        this.props.deckStore.selectedDeck.export();
+    }
 
-
+    //
     render() {
         const deck = this.props.deckStore.selectedDeck;//this.state;
+        const isConnected = this.props.dictionary.isConnected;
 
         if( ! deck) return <div></div>
 
         return (
             <Layout className="ant-layout-transparent">
-                <Layout.Header className="header">
-                    <h1>{deck.dck_name}</h1>
+                <Layout.Header className="header deck-detail-header">
+                    <h1>
+                        {deck.dck_name}
+                        <div style={{float: 'right'}}>
+                            {isConnected ?
+                                <Button icon="star" type="primary" size="large">Favorite</Button>
+                                :
+                                <Tooltip title="You muse be logged-in to favorite a deck"><Button icon="star" type="primary" size="large" disabled>Favorite</Button></Tooltip>
+                            }
+                            <Button icon="download" type="primary" size="large" onClick={this.onClickExport.bind(this)}>Export</Button>
+                        </div>
+                    </h1>
                 </Layout.Header>
                 <Layout className="ant-layout-transparent">
                     <Row>
@@ -54,7 +75,7 @@ class DeckDetail extends React.Component {
                                 {deck ? <Affix offsetTop={64}>
                                     <div>
                                         <DeckHeader deck={deck}/>
-                                        <DeckContent height="calc(100vh - 64px - 64px - 128px - 64px)"/>
+                                        <DeckContent height="calc(100vh - 64px - 84px - 128px - 64px)"/>
                                     </div>
                                 </Affix> : null}
                             </Col>

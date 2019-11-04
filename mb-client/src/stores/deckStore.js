@@ -2,6 +2,7 @@ import {flow, resolveIdentifier, getEnv, types} from 'mobx-state-tree';
 import axios from '../axios';
 import _ from 'lodash';
 import {message} from "antd";
+import copy from 'copy-to-clipboard';
 
 /**
  * Mobx State Tree Store
@@ -69,6 +70,30 @@ export const Deck = types
             else if(line && line.count > 1) line.count--; //decrease
             else self.dck_cards.splice(self.dck_cards.indexOf(line), 1) //last card, remove
             return true;
+        },
+
+        /**
+         * Exports deck to clipboard
+         */
+        export(){
+            //Export basic information
+            const lines = [
+                'name: ' + self.dck_name,
+                'path: ' + (getEnv(self).pathsById[self.ide_path] ? getEnv(self).pathsById[self.ide_path].name : ''),
+                'power: ' + (getEnv(self).powersById[self.ide_power] ? getEnv(self).powersById[self.ide_power].name : ''),
+            ];
+
+            //Export Cards
+            self.cards.forEach(line => lines.push(line.count + ' ' + line.card.name_export))
+
+            //Send to clipboard
+            copy(lines.join("\r\n"), {
+                message: 'Press #{key} to copy',
+                format: 'text/plain',
+            })
+
+            //Notify user
+            message.info("Deck exported to clipboard");
         },
 
         /**

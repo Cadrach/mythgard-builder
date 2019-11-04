@@ -22,7 +22,6 @@ class DeckObserver
         //Additional fields we will update
         $fields = array_merge($computedFields, [
             'dck_version' => "'0.16.2'",
-            'dck_factions' => "''",
         ]);
 
         //Straighten everything

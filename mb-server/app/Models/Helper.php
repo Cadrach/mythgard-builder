@@ -40,7 +40,7 @@ class Helper extends Model
      */
     public static function resolveDeckComputedFields(array $deck){
         if(self::$cards === null){
-            self::$cards = Card::select('id', 'card_gems', 'card_rarity', 'card_rarity_index', 'card_type')->get()->keyBy('id');
+            self::$cards = Card::select('id', 'ide_faction', 'card_gems', 'card_rarity', 'card_rarity_index', 'card_type')->get()->keyBy('id');
             self::$cardCountByRarities = self::$cards->groupBy('card_rarity')->map(function($v){return count($v);});
         }
 
@@ -67,6 +67,7 @@ class Helper extends Model
 
         //Set 1 for each card we own in the correct place
         $colors = [];
+        $factions = [];
         foreach($deck as $row){
             //Card info
             $card = self::$cards[$row['id']];
@@ -76,6 +77,7 @@ class Helper extends Model
             $final['dck_nb_cards']++;
             $final['dck_nb_' . strtolower($card['card_rarity']) . 's']++;
             $final['dck_nb_' . strtolower($card['card_type']) . 's']++;
+            $factions[] = $card['ide_faction'];
 
             //Update colors
             foreach(array_unique(str_split($card['card_gems'])) as $gem){
@@ -92,6 +94,11 @@ class Helper extends Model
         //Colors
         asort($colors, SORT_DESC);
         $final['dck_colors'] = "'" . implode('', array_keys($colors)) . "'";
+
+        //Factions
+        $factions = array_unique($factions);
+        sort($factions);
+        $final['dck_factions'] = "'[" . implode(',', $factions) . "]'";
 
         //Binary string starts on the right, so reverse everything
         foreach($binaries as $k=>$bin){

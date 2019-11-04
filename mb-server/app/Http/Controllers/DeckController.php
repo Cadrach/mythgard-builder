@@ -79,6 +79,12 @@ class DeckController extends Controller
                         }
                     }
                 break;
+                case 'colors':
+                    if(count($value)){
+                        $search = "[" . collect($value)->map(function($v){return intval($v['id']);})->sort()->implode(',') . "]";
+                        $decks->where('dck_factions', '=', $search);
+                    }
+                    break;
                 case 'global':
                     $decks->whereRaw("(dck_name LIKE ? OR dck_description LIKE ?)");
                     $decks->addBinding(array_fill(0, 2, "%$value%"), 'where');

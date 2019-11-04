@@ -81,7 +81,6 @@ class DeckSeeder extends Seeder
 
         while($decksToBuild-->0){
             $deck = [];
-            $colors = [];
             $count = 0;
 
             //Selecting 1 to 3 colors
@@ -97,10 +96,6 @@ class DeckSeeder extends Seeder
                 array_splice($set, $k, 1);
             }
 
-            //Work on colors
-            sort($colors);
-            $colors = array_values(array_unique($colors));
-
             //Generate binary fields
             $binaries = \App\Models\Helper::deckToBinaries($deck);
 
@@ -111,7 +106,7 @@ class DeckSeeder extends Seeder
                 'dck_cards' => "'".json_encode($deck)."'",
                 'dck_stars' => rand(0, 5000),
                 'dck_public' => 1,
-                'dck_factions' => "'".json_encode($colors)."'",
+                'dck_factions' => $binaries['dck_factions'],
                 'dck_bin_common' => "b'{$binaries['dck_bin_common']}'",
                 'dck_bin_uncommon' => "b'{$binaries['dck_bin_uncommon']}'",
                 'dck_bin_rare' => "b'{$binaries['dck_bin_rare']}'",

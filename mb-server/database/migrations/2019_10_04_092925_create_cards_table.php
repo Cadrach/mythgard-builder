@@ -34,7 +34,7 @@ class CreateCardsTable extends Migration
             $table->string('card_subtype');
             $table->enum('card_rarity', $constants['RARITY']);// [Card::RARITY_COMMON, Card::RARITY_UNCOMMON, Card::RARITY_RARE, Card::RARITY_MYTHIC]);
             $table->tinyInteger('card_max_in_deck');
-            $table->unsignedTinyInteger('card_cost');
+            $table->unsignedTinyInteger('card_cost')->nullable();
             $table->string('card_gems', 10);
             $table->unsignedTinyInteger('card_attack');
             $table->unsignedTinyInteger('card_health');

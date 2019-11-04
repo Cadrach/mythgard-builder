@@ -29,6 +29,15 @@ class CreateDecksTable extends Migration
             $table->string("dck_factions", 50)->default('[]');
             $table->char("dck_colors", 10)->default('');
             $table->integer("dck_cost")->unsigned()->nullable();
+            $table->integer("dck_nb_cards")->unsigned()->default(0);
+            $table->integer("dck_nb_creatures")->unsigned()->default(0);
+            $table->integer("dck_nb_spells")->unsigned()->default(0);
+            $table->integer("dck_nb_laneenchantments")->unsigned()->default(0);
+            $table->integer("dck_nb_artifacts")->unsigned()->default(0);
+            $table->integer("dck_nb_commons")->unsigned()->default(0);
+            $table->integer("dck_nb_uncommons")->unsigned()->default(0);
+            $table->integer("dck_nb_rares")->unsigned()->default(0);
+            $table->integer("dck_nb_mythics")->unsigned()->default(0);
 
             //Data
             $table->text("dck_cards");

@@ -88,8 +88,11 @@ class DeckController extends Controller
 
 //        echo $decks->toSql();die();
 
+        //Sorting
+        $sorter = $request->get('sorter');
+        $sorter = isset($sorter['field']) ? $sorter : ['field' => 'dck_stars', 'order' => 'descend'];
         return $decks
-            ->orderBy('dck_stars', 'desc')
+            ->orderBy($sorter['field'], $sorter['order'] == 'descend' ? 'desc':'asc')
             ->paginate(10);
     }
 }

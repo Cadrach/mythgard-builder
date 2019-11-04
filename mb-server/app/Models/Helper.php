@@ -40,11 +40,22 @@ class Helper extends Model
      */
     public static function resolveDeckComputedFields(array $deck){
         if(self::$cards === null){
-            self::$cards = Card::select('id', 'card_gems', 'card_rarity', 'card_rarity_index')->get()->keyBy('id');
+            self::$cards = Card::select('id', 'card_gems', 'card_rarity', 'card_rarity_index', 'card_type')->get()->keyBy('id');
             self::$cardCountByRarities = self::$cards->groupBy('card_rarity')->map(function($v){return count($v);});
         }
 
-        $final = [];
+        $final = [
+            'dck_cost' => 0, //cost in essence
+            'dck_nb_cards' => 0,
+            'dck_nb_creatures' => 0,
+            'dck_nb_spells' => 0,
+            'dck_nb_laneenchantments' => 0,
+            'dck_nb_artifacts' => 0,
+            'dck_nb_commons' => 0,
+            'dck_nb_uncommons' => 0,
+            'dck_nb_rares' => 0,
+            'dck_nb_mythics' => 0,
+        ];
         $maxByRarity = Card::getMaxByRarity();
         $essenceCostByRarity = Card::getEssenceCostByRarity();
 
@@ -55,14 +66,16 @@ class Helper extends Model
         }
 
         //Set 1 for each card we own in the correct place
-        $essenceCost = 0;
         $colors = [];
         foreach($deck as $row){
             //Card info
             $card = self::$cards[$row['id']];
 
             //Update deck cost in essence
-            $essenceCost+= $essenceCostByRarity[$card['card_rarity']] * $row['count'];
+            $final['dck_cost']+= $essenceCostByRarity[$card['card_rarity']] * $row['count'];
+            $final['dck_nb_cards']++;
+            $final['dck_nb_' . strtolower($card['card_rarity']) . 's']++;
+            $final['dck_nb_' . strtolower($card['card_type']) . 's']++;
 
             //Update colors
             foreach(array_unique(str_split($card['card_gems'])) as $gem){
@@ -75,9 +88,6 @@ class Helper extends Model
                 $binaries[$card['card_rarity']][$start + $i] = '1';
             }
         }
-
-        //Cost in essence
-        $final['dck_cost'] = $essenceCost;
 
         //Colors
         asort($colors, SORT_DESC);

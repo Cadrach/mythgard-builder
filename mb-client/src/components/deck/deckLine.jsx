@@ -18,7 +18,7 @@ export default class DeckLine extends React.Component {
             <div className="deck-line" style={{backgroundImage: 'url(/images/cards/m/'+card.image+')'}}>
                 <div className="gradient" style={{background}}>
                     <span className="cost">
-                        <Badge count={card.cost} />
+                        <Badge count={card.cost === null ? 'X':card.cost} />
                     </span>&nbsp;
                     <span className="name">
                         <BadgeCardType type={card.type}/>&nbsp;&nbsp;{card.name}

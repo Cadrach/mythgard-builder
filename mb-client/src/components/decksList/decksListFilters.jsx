@@ -39,7 +39,7 @@ class DecksListFilters extends React.Component {
         return (
             <Form>
                 <Row gutter={20}>
-                    <Col {...colProps}>
+                    <Col {...colProps} span={6}>
                         <Form.Item>
                             {getFieldDecorator('global')(<Input.Search placeholder="By deck name or description..." size="large"/>)}
                         </Form.Item>
@@ -50,6 +50,20 @@ class DecksListFilters extends React.Component {
                                 <Select
                                     placeholder="By Cards..."
                                     options={cards}
+                                    isMulti={true}
+                                    getOptionValue={option => option.id}
+                                    getOptionLabel={option => option.name}
+                                    styles={styleSelect}
+                                />
+                            )}
+                        </Form.Item>
+                    </Col>
+                    <Col {...colProps} span={6}>
+                        <Form.Item>
+                            {getFieldDecorator('colors', {valuePropName: 'state.value'})(
+                                <Select
+                                    placeholder="By Colors..."
+                                    options={factions}
                                     isMulti={true}
                                     getOptionValue={option => option.id}
                                     getOptionLabel={option => option.name}

@@ -4,7 +4,7 @@ import { Route, NavLink, withRouter  } from 'react-router-dom';
 import {inject, observer} from "mobx-react";
 
 // import Header from "../components/header/header";
-import { Layout, Menu, Breadcrumb, Affix } from 'antd';
+import { Layout, Menu, Affix } from 'antd';
 const { Header, Content, Sider } = Layout;
 
 // Import Common Stylesheets
@@ -19,6 +19,7 @@ import Authenticate from "./containers/authenticate";
 @inject('dictionary')
 @observer
 class App extends React.Component {
+
     render(){
         const rootPathName = '/' + this.props.location.pathname.split('/')[1];
         const {isConnected} = this.props.dictionary;
@@ -55,9 +56,10 @@ class App extends React.Component {
                             </Menu.Item>
                             :null}
                         {isConnected ?
-                            <Menu.Item style={{float: 'right'}}>
-                                {this.props.dictionary.user.name}
-                            </Menu.Item>
+                            <Menu.SubMenu title={<div><Icon name="caret-down"/> {this.props.dictionary.user.name}</div>} style={{float: 'right'}}>
+                                {/*<Menu.Item key="logout"><Icon name="sign-out"/> Logout</Menu.Item>*/}
+                                <Menu.Item key="logout"><a href={process.env.REACT_APP_SERVER_ROOT + 'logout'}><Icon name="sign-out"/> Logout</a></Menu.Item>
+                            </Menu.SubMenu>
                             :null}
                     </Menu>
                 </Header>

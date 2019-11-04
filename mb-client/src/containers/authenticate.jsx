@@ -70,11 +70,11 @@ class Authenticate extends React.Component {
 
                             <Divider>OR</Divider>
 
-                            <Button size="large" type="primary" block><Icon name="facebook" fixedWidth={true}/>&nbsp;Login with Facebook</Button>
+                            <Button size="large" type="primary" block href={process.env.REACT_APP_SERVER_ROOT + '/login/facebook'}><Icon name="facebook" fixedWidth={true}/>&nbsp;Login with Facebook</Button>
 
                             <Divider>OR</Divider>
 
-                            <Button size="large" type="primary" block><Icon name="google" fixedWidth={true}/>&nbsp;Login with Google</Button>
+                            <Button size="large" type="primary" block href={process.env.REACT_APP_SERVER_ROOT + '/login/google'}><Icon name="google" fixedWidth={true}/>&nbsp;Login with Google</Button>
                         </Card>
                     </Col>
                     <Col span={12}>

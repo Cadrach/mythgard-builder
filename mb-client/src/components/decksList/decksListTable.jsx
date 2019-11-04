@@ -64,49 +64,57 @@ const columns = [
     {
         className: 'border-left text-center',
         title: <Tooltip title="Creatures"><Icon name="male" style={{fontSize: 16}}/></Tooltip>,
-        dataIndex: 'stats.types.Creature',
+        dataIndex: 'dck_nb_creatures',
+        sorter: true,
         width,
     },
     {
         className: 'text-center',
         title: <Tooltip title="Spells"><Icon name="magic" style={{fontSize: 16}}/></Tooltip>,
-        dataIndex: 'stats.types.Spell',
+        dataIndex: 'dck_nb_spells',
+        sorter: true,
         width,
     },
     {
         className: 'text-center',
         title: <Tooltip title="Enchantments"><Icon name="bookmark" style={{fontSize: 16}}/></Tooltip>,
-        dataIndex: 'stats.types.LaneEnchantment',
+        dataIndex: 'dck_nb_laneenchantments',
+        sorter: true,
         width,
     },
     {
         className: 'text-center',
         title: <Tooltip title="Artifacts"><Icon name="trophy" style={{fontSize: 16}}/></Tooltip>,
-        dataIndex: 'stats.types.Artifact',
+        dataIndex: 'dck_nb_artifacts',
+        sorter: true,
         width,
     },
     {
         className: 'border-left text-center',
         title: <Tooltip title="Commons"><Icon name="square" style={{fontSize: 16, color: constants.rarities.common}}/></Tooltip>,
-        dataIndex: 'stats.rarities.common',
+        dataIndex: 'dck_nb_commons',
+        sorter: true,
         width,
     },
     {
         className: 'text-center',
         title: <Tooltip title="Uncommons"><Icon name="square" style={{fontSize: 16, color: constants.rarities.uncommon}}/></Tooltip>,
-        dataIndex: 'stats.rarities.uncommon',
+        dataIndex: 'dck_nb_uncommons',
+        sorter: true,
         width,
     },
     {
         className: 'text-center',
         title: <Tooltip title="Rares"><Icon name="square" style={{fontSize: 16, color: constants.rarities.rare}}/></Tooltip>,
-        dataIndex: 'stats.rarities.rare',
+        dataIndex: 'dck_nb_rares',
+        sorter: true,
         width,
     },
     {
         className: 'text-center',
         title: <Tooltip title="Mythics"><Icon name="square" style={{fontSize: 16, color: constants.rarities.mythic}}/></Tooltip>,
-        dataIndex: 'stats.rarities.mythic',
+        dataIndex: 'dck_nb_mythics',
+        sorter: true,
         width,
     },
     {
@@ -163,10 +171,11 @@ class DecksListTable extends React.Component {
      * - Will apply current sorting
      * @param currentPage
      */
-    fetchDecks(currentPage) {
+    fetchDecks(currentPage, sorter) {
         this.setState({loading: true});
         axios.post('json/decks?page=' + currentPage, {
-            filters: this.props.filters
+            filters: this.props.filters,
+            sorter,
         }).then(({data}) => {
             const decks = data.data;
             const dictionary = this.props.dictionary;
@@ -190,7 +199,7 @@ class DecksListTable extends React.Component {
     }
 
     handleTableChange = (pagination, filters, sorter) => {
-        this.fetchDecks(pagination.current);
+        this.fetchDecks(pagination.current, {field: sorter.field, order: sorter.order});
     };
 
     /**

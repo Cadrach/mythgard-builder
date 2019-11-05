@@ -4,6 +4,7 @@
     position: relative;
     height: 48px;
     margin: 1px 0;
+    margin-right: 10px;
 
     background-repeat: no-repeat;
     background-position: calc(100% + 6px) 10%;
@@ -42,10 +43,25 @@
       margin-right: 4px;
     }
 
+  .rarity{
+      background-color: red;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      height: 100%;
+      width: 8px;
+
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      border-left: 1px solid rgba(255,255,255,0.25)
+  }
+
     .occurences{
       position: absolute;
       top: 6px;
-      right: 8px;
+      right: 16px;
       .ant-badge-count{
         font-size: 18px;
         height: 22px

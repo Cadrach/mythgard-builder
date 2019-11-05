@@ -1,8 +1,6 @@
 import React from "react";
-import {inject, observer} from "mobx-react";
 import {Badge, List} from "antd";
 import constants from "../../constants";
-import Gem from "../gem/gem";
 import BadgeCardType from "../badge/badgeCardType";
 
 export default class DeckLine extends React.Component {
@@ -26,7 +24,7 @@ export default class DeckLine extends React.Component {
                     <span className="occurences">
                         <Badge count={"x " + count} />
                     </span>&nbsp;
-                    <div className="rarity">
+                    <div className="rarity" style={{backgroundColor: constants.rarities[card.rarity]}}>
                     </div>
                 </div>
             </div>

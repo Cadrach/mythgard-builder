@@ -11,7 +11,6 @@ class DeckForm extends React.Component {
         let fields = {};
         _.each([
             'dck_name',
-            'dck_description',
             'dck_public',
         ], key => fields[key] = {value: this.props.deckStore.selectedDeck[key]});
 
@@ -40,9 +39,9 @@ class DeckForm extends React.Component {
                         })(<Switch/>)}
                     </Form.Item>
 
-                    <Form.Item label="Description">
-                        {getFieldDecorator('dck_description')(<Input.TextArea/>)}
-                    </Form.Item>
+                    {/*<Form.Item label="Description">*/}
+                    {/*    {getFieldDecorator('dck_description')(<Input.TextArea/>)}*/}
+                    {/*</Form.Item>*/}
                 </Form>
             </div>
         )

@@ -113,6 +113,7 @@ export const Deck = types
          */
         setFormValues(values){
             _.forEach(values, (value, key) => self[key] = value);
+            self.dck_description = values.dck_description;
             self.saved = false;
         },
 

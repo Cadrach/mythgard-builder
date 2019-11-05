@@ -33,7 +33,8 @@ class DecksListFilters extends React.Component {
 
         const colProps = {span: 8};
         const styleSelect = {
-            control: base => ({...base, minHeight: 40 })
+            control: base => ({...base, minHeight: 40 }),
+            container: base => ({...base, zIndex: 10}),
         }
 
         return (

@@ -1,12 +1,10 @@
 import React from "react";
-import { EditorState, convertToRaw } from 'draft-js';
+import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import Gem from "../gem/gem";
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import CustomOptionCard from "./customOptionCard";
-import CustomOptionStar from "./customOptionStar";
-import CardComponent from "./cardComponent";
 
 const regexCard = /<\s*card[^>]*>(.*?)<\s*\/\s*card>/g;
 const regexGems = /<\s*color[^>]*>(.*?)<\s*\/\s*color?>/g;
@@ -14,68 +12,46 @@ const regexGems = /<\s*color[^>]*>(.*?)<\s*\/\s*color?>/g;
 class TextEditor extends React.Component {
     constructor(props) {
         super(props);
+
+        const content = this.props.content;
+
         this.state = {
-            editorState: EditorState.createEmpty(),
+            editorState: content ? EditorState.createWithContent(convertFromRaw(JSON.parse(content))):EditorState.createEmpty(),
         };
-        this.blockRendererFn = this.blockRendererFn.bind(this);
+
+        //Binds
+        this.onEditorStateChange = this.onEditorStateChange.bind(this)
     }
 
+    /**
+     * Update state when EditorState changes
+     * @param editorState
+     */
     onEditorStateChange(editorState) {
-        // const raw = convertToRaw(editorState.getCurrentContent());
-        // console.log(raw);
         this.setState({
             editorState,
         });
+
+        if (this.props.onTextChange) {
+            this.props.onTextChange(editorState);
+        }
     };
 
-    findWithRegex(regex, contentBlock, callback) {
-        const text = contentBlock.getText();
-        let matchArr, start;
-        while ((matchArr = regex.exec(text)) !== null) {
-            start = matchArr.index;
-            callback(start, start + matchArr[0].length, text);
-        }
-    }
-
-    blockRendererFn(contentBlock){
-        const type = contentBlock.getType();
-        console.log(type);
-        if(type === 'card'){
-            return {
-                component: CardComponent,
-                editable: false,
-            }
-        }
-    }
-
+    /**
+     * Render the Editor
+     * @returns {*}
+     */
     render() {
-        const { editorState } = this.state;
-        // const customDecorators = [{
-        //     //Cards decorator
-        //     strategy: (contentBlock, callback, contentState) => this.findWithRegex(regexCard, contentBlock, callback),
-        //     component: (props) => {
-        //         console.log(props.decoratedText, regexCard.exec(props.decoratedText))
-        //         return <div style={{color: 'red'}}>{props.children}</div>
-        //     }
-        // },{
-        //     //Gems decorator
-        //     strategy: (contentBlock, callback, contentState) => this.findWithRegex(regexGems, contentBlock, callback),
-        //     component: (props) => {
-        //         console.log(regexGems.exec(props.decoratedText));
-        //         const match = regexGems.exec(props.decoratedText);
-        //         const gems = match ? match[1]:null;
-        //         return gems ? <Gem string={gems}>:null;
-        //     }
-        // }];
+        const {editorState} = this.state;
         return (
             <Editor
+                ref={ref => this.editor = ref}
                 editorState={editorState}
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
-                // customDecorators={customDecorators}
-                blockRendererFn={this.blockRendererFn}
-                toolbarCustomButtons={[<CustomOptionCard/>, <CustomOptionStar/>]}
-                onEditorStateChange={this.onEditorStateChange.bind(this)}
+                toolbarCustomButtons={[<CustomOptionCard editor={this.editor}/>,]}
+                onEditorStateChange={this.onEditorStateChange}
+                {...this.props}
             />
         )
     }

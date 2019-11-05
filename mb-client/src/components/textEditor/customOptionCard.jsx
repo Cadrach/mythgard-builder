@@ -20,65 +20,31 @@ export default class CustomOptionCard extends Component {
         this.state = {value: null}
     }
 
-    onSelectDEPRECATED(card){
-        //Unselect the card
-        this.setState({value: null});
-
-        //
-        const { editorState, onChange } = this.props;
-
-        //Add the card
-        const contentState = editorState.getCurrentContent();
-        const contentStateWithEntity = contentState.createEntity(
-            "card",
-            "IMMUTABLE",
-            { card }
-        );
-        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-        const newEditorState = EditorState.set(
-            editorState,
-            { currentContent: contentStateWithEntity },
-            "create-entity"
-        );
-        AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, " ");
-    }
-
-    addStar(){
+    onSelect(card){
+        //Create new content state with our card
         const { editorState, onChange } = this.props;
         const contentState = Modifier.replaceText(
             editorState.getCurrentContent(),
             editorState.getSelection(),
-            '⭐',
+            "[[" + card.name_export + "]]",
             editorState.getCurrentInlineStyle(),
         );
+
+        //Apply change to editorState
         onChange(EditorState.push(editorState, contentState, 'insert-characters'));
-    };
 
-    onSelect(card){
-        const { editorState, onChange } = this.props;
-        const newBlock = new ContentBlock({
-            key: genKey(),
-            type: 'card',
-            text: card.id + '',
-        })
-
-        const contentState = editorState.getCurrentContent()
-        const newBlockMap = contentState.getBlockMap().set(newBlock.key, newBlock)
-
-        onChange(EditorState.push(
-            editorState,
-            ContentState
-                .createFromBlockArray(newBlockMap.toArray())
-                .set('selectionBefore', contentState.getSelectionBefore())
-                .set('selectionAfter', contentState.getSelectionAfter())
-        ))
+        //Focus on editor after
+        if(this.props.editor){
+            setTimeout(this.props.editor.editor.focus, 200);
+        }
     };
 
     render() {
         const cards = this.props.dictionary.cards.all;
 
         const styleSelect = {
-            control: base => ({...base, width: 300 })
+            control: base => ({...base, width: 300, fontSize: 12}),
+            container: base => ({...base, zIndex: 10, height: 36, position: 'relative', top: -4}),
         }
 
         return (

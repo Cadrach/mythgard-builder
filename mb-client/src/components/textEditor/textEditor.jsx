@@ -1,20 +1,27 @@
 import React from "react";
-import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
+import {EditorState, convertFromRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
-import Gem from "../gem/gem";
+import { cardDecorator, CardToolbarButton } from "./customOptionCard";
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import CustomOptionCard from "./customOptionCard";
 
-const regexCard = /<\s*card[^>]*>(.*?)<\s*\/\s*card>/g;
-const regexGems = /<\s*color[^>]*>(.*?)<\s*\/\s*color?>/g;
 
+/**
+ * *********************************************************************************************************************
+ * *********************************************************************************************************************
+ * *********************************************************************************************************************
+ * *********************************************************************************************************************
+ * *********************************************************************************************************************
+ * *********************************************************************************************************************
+ * *********************************************************************************************************************
+ * THE TEXT EDITOR
+ */
 class TextEditor extends React.Component {
     constructor(props) {
         super(props);
 
+        //Create starting state
         const content = this.props.content;
-
         this.state = {
             editorState: content ? EditorState.createWithContent(convertFromRaw(JSON.parse(content))):EditorState.createEmpty(),
         };
@@ -49,7 +56,8 @@ class TextEditor extends React.Component {
                 editorState={editorState}
                 wrapperClassName="demo-wrapper"
                 editorClassName="demo-editor"
-                toolbarCustomButtons={[<CustomOptionCard editor={this.editor}/>,]}
+                toolbarCustomButtons={[<CardToolbarButton editor={this.editor}/>]}
+                customDecorators={[cardDecorator]}
                 onEditorStateChange={this.onEditorStateChange}
                 {...this.props}
             />

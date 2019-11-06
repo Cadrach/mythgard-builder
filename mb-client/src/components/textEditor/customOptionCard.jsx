@@ -1,14 +1,73 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
 import PropTypes from 'prop-types';
-import { EditorState, Modifier, AtomicBlockUtils, ContentBlock, ContentState, genKey } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
+import { EditorState, Modifier, Entity } from 'draft-js';
 import Select from 'react-select';
+import { List, Map, Repeat } from 'immutable';
+import Gem from "../gem/gem";
 
+
+/**
+ * **********************************************************************
+ * **********************************************************************
+ * **********************************************************************
+ * ****************************** DECORATOR *****************************
+ * **********************************************************************
+ * **********************************************************************
+ * **********************************************************************
+ */
+const styles = {
+    placeholder: {
+        display: 'inline-block',
+        background: 'lightBlue',
+        padding: '0 10px',
+        borderRadius: 99
+    },
+};
 
 @inject('dictionary')
 @observer
-export default class CustomOptionCard extends Component {
+class CardEditorComponent extends React.Component{
+    render(){
+        const meta = Entity.get(this.props.entityKey).getData();
+        const card = this.props.dictionary.cards.cardById(meta.id);
+
+        return (
+            <span style={styles.placeholder}>
+                <Gem string={card.gems}/>{card.name}
+                <span style={{display: 'none'}}>{this.props.children}</span>
+            </span>
+        );
+    }
+}
+
+export const cardDecorator = {
+    strategy: findCardEditorComponents,
+    component: CardEditorComponent,
+};
+
+function findCardEditorComponents(contentBlock, callback) {
+    contentBlock.findEntityRanges((character) => {
+        const entityKey = character.getEntity();
+        return (
+            entityKey !== null &&
+            Entity.get(entityKey).getType() === 'CARD'
+        );
+    }, callback);
+}
+
+/**
+ * **********************************************************************
+ * **********************************************************************
+ * **********************************************************************
+ * *************************** TOOLBAR BUTTON ***************************
+ * **********************************************************************
+ * **********************************************************************
+ * **********************************************************************
+ */
+@inject('dictionary')
+@observer
+export class CardToolbarButton extends Component {
     static propTypes = {
         onChange: PropTypes.func,
         editorState: PropTypes.object,
@@ -16,22 +75,21 @@ export default class CustomOptionCard extends Component {
 
     constructor(props){
         super(props);
-
         this.state = {value: null}
     }
 
     onSelect(card){
-        //Create new content state with our card
         const { editorState, onChange } = this.props;
-        const contentState = Modifier.replaceText(
-            editorState.getCurrentContent(),
-            editorState.getSelection(),
-            "[[" + card.name_export + "]]",
-            editorState.getCurrentInlineStyle(),
-        );
+        const selection = editorState.getSelection();
+        const currentContent = editorState.getCurrentContent();
 
-        //Apply change to editorState
-        onChange(EditorState.push(editorState, contentState, 'insert-characters'));
+        const entityKey = Entity.create('CARD', 'IMMUTABLE', {
+            id: card.id,
+            name_export: card.name_export,
+        });
+        const textWithEntity = Modifier.insertText(currentContent, selection, ' ', null, entityKey);
+
+        onChange(EditorState.push(editorState, textWithEntity, 'insert-characters'))
 
         //Focus on editor after
         if(this.props.editor){

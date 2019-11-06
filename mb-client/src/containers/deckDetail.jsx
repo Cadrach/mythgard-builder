@@ -50,7 +50,7 @@ class DeckDetail extends React.Component {
         const deck = this.props.deckStore.selectedDeck;//this.state;
         const isConnected = this.props.dictionary.isConnected;
         const content = deck.dck_description;
-        if( ! deck) return <div></div>
+        if( ! deck || ! deck.id) return <div></div>
 
         return (
             <Layout className="ant-layout-transparent">

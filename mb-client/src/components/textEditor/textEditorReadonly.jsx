@@ -1,5 +1,5 @@
 import React from "react";
-import {EditorState, convertFromRaw} from 'draft-js';
+import {EditorState, convertToRaw, convertFromRaw} from 'draft-js';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './stylesheets/textEditorReadonly.scss';

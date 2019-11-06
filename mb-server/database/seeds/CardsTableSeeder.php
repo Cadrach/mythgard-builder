@@ -41,7 +41,7 @@ class CardsTableSeeder extends Seeder
                 'ide_faction' => $factions[$card->faction],
                 'card_rarity_index' => $rarityIndex[$card->rarity]++,
                 'id_rhino' => $card->cardid,
-                'card_name' => $card->cardname,
+                'card_name' => ucwords($card->cardname),
                 'card_name_export' => $card->cardnameclean,
                 'card_name_clean' => $cleanedName,
                 'card_image' => "$cleanedName.png",
@@ -63,6 +63,5 @@ class CardsTableSeeder extends Seeder
         //Insert cards
         DB::table('cards')->truncate();
         DB::table('cards')->insert($cards);
-
     }
 }

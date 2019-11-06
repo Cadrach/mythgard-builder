@@ -5,6 +5,8 @@ import { EditorState, Modifier, Entity } from 'draft-js';
 import Select from 'react-select';
 import Gem from "../gem/gem";
 import constants from "../../constants";
+import {Popover} from "antd";
+import CardPopover from "../card/cardPopover";
 
 
 /**
@@ -24,6 +26,8 @@ const styles = {
         textTransform: 'capitalize',
         fontWeight: 'bold',
     },
+    gem: {
+    }
 };
 
 @inject('dictionary')
@@ -31,13 +35,38 @@ const styles = {
 class CardEditorComponent extends React.Component{
     render(){
         const meta = Entity.get(this.props.entityKey).getData();
+
         const card = this.props.dictionary.cards.cardById(meta.id);
 
+        const cardStyle = {...styles.card,
+            border: '2px solid '+constants.gems[card.gems[0]],
+            background: '#666',
+            color: '#fff',
+            paddingRight: 8,
+        }
+
+        const rarityStyle = {
+            background: constants.rarities[card.rarity],
+            width: 10,
+            height: 21,
+            position: 'relative',
+            left: 5,
+            top: 1,
+            display: 'inline-block',
+            border: '1px solid rgba(255,255,255,.25)',
+            borderTopRightRadius: 99,
+            borderBottomRightRadius: 99,
+        }
+
         return (
-            <span style={{...styles.card, background: constants.gems[card.gems[0]]}}>
-                <Gem string={card.gems}/>{card.name}
-                <span style={{display: 'none'}}>{this.props.children}</span>
-            </span>
+            <CardPopover card={card}>
+                <span style={cardStyle}>
+                    <Gem string={card.gems} styleGem={styles.gem}/>
+                    {card.name}
+                    <span style={{display: 'none'}}>{this.props.children}</span>
+                    <span style={rarityStyle}>&nbsp;</span>
+                </span>
+            </CardPopover>
         );
     }
 }

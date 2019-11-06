@@ -23,8 +23,8 @@ class Card extends React.Component {
      * @param e
      */
     handleClick = (e) => {
-        if(this.props.deckStore && this.props.deckStore.selectedDeck) {
-            if (this.props.deckStore.selectedDeck.addCard(this.card)) {
+        if(this.props.deck) {
+            if (this.props.deck.addCard(this.card)) {
                 this.addAnimatedCard('fadeOutRight');
             }
             else {
@@ -38,8 +38,8 @@ class Card extends React.Component {
      * @param e
      */
     handleRightClick = (e) => {
-        if(this.props.deckStore && this.props.deckStore.selectedDeck){
-            if(this.props.deckStore.selectedDeck.removeCard(this.card)){
+        if(this.props.deck){
+            if(this.props.deck.removeCard(this.card)){
                 this.addAnimatedCard('fadeInRight', true);
             }
             else{
@@ -70,11 +70,11 @@ class Card extends React.Component {
         let rate;
 
         //Display number of cards (if deckStore provided)
-        if(this.props.deckStore){
+        if(this.props.deck){
             rate = <div style={{textAlign:'center'}}>
                 <Rate
                     disabled
-                    value={this.props.deckStore.selectedDeck.countCard(this.card)}
+                    value={this.props.deck.countCard(this.card)}
                     count={this.card.max_in_deck}
                     character={<Icon name="circle"/>}
                     style={{color: 'red'}}

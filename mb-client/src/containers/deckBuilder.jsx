@@ -160,7 +160,7 @@ export default class DeckBuilder extends React.Component {
                         <Layout.Content style={{height}}>
                             <CardsList
                                 cards={cards.filtered}
-                                deckStore={this.props.deckStore}
+                                deck={this.props.deckStore.selectedDeck}
                                 shavedWidth={300 + 80}
                                 shavedHeight={64+80+80}
                             />

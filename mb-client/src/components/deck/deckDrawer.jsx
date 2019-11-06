@@ -11,7 +11,7 @@ export default class DeckDrawer extends React.Component {
 
     onConfirm(){
         const values = this.formRef.props.form.getFieldsValue();
-        const dck_description = JSON.stringify(convertToRaw(this.editorState.getCurrentContent()));
+        const dck_description = this.editorState ? JSON.stringify(convertToRaw(this.editorState.getCurrentContent())) : null;
         this.props.deckStore.selectedDeck.setFormValues({...values, dck_description});
 
         this.props.onClose();

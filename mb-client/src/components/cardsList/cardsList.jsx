@@ -24,7 +24,7 @@ const Cell = (props, { columnIndex, rowIndex, style }) => {
                 height: style.height - spacer
             }}
         >
-            <Card data={card} deckStore={props.deckStore}/>
+            <Card data={card} deck={props.deck}/>
         </div>)
 }
 
@@ -34,7 +34,7 @@ const CardsList = (props) => {
     const columnCount = width>1600 ? 6 : (width>1200 ? 5 : (width>900 ? 4: (width>700 ? 3:1)));
     const widthModified = width - (props.shavedWidth ? props.shavedWidth:0);
     const columnWidth = (widthModified - spacer*2) / columnCount - spacer;
-    const cellHeight = columnWidth * 1.39 + (props.deckStore ? 30 : 0);
+    const cellHeight = columnWidth * 1.39 + (props.deck ? 30 : 0);
 
     const cellProps = {...props, columnCount};
 

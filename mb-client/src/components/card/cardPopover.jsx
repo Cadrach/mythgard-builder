@@ -11,10 +11,10 @@ const CardPopover = (props) => {
     const card = props.card;
     console.log(card);
     const content = <div>
-        <img src={"/images/cards/m/" + card.image}/>
+        <img src={"/images/cards/m/" + card.image} style={{maxHeight: 466, height: '40vh', minHeight: 200}}/>
     </div>
 
-    return <Popover content={content} title={card.name}>
+    return <Popover content={content} title={card.name} placement="bottom">
         {props.children}
     </Popover>
 }

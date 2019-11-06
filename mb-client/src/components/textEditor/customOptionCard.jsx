@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { EditorState, Modifier, Entity } from 'draft-js';
 import Select from 'react-select';
 import Gem from "../gem/gem";
+import constants from "../../constants";
 
 
 /**
@@ -16,11 +17,12 @@ import Gem from "../gem/gem";
  * **********************************************************************
  */
 const styles = {
-    placeholder: {
+    card: {
         display: 'inline-block',
-        background: 'lightBlue',
-        padding: '0 10px',
-        borderRadius: 99
+        padding: '0 6px',
+        borderRadius: 99,
+        textTransform: 'capitalize',
+        fontWeight: 'bold',
     },
 };
 
@@ -32,7 +34,7 @@ class CardEditorComponent extends React.Component{
         const card = this.props.dictionary.cards.cardById(meta.id);
 
         return (
-            <span style={styles.placeholder}>
+            <span style={{...styles.card, background: constants.gems[card.gems[0]]}}>
                 <Gem string={card.gems}/>{card.name}
                 <span style={{display: 'none'}}>{this.props.children}</span>
             </span>

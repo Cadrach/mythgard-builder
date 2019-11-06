@@ -24,7 +24,14 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->text('cards')->nullable();
         });
+
+        //Add varbinary fields
+        DB::statement('ALTER TABLE `users` ADD `bin_common` VARBINARY(1000)');
+        DB::statement('ALTER TABLE `users` ADD `bin_uncommon` VARBINARY(1000)');
+        DB::statement('ALTER TABLE `users` ADD `bin_rare` VARBINARY(1000)');
+        DB::statement('ALTER TABLE `users` ADD `bin_mythic` VARBINARY(1000)');
     }
 
     /**

@@ -20,13 +20,6 @@ import Dictionary from "./stores/dictionary";
 serviceWorkerRegister();
 
 // Because they're classes, we have to instantiate them here :)
-const userStore = UserStore.create({
-  id: '1',
-  name: 'Alex',
-  lastName: 'Casillas',
-  age: 27,
-  xp: 0
-});
 const languageStore = LanguageStore.create({ language: 'en' });
 const uiStore = UIStore.create({ borderRadius: 3, textColor: 'white' });
 const dictionary = Dictionary;
@@ -37,7 +30,6 @@ const deckStore = DeckStore.create({}, {
 });
 
 const store = {
-    user: userStore,
     language: languageStore,
     ui: uiStore,
     dictionary: dictionary,

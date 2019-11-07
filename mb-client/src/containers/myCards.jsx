@@ -42,11 +42,12 @@ export default class MyCards extends React.Component {
             <ul style={{listStyleType: 'disc', paddingLeft: 30}}>
                 <li style={{marginTop: 10}}>Open <b>Mythgard</b> and login on your account</li>
                 <li style={{marginTop: 10}}><b>Create a new deck</b> and name it <Text code>All my Mythics & Rares</Text></li>
-                <li style={{marginTop: 10}}>Add to this deck all your rares and all your mythics</li>
+                <li style={{marginTop: 10}}>Add to this deck all your rares and all your mythics (Use <Text code>Shift + Right-Click</Text> to add them quickly)</li>
                 <li style={{marginTop: 10}}><b>Export it</b>, save and close</li>
                 <li style={{marginTop: 10}}>Come back here and <b>paste!</b></li>
-                <li style={{marginTop: 10}}>Repeat with 2 other decks for your <Text code>Uncommons</Text> and <Text code>Commons</Text> (there is a limit of <Text type="danger">200 cards per deck</Text> in Mythgard so you should be fine this way)</li>
+                <li style={{marginTop: 10}}>Repeat with 2 other decks for your <Text code>Uncommons</Text> and <Text code>Commons</Text> (there is a limit of <Text type="danger">200 cards per deck</Text> in Mythgard so you might have to create more than 1 per rarity)</li>
             </ul>
+            <b>It is a small hassle but once it is done you will be able to have actual costs of decks based on your cards when you browse. You can also push for an export feature to Rhino developers :)</b>
         </span>
 
         return (

@@ -8,8 +8,10 @@ import constants from "../../constants";
 import './stylesheets/decksListTable.scss';
 import Gem from "../gem/gem";
 import BadgePower from "../badge/badgePower";
+import DecksColumnRarity from "./decksColumnRarity";
+import Dictionary from "../../stores/dictionary";
 
-
+const isConnected = Dictionary.isConnected;
 const width = 50;
 const columns = [
     {
@@ -35,8 +37,8 @@ const columns = [
     },
     {
         className: 'text-center',
-        title: <Tooltip title="Essence Cost"><Icon name="flask" style={{fontSize: 16}}/></Tooltip>,
-        dataIndex: 'dck_cost',
+        title: <Tooltip title={"Essence Cost" + (isConnected ? ' based on your cards':'')}><Icon name="flask" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: isConnected ? 'user_cost':'dck_cost',
         sorter: true,
         width,
     },
@@ -94,6 +96,7 @@ const columns = [
         title: <Tooltip title="Commons"><Icon name="square" style={{fontSize: 16, color: constants.rarities.common}}/></Tooltip>,
         dataIndex: 'dck_nb_commons',
         sorter: true,
+        render: (value, row) => <DecksColumnRarity row={row} rarity="common"/>,
         width,
     },
     {
@@ -101,6 +104,7 @@ const columns = [
         title: <Tooltip title="Uncommons"><Icon name="square" style={{fontSize: 16, color: constants.rarities.uncommon}}/></Tooltip>,
         dataIndex: 'dck_nb_uncommons',
         sorter: true,
+        render: (value, row) => <DecksColumnRarity row={row} rarity="uncommon"/>,
         width,
     },
     {
@@ -108,6 +112,7 @@ const columns = [
         title: <Tooltip title="Rares"><Icon name="square" style={{fontSize: 16, color: constants.rarities.rare}}/></Tooltip>,
         dataIndex: 'dck_nb_rares',
         sorter: true,
+        render: (value, row) => <DecksColumnRarity row={row} rarity="rare"/>,
         width,
     },
     {
@@ -115,6 +120,7 @@ const columns = [
         title: <Tooltip title="Mythics"><Icon name="square" style={{fontSize: 16, color: constants.rarities.mythic}}/></Tooltip>,
         dataIndex: 'dck_nb_mythics',
         sorter: true,
+        render: (value, row) => <DecksColumnRarity row={row} rarity="mythic"/>,
         width,
     },
     {
@@ -122,10 +128,6 @@ const columns = [
         render: id => <NavLink to={"/decks/" + id}><Button type="primary">Details <AntIcon type="right"/></Button></NavLink>,
         width: 65,
     },
-    // {
-    //     title: 'Email',
-    //     dataIndex: 'email',
-    // },
 ];
 
 @inject('dictionary')
@@ -208,6 +210,7 @@ class DecksListTable extends React.Component {
      */
     render(){
         const { data, loading, pagination } = this.state;
+
         return (
             <div>
 

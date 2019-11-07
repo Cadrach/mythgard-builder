@@ -29,7 +29,7 @@ class Card extends Model
         self::RARITY_COMMON => 50,
         self::RARITY_UNCOMMON => 100,
         self::RARITY_RARE => 500,
-        self::RARITY_MYTHIC => 2500,
+        self::RARITY_MYTHIC => 2400,
     ];
 
     protected $casts = [

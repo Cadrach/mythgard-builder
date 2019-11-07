@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use App\Models\Deck;
 use App\Models\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DeckController extends Controller
 {
@@ -68,11 +70,32 @@ class DeckController extends Controller
         $decks = Deck::where('dck_public','=',1)
             ->with('user:id,name,image');
 
+        //If we have a user, we can compute more information
+        $user = $this->_user();
+        if($user){
+            $decks->leftJoin("users", "users.id", "=", DB::raw($user->id));
+            $rarities = Card::getEssenceCostByRarity();
+            $sqlTotal = $sqlCount = [];
+            foreach($rarities as $rarity => $cost){
+                $rarityCount = "BIT_COUNT(dck_bin_{$rarity} & ~bin_{$rarity})";
+                $sqlTotal[] = "$rarityCount * $cost";
+                $sqlCount[] = "dck_nb_{$rarity}s - $rarityCount as user_cards_{$rarity}s";
+            }
+            $decks->selectRaw("
+                decks.*,
+                ".implode(' + ', $sqlTotal)." as user_cost,
+                ".implode(', ', $sqlCount)
+            );
+        }
+
         foreach($request->get('filters', []) as $key=>$value){
             switch($key){
                 case 'cards':
                     $binaries = Helper::resolveDeckComputedFields($value);
                     foreach($binaries as $field => $bin){
+                        //$bin = the cards that are requested by me
+                        //$field contains the cards in the deck
+                        //We want all the decks that have the card that I have
                         if(strpos($bin, '1') !== false && strpos($field, 'dck_bin') === 0){
                             $decks->whereRaw("BIT_COUNT($bin & ~$field) = 0");
 //                            $decks->whereRaw("test_$field LIKE '".str_replace('0','_', $bin)."'");
@@ -92,13 +115,39 @@ class DeckController extends Controller
             }
         }
 
-//        echo $decks->toSql();die();
+
 
         //Sorting
         $sorter = $request->get('sorter');
         $sorter = isset($sorter['field']) ? $sorter : ['field' => 'dck_stars', 'order' => 'descend'];
+
+//        echo($decks->toSql());
+//        die();
+
         return $decks
             ->orderBy($sorter['field'], $sorter['order'] == 'descend' ? 'desc':'asc')
             ->paginate(10);
+    }
+
+    /**
+     * Save current user cards
+     * @param Request $request
+     */
+    public function postSaveUserCards(Request $request){
+        $cards = $request->all();
+        $user = $this->_user();
+        $user->cards = $cards;
+        $user->save();
+        $binaries = Helper::resolveDeckComputedFields($cards);
+
+        //Update the line. WARNING: this is not protected so careful what you put there!
+        DB::update("
+            UPDATE {$user->getTable()} SET
+                bin_common = {$binaries['dck_bin_common']},
+                bin_uncommon = {$binaries['dck_bin_uncommon']},
+                bin_rare = {$binaries['dck_bin_rare']},
+                bin_mythic = {$binaries['dck_bin_mythic']}
+            WHERE id={$user->id}
+        ");
     }
 }

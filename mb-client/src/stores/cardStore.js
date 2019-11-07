@@ -3,6 +3,10 @@ import axios from '../axios';
 import _ from 'lodash';
 // import uuid from 'node-uuid';
 
+function normalize(str){
+    return str.normalize("NFD").replace(/[\u0300-\u036f\-,]/g, "").replace(/ /g, '_').toLowerCase();
+}
+
 class CardStore {
 
     @observable cardsRegistry = [];
@@ -40,6 +44,11 @@ class CardStore {
 
     cardById(id) {
         return this.cardsById[id];
+    }
+
+    cardByName(name){
+        const normalizedName = normalize(name);
+        return _.find(this.cardsRegistry, {name_clean: normalizedName});
     }
 
     @action loadCards(cards) {

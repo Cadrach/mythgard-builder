@@ -16,9 +16,6 @@ export default class MyCards extends React.Component {
         //Initial state
         this.state = {deck: null}
 
-        //Binds
-        this.onPaste = this.onPaste.bind(this);
-
         //Create a deck once we are connected
         const {dictionary} = this.props;
         dictionary.promise.then(() => {
@@ -26,11 +23,6 @@ export default class MyCards extends React.Component {
                 this.setState({deck: Deck.create({id: 1, dck_cards: toJS(dictionary.user.cards)})})
             }
         })
-    }
-
-    onPaste(){
-        console.log('PASTE');
-        console.log(arguments)
     }
 
     render() {

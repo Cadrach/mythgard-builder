@@ -10,7 +10,6 @@ import LanguageStore from './stores/language';
 import UIStore from './stores/ui';
 
 //Stores
-import CardStore from "./stores/cardStore";
 import {DeckStore, Deck} from "./stores/deckStore";
 
 // Import Components

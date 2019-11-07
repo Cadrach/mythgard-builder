@@ -119,7 +119,7 @@ class DeckImportButton extends React.Component {
     render(){
         const {children, description, buttonProps} = this.props;
         return (
-            <div>
+            <span>
                 <Modal title="Import cards"
                        visible={this.state.modalVisible}
                        footer={null}
@@ -132,7 +132,7 @@ class DeckImportButton extends React.Component {
                 <Button onClick={() => this.setState({modalVisible: true})} {...buttonProps}>
                     {children}
                 </Button>
-            </div>
+            </span>
         )
 
     }

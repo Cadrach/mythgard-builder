@@ -25,6 +25,13 @@ export default class MyCards extends React.Component {
         })
     }
 
+    /**
+     * On click "save" we will save for the current user the cards configured
+     */
+    onClickSave(){
+        this.props.dictionary.saveUserCards(toJS(this.deck.cards));
+    }
+
     render() {
         const cards = this.props.dictionary.cards.all;
         const deck = this.deck;
@@ -44,13 +51,17 @@ export default class MyCards extends React.Component {
 
         return (
             <Layout className="ant-layout-transparent">
-                <Layout.Header className="header" style={{height: 88}}>
-                    {deck ?
-                        <DeckImportButton deck={deck} buttonProps={{size: "large", type: "primary"}} description={explanation}>
-                            <AntIcon type="import"/> Import all your cards!
-                        </DeckImportButton>
-                    :null}
-                </Layout.Header>
+                {deck ?
+                    <Layout.Header className="header" style={{height: 88}}>
+                        <span style={{float: 'right'}}>
+                            <DeckImportButton deck={deck} buttonProps={{size: "large", type: "primary"}} description={explanation}>
+                                <AntIcon type="import"/> Import all your cards!
+                            </DeckImportButton>
+                            &nbsp;
+                            <Button type="primary" size="large" onClick={this.onClickSave.bind(this)}><AntIcon type="save"/>&nbsp;Save</Button>
+                        </span>
+                    </Layout.Header>
+                :null}
                 <CardsList cards={cards} deck={deck} shavedHeight={64+88}/>
             </Layout>
         );

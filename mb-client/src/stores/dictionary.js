@@ -2,6 +2,7 @@ import {observable, action, computed, autorun} from 'mobx';
 import axios from '../axios';
 import _ from 'lodash';
 import CardStore from "./cardStore";
+import {notification} from "antd";
 // import uuid from 'node-uuid';
 
 class Dictionary {
@@ -49,6 +50,14 @@ class Dictionary {
         }).finally(action(() => { this.isLoading = false; }))
 
         return this.promise;
+    }
+
+    /**
+     * Save user cards
+     * @param cards
+     */
+    saveUserCards(cards){
+        axios.post('json/save-user-cards', cards).then(() => notification.success({message: "Your cards have been saved"}));
     }
 }
 

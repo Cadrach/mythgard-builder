@@ -72,8 +72,11 @@ class DeckController extends Controller
 
         //If we have a user, we can compute more information
         $user = $this->_user();
-        if($user){
+        if($user && $user->cards){
+            //Join current user
             $decks->leftJoin("users", "users.id", "=", DB::raw($user->id));
+
+            //Create stats points based on user cards
             $rarities = Card::getEssenceCostByRarity();
             $sqlTotal = $sqlCount = [];
             foreach($rarities as $rarity => $cost){
@@ -81,6 +84,8 @@ class DeckController extends Controller
                 $sqlTotal[] = "$rarityCount * $cost";
                 $sqlCount[] = "dck_nb_{$rarity}s - $rarityCount as user_cards_{$rarity}s";
             }
+
+            //Select the data
             $decks->selectRaw("
                 decks.*,
                 ".implode(' + ', $sqlTotal)." as user_cost,

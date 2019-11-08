@@ -38,7 +38,7 @@ const columns = [
     {
         className: 'text-center',
         title: <Tooltip title={"Essence Cost" + (isConnected ? ' based on your cards':'')}><Icon name="flask" style={{fontSize: 16}}/></Tooltip>,
-        dataIndex: isConnected ? 'user_cost':'dck_cost',
+        dataIndex: isConnected && Dictionary.user.cards ? 'user_cost':'dck_cost',
         sorter: true,
         width,
     },

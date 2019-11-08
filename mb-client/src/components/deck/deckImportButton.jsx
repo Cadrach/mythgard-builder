@@ -4,7 +4,7 @@ import {Button, notification, Modal} from "antd";
 import './stylesheets/deckContent.scss';
 import {inject, observer} from "mobx-react";
 import {toJS} from "mobx";
-import TextArea from "antd/es/input/TextArea";
+import {Input} from "antd";
 
 @inject('dictionary')
 @observer
@@ -127,7 +127,7 @@ class DeckImportButton extends React.Component {
                        onCancel={() => this.setState({modalVisible:false})}
                 >
                     {description}
-                    <TextArea ref={ref=>ref?ref.focus():null} onPaste={this.onPaste} placeholder="Paste your deck here" style={{minHeight: 100}}></TextArea>
+                    <Input.TextArea ref={ref=>ref?ref.focus():null} onPaste={this.onPaste} placeholder="Paste your deck here" style={{minHeight: 100}}></Input.TextArea>
                 </Modal>
                 <Button onClick={() => this.setState({modalVisible: true})} {...buttonProps}>
                     {children}

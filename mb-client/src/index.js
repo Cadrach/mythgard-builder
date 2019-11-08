@@ -5,7 +5,6 @@ import { Provider } from 'mobx-react';
 // Service Worker for PWA
 import serviceWorkerRegister from './registerServiceWorker';
 // Import our Stores Here
-import UserStore from './stores/user';
 import LanguageStore from './stores/language';
 import UIStore from './stores/ui';
 

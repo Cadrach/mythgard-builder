@@ -2,7 +2,7 @@ import React from "react";
 import axios from '../axios';
 import { observer, inject } from "mobx-react";
 import {Layout, Typography, Row, Col, Card, Form, Input, Icon as AntIcon, Button, Divider} from "antd";
-import {Switch} from "antd/es";
+import {Switch} from "antd";
 import {Icon} from "react-fa/lib";
 const { Title, Paragraph, Text } = Typography;
 

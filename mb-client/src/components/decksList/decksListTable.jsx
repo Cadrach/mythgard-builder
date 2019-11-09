@@ -49,7 +49,7 @@ const columns = [
         title: <Tooltip title={"Essence Cost" + (isConnected ? ' based on your cards':'')}><Icon name="flask" style={{fontSize: 16}}/></Tooltip>,
         dataIndex: isConnected && Dictionary.user.cards ? 'user_cost':'dck_cost',
         sorter: true,
-        render: value => <BadgeEssence value={value}/>,
+        render: (value, row) => <BadgeEssence value={isConnected && Dictionary.user.cards ? row.user_cost : row.dck_cost}/>,
         width: 100,
     },
     {

@@ -70,6 +70,10 @@ class DeckController extends Controller
         $decks = Deck::where('dck_public','=',1)
             ->with('user:id,name,image');
 
+        //Sorting
+        $sorter = $request->get('sorter');
+        $sorter = isset($sorter['field']) ? $sorter : ['field' => 'dck_stars', 'order' => 'descend'];
+
         //If we have a user, we can compute more information
         $user = $this->_user();
         if($user && $user->cards){
@@ -91,6 +95,10 @@ class DeckController extends Controller
                 ".implode(' + ', $sqlTotal)." as user_cost,
                 ".implode(', ', $sqlCount)
             );
+
+            if(isset($sorter['field']) && $sorter['field'] == 'dck_cost'){
+                $sorter['field'] = 'user_cost';
+            }
         }
 
         foreach($request->get('filters', []) as $key=>$value){
@@ -119,12 +127,6 @@ class DeckController extends Controller
                 break;
             }
         }
-
-
-
-        //Sorting
-        $sorter = $request->get('sorter');
-        $sorter = isset($sorter['field']) ? $sorter : ['field' => 'dck_stars', 'order' => 'descend'];
 
 //        echo($decks->toSql());
 //        die();

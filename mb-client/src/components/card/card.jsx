@@ -12,7 +12,7 @@ class Card extends React.Component {
         super(props);
         this.state = {animatedCards: []};
         this.card = props.data;
-        this.cardImage = <div id="cardImage" style={{backgroundImage: 'url(images/cards/s/'+this.card.image+')'}}></div>;
+        this.cardImage = <div className="card-image" style={{backgroundImage: 'url(images/cards/s/'+this.card.image+')'}}></div>;
 
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
@@ -56,7 +56,7 @@ class Card extends React.Component {
      */
     addAnimatedCard = (animation, onBottom) => {
         const {animatedCards} = this.state;
-        const newAnimatedCard = React.cloneElement(this.cardImage, {className: 'animated ' + animation, key: _.uniqueId('acard_')});
+        const newAnimatedCard = React.cloneElement(this.cardImage, {className: 'card-image animated ' + animation, key: _.uniqueId('acard_')});
         this.setState({animatedCards: onBottom ? [...animatedCards, newAnimatedCard]:[newAnimatedCard, ...animatedCards]});
         setTimeout(() => {
             const newAnimatedCards = [...this.state.animatedCards];
@@ -83,8 +83,8 @@ class Card extends React.Component {
         }
 
         return (
-            <div id="container-aspect-ratio" onClick={this.handleClick} onContextMenu={this.handleRightClick}>
-                <div id="container">
+            <div class="card-container-aspect-ratio" onClick={this.handleClick} onContextMenu={this.handleRightClick}>
+                <div className={"card-container card-rarity-" + this.card.rarity}>
                     {this.cardImage}
                     {animatedCards.map(c => c)}
                     {rate ? rate : null}

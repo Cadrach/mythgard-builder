@@ -11,6 +11,7 @@ import BadgePower from "../badge/badgePower";
 import DecksColumnRarity from "./decksColumnRarity";
 import Dictionary from "../../stores/dictionary";
 import BadgePath from "../badge/badgePath";
+import BadgeEssence from "../badge/badgeEssence";
 
 const isConnected = Dictionary.isConnected;
 const width = 50;
@@ -48,7 +49,8 @@ const columns = [
         title: <Tooltip title={"Essence Cost" + (isConnected ? ' based on your cards':'')}><Icon name="flask" style={{fontSize: 16}}/></Tooltip>,
         dataIndex: isConnected && Dictionary.user.cards ? 'user_cost':'dck_cost',
         sorter: true,
-        width,
+        render: value => <BadgeEssence value={value}/>,
+        width: 100,
     },
     {
         className: 'border-left text-center',

@@ -22,19 +22,19 @@ $rate-shadow: 3px;
 
     &.card-rarity-common .ant-rate{
         background-color: transparentize(#8f764c, 0.45);
-        .ant-rate-star-full{color: lighten(#8f764c, 10)}
+        //.ant-rate-star-full{color: lighten(#8f764c, 10)}
     }
     &.card-rarity-uncommon .ant-rate{
         background-color: transparentize(#adaca9, 0.35);
-        .ant-rate-star-full{color: lighten(#adaca9, 10)}
+        //.ant-rate-star-full{color: lighten(#adaca9, 10)}
     }
     &.card-rarity-rare .ant-rate{
         background-color: transparentize(#fff300, 0.25);
-        .ant-rate-star-full{color: lighten(#fff300, 10)}
+        //.ant-rate-star-full{color: lighten(#fff300, 10)}
     }
     &.card-rarity-mythic .ant-rate{
         background-color: transparentize(#2ec7f5, 0.15);
-        .ant-rate-star-full{color: lighten(#2ec7f5, 10)}
+        //.ant-rate-star-full{color: lighten(#2ec7f5, 10)}
     }
 
     .ant-rate{
@@ -50,6 +50,7 @@ $rate-shadow: 3px;
     .ant-rate-star-full{
         //position: relative;
         text-shadow: 0px 0px #{$rate-shadow} rgba(0, 0, 0,.75), 0px 0px #{$rate-shadow} rgba(0, 0, 0,.75), 0px 0px #{$rate-shadow} rgba(0, 0, 0,.75), 0px 0px #{$rate-shadow} rgba(0, 0, 0,.75);
+        color: #a9ff4f;
         &:after{
             content: ' ';
             position: absolute;
@@ -77,7 +78,7 @@ $rate-shadow: 3px;
         }
     }
     .ant-rate-star-zero{
-        opacity: 0.15;
+        opacity: 0.35;
         text-shadow: 0px 0px 2px #000,0px 0px 2px #000,0px 0px 2px #000,0px 0px 2px #000;
 
         &:after{
@@ -111,6 +112,6 @@ $rate-shadow: 3px;
         position: absolute;
         top: 0;
         pointer-events: none;
-        z-index: 2;
+        z-index: 4;
     }
 }

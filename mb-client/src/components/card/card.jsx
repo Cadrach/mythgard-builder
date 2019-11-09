@@ -83,7 +83,7 @@ class Card extends React.Component {
         }
 
         return (
-            <div class="card-container-aspect-ratio" onClick={this.handleClick} onContextMenu={this.handleRightClick}>
+            <div className="card-container-aspect-ratio" onClick={this.handleClick} onContextMenu={this.handleRightClick}>
                 <div className={"card-container card-rarity-" + this.card.rarity}>
                     {this.cardImage}
                     {animatedCards.map(c => c)}

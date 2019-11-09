@@ -16,25 +16,35 @@ $rate-shadow: 3px;
     bottom: 0;
     left: 0;
 
-    border: 4px solid transparent;
-    background-color: #AAA;
+    //border: 4px solid transparent;
+    //background-color: #AAA;
     border-radius: 5px;
 
-    &.card-rarity-common{
+    &.card-rarity-common .ant-rate{
         background-color: transparentize(#8f764c, 0.45);
         .ant-rate-star-full{color: lighten(#8f764c, 10)}
     }
-    &.card-rarity-uncommon{
+    &.card-rarity-uncommon .ant-rate{
         background-color: transparentize(#adaca9, 0.35);
         .ant-rate-star-full{color: lighten(#adaca9, 10)}
     }
-    &.card-rarity-rare{
+    &.card-rarity-rare .ant-rate{
         background-color: transparentize(#fff300, 0.25);
         .ant-rate-star-full{color: lighten(#fff300, 10)}
     }
-    &.card-rarity-mythic{
+    &.card-rarity-mythic .ant-rate{
         background-color: transparentize(#2ec7f5, 0.15);
         .ant-rate-star-full{color: lighten(#2ec7f5, 10)}
+    }
+
+    .ant-rate{
+        width: 80%;
+        border-radius: 15px;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        margin-top: -2px;
+        z-index: -1;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
     }
 
     .ant-rate-star-full{
@@ -72,14 +82,16 @@ $rate-shadow: 3px;
 }
 
 .card-image{
-    //position: absolute;
+    position: relative;
     padding-bottom: 139%;
     width: 100%;
     background-size:     contain;
     background-repeat:   no-repeat;
     background-position: center center;
     border-radius: 5px;
-    background-color: #000;
+    border-bottom: 4px solid transparent;
+    background-color: rgba(0,0,0,.25);
+    z-index: 3;
 
     &.animated{
         position: absolute;

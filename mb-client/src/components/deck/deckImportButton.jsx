@@ -30,7 +30,7 @@ class DeckImportButton extends React.Component {
         const text = event.clipboardData.getData('text/plain');
         const regex = /^([0-9]) (.*)/g
         const values = {
-            dck_cards: [...toJS(this.props.deck.dck_cards)],
+            dck_cards: this.props.reset ? []:[...toJS(this.props.deck.dck_cards)],
         };
         const unidentified = [];
         const dictionary = this.props.dictionary;
@@ -119,7 +119,7 @@ class DeckImportButton extends React.Component {
     render(){
         const {children, description, buttonProps} = this.props;
         return (
-            <span>
+            <div style={this.props.style}>
                 <Modal title="Import cards"
                        visible={this.state.modalVisible}
                        footer={null}
@@ -127,12 +127,12 @@ class DeckImportButton extends React.Component {
                        onCancel={() => this.setState({modalVisible:false})}
                 >
                     {description}
-                    <Input.TextArea ref={ref=>ref?ref.focus():null} onPaste={this.onPaste} placeholder="Paste your deck here" style={{minHeight: 100}}></Input.TextArea>
+                    <Input.TextArea ref={ref=>ref?ref.focus():null} value='' onPaste={this.onPaste} placeholder="Paste your deck here" style={{minHeight: 100}}></Input.TextArea>
                 </Modal>
-                <Button onClick={() => this.setState({modalVisible: true})} {...buttonProps}>
+                <span onClick={() => this.setState({modalVisible: true})}>
                     {children}
-                </Button>
-            </span>
+                </span>
+            </div>
         )
 
     }

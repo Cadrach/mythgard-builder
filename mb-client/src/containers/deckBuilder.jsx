@@ -13,6 +13,7 @@ import _ from 'lodash';
 import './stylesheets/deckBuilder.scss';
 import DeckDrawer from "../components/deck/deckDrawer";
 import {Scrollbars} from "react-custom-scrollbars";
+import DeckImportButton from "../components/deck/deckImportButton";
 
 @inject('dictionary', 'deckStore')
 @observer
@@ -126,7 +127,11 @@ export default class DeckBuilder extends React.Component {
                         <Menu className="menu" mode="inline" selectable={false} theme="dark">
                             <Menu.Item key="0"><AntIcon type="file-add" /><span>Create new Deck</span></Menu.Item>
                             <Menu.Item key="1" onClick={this.onClickExport.bind(this)}><AntIcon type="copy" /><span>Export</span></Menu.Item>
-                            <Menu.Item key="2"><AntIcon type="import" /><span>Import</span></Menu.Item>
+                            <Menu.Item key="2">
+                                <DeckImportButton deck={selectedDeck} reset={true} description="Paste your deck in the input below">
+                                    <AntIcon type="import" /><span>Import</span>
+                                </DeckImportButton>
+                            </Menu.Item>
                             <Menu.Item key="3" onClick={this.onToggleSlider.bind(this)}><AntIcon type="unordered-list" /><span>My Decks</span><AntIcon type="down" style={{float: 'right', marginTop: 14}}/></Menu.Item>
                         </Menu>
 

@@ -55,8 +55,8 @@ export default class MyCards extends React.Component {
                 {deck ?
                     <Layout.Header className="header" style={{height: 88}}>
                         <span style={{float: 'right'}}>
-                            <DeckImportButton deck={deck} buttonProps={{size: "large", type: "primary"}} description={explanation}>
-                                <AntIcon type="import"/> Import all your cards!
+                            <DeckImportButton deck={deck} buttonProps={{}} description={explanation} style={{display: 'inline'}}>
+                                <Button size="large" type="primary"><AntIcon type="import"/> Import all your cards!</Button>
                             </DeckImportButton>
                             &nbsp;
                             <Button type="primary" size="large" onClick={this.onClickSave.bind(this)}><AntIcon type="save"/>&nbsp;Save</Button>

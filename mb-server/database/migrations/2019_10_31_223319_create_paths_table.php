@@ -16,6 +16,8 @@ class CreatePathsTable extends Migration
         Schema::create('paths', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('pth_name');
+            $table->string('pth_icon');
+            $table->string('pth_image');
             $table->timestamps();
         });
     }

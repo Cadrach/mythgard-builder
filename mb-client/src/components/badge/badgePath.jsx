@@ -1,5 +1,6 @@
 import React from "react";
 import {inject} from "mobx-react";
+import {Tooltip} from "antd";
 
 const BadgePath = (props) => {
 
@@ -7,7 +8,7 @@ const BadgePath = (props) => {
     const path = props.dictionary.pathById(id);
 
     return (
-        <div>{path?path.name:null}</div>
+        path?<Tooltip title={path.name}><img src={'/images/' + path.icon} style={{width: 32}} {...props}/></Tooltip>:null
     )
 }
 

@@ -10,6 +10,7 @@ import Gem from "../gem/gem";
 import BadgePower from "../badge/badgePower";
 import DecksColumnRarity from "./decksColumnRarity";
 import Dictionary from "../../stores/dictionary";
+import BadgePath from "../badge/badgePath";
 
 const isConnected = Dictionary.isConnected;
 const width = 50;
@@ -23,6 +24,13 @@ const columns = [
     },
     {
         className: 'border-left text-center',
+        title: <Tooltip title="Path"><Icon name="code-fork" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: 'ide_path',
+        render: id => <BadgePath id={id}/>,
+        width,
+    },
+    {
+        className: 'text-center',
         title: <Tooltip title="Power"><Icon name="bolt" style={{fontSize: 16}}/></Tooltip>,
         dataIndex: 'ide_power',
         render: id => <BadgePower id={id}/>,

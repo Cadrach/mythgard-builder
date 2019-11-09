@@ -1,0 +1,366 @@
+name: Rares & Mythics
+path: 
+power: 
+1 fey plagiarist
+2 singing stone
+2 norn datacore
+2 earthslide
+2 maelstrom
+2 road queen
+2 seahaven
+1 thunderclap
+2 draugr
+2 jotun shatterfist
+1 tyr monomund
+1 allfather's horn
+2 cataclysm
+1 triassic kraken
+1 clay effigy
+1 godspore mushroom
+2 helm of conscription
+2 gemcutter spider
+1 incubation chamber
+2 splicing lab
+2 wonder drug
+2 goliath's web
+2 ollama ring
+1 sacrificial altar
+2 magpyre sniper
+2 misanthropia
+1 revelation of ximec
+2 godsbane transport
+2 harvester
+1 sapo, the devourer
+2 extract life
+2 dead man's eyes
+2 dragon's teeth
+1 firesong prodigy
+1 blood dolls
+2 blood moon
+2 shopworn bull
+2 strigoi familiar
+1 terpsichore muse
+2 the stretcher
+1 alacrity
+2 howling abyssal
+1 the oak of dodona
+2 wings of abaddon
+2 magmataur
+1 serapis, false apostle
+1 stairway to hades
+2 house elf
+2 marching orders
+2 born-again
+2 garden of iriy
+2 samosek, the living sword
+1 spellflux cauldron
+2 academy analyst
+1 bela, witch queen
+2 night hag
+1 ved'ma skyranger
+2 sovereign architect
+2 alkonost
+1 sablewing zira
+1 traitorous murmur
+1 chort stag
+2 indrik beast
+2 alchemical key
+1 ghul
+1 spear of destiny
+1 xerxian hideout
+2 xerxian recruiter
+1 desertification engine
+1 dire benediction
+1 resupply caravan
+2 soma oasis
+2 oil field
+2 peri at the gates
+1 scion of pride
+2 temptation
+2 digital golem
+2 sandscale wurm
+2 daeva of the wastes
+2 ghost in the system
+2 peach of life
+2 five spirit gate
+1 misfortune
+1 neo-gangnam
+2 balance
+2 feng shui master
+2 pentacle of flavors
+1 spiteful mimic
+1 whitemoon arena
+1 hungry ghost
+2 spirit away
+2 baku bogeyman
+1 perfect grade
+1 headless one
+1 the recursionist
+1 familia sprite
+3 berserkr sickness
+3 demolition speedway
+2 false mjolnir
+3 jorthsong
+3 ravine guardian
+3 root of the world
+3 daughters of the forest
+3 forked lightning
+3 godsblud transfusion
+3 skilled hacktivist
+2 stone mother
+3 bridgeway troll
+3 rune of denial
+3 tailroot wurm
+3 blackened jotun
+3 giant's stairway
+1 hyperborean
+2 volcanic risi
+2 nazca memorial
+3 obligation
+3 laser grid
+3 pack mentality
+3 pandemic
+3 vibrant quetzal
+3 yahui
+3 yana virus
+3 cloudscale drake
+3 dream weaver
+3 poxbringer
+3 serpent den
+3 vicious cycle
+2 black cadejo
+3 enchanteater
+3 magpyre enforcer
+3 white cadejo
+3 metzin giant
+3 carny lug
+2 orpheum of horrors
+2 stray panacea
+3 vulcan brand
+3 mistwalker gate
+3 calliope muse
+3 crimson pact
+3 freki huntress
+2 grim narcoleptic
+3 hekate's wheel
+3 ichor feast
+3 melpomene muse
+1 ourania muse
+1 panic raider
+3 pit fiend
+2 red carnival
+3 cyclopean giant
+3 sea fire
+3 strigoi reaver
+3 duskwing angel
+3 dora
+3 grinning kolobok
+3 circle of protection
+2 doublethink
+3 hacker's intuition
+3 mavka
+3 sugar plum fairy
+3 troikasekt
+3 ved'ma flamespar
+3 gemhold dwarf
+3 isle of buyan
+3 led astray
+3 simargl hatchling
+3 volkov pointman
+3 avenging alpha
+3 focused frenzy
+3 gamayun
+2 ravenous she
+1 vilja windfury
+3 xerxian observer
+3 mandatory vigor
+3 quicksand hourglass
+3 sand scout
+3 dune courser
+3 imperfect copy
+3 insurance broker
+3 mirage
+3 parsa clarion
+3 serendipity ifreet
+2 shadhavar beast
+3 vengeful heirloom
+2 xerxian sympathizer
+3 parsa divinity cannon
+3 parsa immortal
+3 seal of exile
+3 mardykhor
+2 jaded courtier
+3 sniffer
+3 steam bun
+3 battle chef
+3 imperative bell
+3 knives in the dark
+2 re:spawn
+3 red cliffs
+3 hotel barkeep
+3 muttonmorphosis
+3 night market
+2 shinobi of smoke
+3 back alley ronin
+2 emperor koi
+3 thriving shade
+3 pushy oni
+3 lantern colossus
+name: Common BY
+path: 
+power: 
+4 cairnhenge
+4 field of poppies
+4 freki scout
+4 grease monkey
+4 honed edge
+2 jaunt
+4 breath of wintertide
+4 einherjar thane
+4 eir healing
+4 ice spike
+4 sons of the pack
+4 valkyrie tough
+4 brainstorm
+4 einherjar berserkr
+4 ensnaring serpent
+4 timberland troll
+4 valkyrie enforcer
+4 winter wolf
+4 foul harvest
+4 golden axolotl
+4 magpyre commando
+4 maze of iyatiku
+4 verdant jungle
+4 beast of plenty
+4 beimeni falls
+4 firedart frog
+3 garterkan
+4 riot guard
+4 striking viper
+4 venomfang mutant
+4 volition™
+4 blood idol
+4 magpyre squad leader
+4 meso libre
+4 security phalanx
+1 cornered wildcat
+4 feathered serpent
+4 conviction
+4 dune cat
+4 eager recruit
+4 storied martyr
+4 thieves bazaar
+4 xerxian saboteur
+4 dust devil
+3 notarize reality
+4 parsa crusader
+4 sandscape
+4 twinfire zealot
+4 vital broxa
+4 halcyon decree
+4 parsa regulars
+2 radiant vessel
+4 aimless vessel
+4 silicon sentinel
+4 cataphract
+4 faceless construct
+3 compulsory curse
+4 mind freak
+4 pocket instance
+3 racer in shadow
+4 simuzen
+4 tong foot soldiers
+4 axe man
+4 insatient
+4 juiced
+4 little crane girl
+4 sword saint
+4 yojimbo
+4 shinobi of fire
+4 shinobi of wind
+4 stratagem thirty-six
+3 stubborn tengu
+4 zen archer
+4 decoy
+4 terragon 
+4 hysterical strength
+4 ignition
+4 ironflesh performer
+4 minitaur
+4 shadow trapeze
+4 strigoi pup
+4 amnesia
+4 ankle biter
+4 barbed bolts
+4 daring trapezists
+4 forlorn spirit
+4 reckless vulcanist
+4 strigoi pureblood
+4 ironbelly wyvern
+2 lamia's kiss
+4 chloe sunshine
+4 faun of decay
+4 mister snuggles
+4 mothmara
+4 overkill
+4 pack trooper
+4 rewind hex
+4 ruslan's bight
+4 sweet spinnerette
+4 vodnik informant
+4 wake the bones
+4 bold omega
+4 detained
+4 gallows boy
+4 matryoshka
+4 raid the tombs
+4 synapse overclock
+4 academy recruitment
+4 hopeless necromantic
+4 volkov veteran
+3 bog basilisk
+4 wendish giant
+4 volkov heavy
+4 hysterical strength
+4 ignition
+4 ironflesh performer
+4 minitaur
+4 shadow trapeze
+4 strigoi pup
+4 amnesia
+4 ankle biter
+4 barbed bolts
+4 daring trapezists
+4 forlorn spirit
+4 reckless vulcanist
+4 strigoi pureblood
+4 ironbelly wyvern
+2 lamia's kiss
+4 chloe sunshine
+4 faun of decay
+4 mister snuggles
+4 mothmara
+4 overkill
+4 pack trooper
+4 rewind hex
+4 ruslan's bight
+4 sweet spinnerette
+4 vodnik informant
+4 wake the bones
+4 bold omega
+4 detained
+4 gallows boy
+4 matryoshka
+4 raid the tombs
+4 synapse overclock
+4 academy recruitment
+4 hopeless necromantic
+4 volkov veteran
+3 bog basilisk
+4 wendish giant
+4 volkov heavy
+4 bulwark
+4 eirsdottir
+4 fire eater
+4 jade puma

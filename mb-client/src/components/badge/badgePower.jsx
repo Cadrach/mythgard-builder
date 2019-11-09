@@ -1,5 +1,6 @@
 import React from "react";
 import {inject} from "mobx-react";
+import {Tooltip} from "antd";
 
 const BadgePower = (props) => {
 
@@ -7,7 +8,7 @@ const BadgePower = (props) => {
     const power = props.dictionary.powerById(id);
 
     return (
-        <div>{power?power.name:null}</div>
+        power?<Tooltip title={power.name}><img src={'/images/' + power.icon} style={{width: 32}} {...props}/></Tooltip>:null
     )
 }
 

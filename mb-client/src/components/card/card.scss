@@ -59,13 +59,27 @@ $rate-shadow: 3px;
             height: 20px;
 
             //background: #000;
-            box-shadow: inset -5px -5px 9px 0px rgba(0,0,0,0.75);
+            box-shadow: inset -4px -4px 9px 0px rgba(0,0,0,0.75);
+            border-radius: 50px;
+        }
+        &:before{
+            content: ' ';
+            position: absolute;
+            top: 5px;
+            left: -1px;
+            width: 20px;
+            height: 20px;
+            z-index: 20;
+
+            //background: #000;
+            box-shadow: inset 5px 3px 5px 0px rgba(255,255,255,.25);
             border-radius: 50px;
         }
     }
     .ant-rate-star-zero{
-        opacity: 0.35;
+        opacity: 0.15;
         text-shadow: 0px 0px 2px #000,0px 0px 2px #000,0px 0px 2px #000,0px 0px 2px #000;
+
         &:after{
             content: ' ';
             position: absolute;

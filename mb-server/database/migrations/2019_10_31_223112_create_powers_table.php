@@ -16,6 +16,8 @@ class CreatePowersTable extends Migration
         Schema::create('powers', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->string('pow_name');
+            $table->string('pow_icon');
+            $table->string('pow_image');
             $table->timestamps();
         });
     }

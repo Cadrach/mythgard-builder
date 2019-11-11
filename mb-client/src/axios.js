@@ -37,7 +37,7 @@ instance.interceptors.response.use(response => response, function (error) {
             duration: 0,
         })
     }
-    return Promise.reject(error.response);
+    return Promise.reject(error.response ? error.response:{});
 });
 
 export default instance;

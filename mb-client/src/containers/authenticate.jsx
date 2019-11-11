@@ -1,7 +1,7 @@
 import React from "react";
 import axios from '../axios';
 import { observer, inject } from "mobx-react";
-import {Layout, Typography, Row, Col, Card, Form, Input, Icon as AntIcon, Button, Divider, notification} from "antd";
+import {Layout, Typography, Alert, Row, Col, Card, Form, Input, Icon as AntIcon, Button, Divider, notification} from "antd";
 import {Switch} from "antd";
 import {withRouter} from 'react-router-dom';
 import {Icon} from "react-fa/lib";
@@ -28,7 +28,9 @@ class Authenticate extends React.Component {
             }
         }, ({data}) => {
             notification.destroy();
-            notification.error({message: <ul>{_.chain(data.errors).toArray().flatten().value().map((v,k) => <li key={k}>{v}</li>)}</ul>});
+            if(data && data.errors){
+                notification.error({message: <ul>{_.chain(data.errors).toArray().flatten().value().map((v,k) => <li key={k}>{v}</li>)}</ul>});
+            }
         });
     }
 
@@ -52,6 +54,10 @@ class Authenticate extends React.Component {
                 span: 8,
                 offset: 2,
             }
+        }
+
+        if(this.props.dictionary.isConnected){
+            return <Alert message="You are already connected" style={{margin: 50}}/>
         }
 
         return (

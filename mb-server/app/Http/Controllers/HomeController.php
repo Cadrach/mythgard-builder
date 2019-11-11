@@ -32,10 +32,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         //Redirect to the home of the React App
-        return redirect(env('EXTERNAL_SERVER_URL'));
+        if( ! $request->ajax()){
+            return redirect(env('EXTERNAL_SERVER_URL'));
+        }
+        else{
+            return;
+        }
     }
 
     public function getDictionaries(){

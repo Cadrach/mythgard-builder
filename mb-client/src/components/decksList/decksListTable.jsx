@@ -13,7 +13,6 @@ import Dictionary from "../../stores/dictionary";
 import BadgePath from "../badge/badgePath";
 import BadgeEssence from "../badge/badgeEssence";
 
-const isConnected = Dictionary.isConnected;
 const width = 50;
 const columns = [
     {
@@ -46,10 +45,10 @@ const columns = [
     },
     {
         className: 'text-center',
-        title: <Tooltip title={"Essence Cost" + (isConnected ? ' based on your cards':'')}><Icon name="flask" style={{fontSize: 16}}/></Tooltip>,
-        dataIndex: isConnected && Dictionary.user.cards ? 'user_cost':'dck_cost',
+        title: <Tooltip title={"Essence Cost" + (Dictionary.userHasCards ? ' based on your cards':'')}><Icon name="flask" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: Dictionary.userHasCards ? 'user_cost':'dck_cost',
         sorter: true,
-        render: (value, row) => <BadgeEssence value={isConnected && Dictionary.user.cards ? row.user_cost : row.dck_cost}/>,
+        render: (value, row) => <BadgeEssence value={Dictionary.userHasCards ? row.user_cost : row.dck_cost}/>,
         width: 100,
     },
     {

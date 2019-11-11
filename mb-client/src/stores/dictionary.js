@@ -29,6 +29,10 @@ class Dictionary {
         return !!this.user;
     }
 
+    @computed get userHasCards(){
+        return this.user && this.user.cards && this.user.cards.length;
+    }
+
     $req = async () => {
         const {data} = await axios.get('json/dictionaries');
         return data;

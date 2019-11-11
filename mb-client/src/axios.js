@@ -24,7 +24,7 @@ instance.interceptors.response.use(response => response, function (error) {
         //Not authenticated
         message = <span>You must be <a href="/auth">logged-in</a> to access this page</span>;
     }
-    else if(status && error.response.data && error.response.data.message){
+    else if(status>=400 && error.response && error.response.data && error.response.data.message){
         //Other errors
         message = error.response.data.message;
     }

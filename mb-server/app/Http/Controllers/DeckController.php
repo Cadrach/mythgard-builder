@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Card;
 use App\Models\Deck;
+use App\Models\Favorite;
 use App\Models\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -156,5 +157,31 @@ class DeckController extends Controller
                 bin_mythic = {$binaries['dck_bin_mythic']}
             WHERE id={$user->id}
         ");
+    }
+
+    /**
+     * Toggle favorite
+     * @param Request $request
+     */
+    public function postToggleFavorite(Request $request){
+        $deckId = $request->get('id');
+        $userId = $this->_user()->id;
+        $deck = Deck::findOrFail($deckId);
+        $favorite = Favorite::where('ide_user', '=', $userId)->where('ide_deck', '=', $deckId)->first();
+
+        if($favorite){
+            $favorite->delete();
+            $deck->dck_stars--;
+            $deck->save();
+        }
+        else{
+            $favorite = new Favorite();
+            $favorite->ide_user = $userId;
+            $favorite->ide_deck = $deckId;
+            $favorite->save();
+            $deck->dck_stars++;
+            $deck->save();
+        }
+
     }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import axios from '../axios';
 import { observer, inject } from "mobx-react";
 import {withRouter} from "react-router-dom";
-import {Layout, Affix, Row, Col, Button, Tooltip} from "antd";
+import {Layout, Affix, Row, Col, Button, Tooltip, Icon as AntIcon} from "antd";
 import DeckContent from "../components/deck/deckContent";
 import DeckHeader from "../components/deck/deckHeader";
 
@@ -45,6 +45,10 @@ class DeckDetail extends React.Component {
         this.props.deckStore.selectedDeck.export();
     }
 
+    onClickFavorite(){
+        this.props.deckStore.selectedDeck.toggleFavorite();
+    }
+
     //
     render() {
         const deck = this.props.deckStore.selectedDeck;//this.state;
@@ -59,7 +63,9 @@ class DeckDetail extends React.Component {
                         {deck.dck_name}
                         <div style={{float: 'right'}}>
                             {isConnected ?
-                                <Button icon="star" type="primary" size="large">Favorite</Button>
+                                <Button type="primary" size="large" onClick={this.onClickFavorite.bind(this)}>
+                                    <AntIcon type="star" theme={deck.is_favorite?'filled':null}/> Favorite
+                                </Button>
                                 :
                                 <Tooltip title="You muse be logged-in to favorite a deck"><Button icon="star" type="primary" size="large" disabled>Favorite</Button></Tooltip>
                             }

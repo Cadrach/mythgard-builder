@@ -29,6 +29,8 @@ export const Deck = types
         dck_public: types.optional(types.boolean, false),
         dck_description: types.maybeNull(types.string),
         saved: types.optional(types.boolean, true),
+        is_favorite: types.optional(types.integer, 0),
+        loading: types.optional(types.boolean, false),
     })
     .views(self => ({
         get cards() {return self.dck_cards;},
@@ -115,6 +117,19 @@ export const Deck = types
             _.forEach(values, (value, key) => self[key] = value);
             self.dck_description = values.dck_description;
             self.saved = false;
+        },
+
+        toggleFavorite(){
+            if( ! self.loading){
+                self.loading = true;
+                axios.post('json/toggle-favorite', {id: self.id}).then(({data}) => self.applyToggleFavorite(data))
+            }
+        },
+
+        applyToggleFavorite({is_favorite, dck_stars}){
+            self.loading = false;
+            self.is_favorite = is_favorite;
+            self.dck_stars = dck_stars;
         },
 
         /**

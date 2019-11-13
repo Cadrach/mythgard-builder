@@ -1,4 +1,5 @@
 import React from "react";
+import {isWebpSupported} from 'react-image-webp/dist/utils';
 
 // Stylesheet Imports
 import "./card.scss";
@@ -12,7 +13,8 @@ class Card extends React.Component {
         super(props);
         this.state = {animatedCards: []};
         this.card = props.data;
-        this.cardImage = <div className="card-image" style={{backgroundImage: 'url(images/cards/s/'+this.card.image+')'}}></div>;
+        const url = isWebpSupported() ? 'images/cards/webp/'+this.card.image.replace('.png', '.webp') : 'images/cards/s/'+this.card.image;
+        this.cardImage = <div className="card-image" style={{backgroundImage: 'url('+url+')'}}></div>;
 
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);

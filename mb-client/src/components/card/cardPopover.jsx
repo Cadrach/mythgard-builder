@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "react-image-webp";
 
 // Stylesheet Imports
 import "./card.scss";
@@ -10,15 +11,17 @@ const CardPopover = (props) => {
     const card = props.card;
 
     const content = <div>
-        <img src={"/images/cards/m/" + card.image} style={{maxHeight: 466, height: '40vh', minHeight: 200}}/>
+        <Image
+            webp={"/images/cards/webp/" + card.image.replace('.png', '.webp')}
+            src={"/images/cards/m/" + card.image}
+            style={{maxHeight: 466, height: '40vh', minHeight: 200, minWidth: 143}}
+        />
     </div>
 
     const popoverProps = _.extend({
         title: card.name,
         placement: 'bottom',
         onVisibleChange: function(){
-            console.log(arguments);
-            console.log(popoverRef);
             setTimeout(popoverRef.forceUpdate.bind(popoverRef), 50);
         }
     }, props.popoverProps)

@@ -34,6 +34,7 @@
     "react-dom": "^16.8.6",
     "react-draft-wysiwyg": "^1.13.2",
     "react-fa": "^5.0.0",
+    "react-image-webp": "^0.6.0",
     "react-router-dom": "5.1.2",
     "react-select": "^3.0.8",
     "react-window": "^1.8.5",

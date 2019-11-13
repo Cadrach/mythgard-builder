@@ -1,5 +1,6 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
+import {withRouter} from "react-router-dom";
 import {Drawer, Layout, Button, Menu, Icon as AntIcon, Divider, List} from "antd";
 import DeckContent from "../components/deck/deckContent";
 import DeckHeader from "../components/deck/deckHeader";
@@ -17,7 +18,7 @@ import DeckImportButton from "../components/deck/deckImportButton";
 
 @inject('dictionary', 'deckStore')
 @observer
-export default class DeckBuilder extends React.Component {
+class DeckBuilder extends React.Component {
 
     constructor(props){
         super(props);
@@ -41,7 +42,13 @@ export default class DeckBuilder extends React.Component {
         }
 
         //Fetch our decks
-        props.deckStore.fetchMyDecks();
+        props.dictionary.promise.then(() => {
+            props.deckStore.fetchMyDecks().then(() => {
+                if(props.match.params.id){
+                    props.deckStore.selectDeckById(props.match.params.id);
+                }
+            });
+        })
     }
 
     /**
@@ -207,3 +214,5 @@ export default class DeckBuilder extends React.Component {
         );
     }
 }
+
+export default withRouter(DeckBuilder);

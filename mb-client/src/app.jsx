@@ -66,7 +66,7 @@ class App extends React.Component {
             </Affix>
             <Layout className="ant-layout-transparent" style={{marginTop: 64}}>
                 <div>
-                    <Route exact path="/deck-builder" component={DeckBuilder}/>
+                    <Route exact path="/deck-builder/:id?" component={DeckBuilder}/>
                     <Route exact path="/cards" component={MyCards}/>
                     <Route exact path="/decks" component={DecksList}/>
                     <Route exact path="/decks/:id" component={DeckDetail}/>

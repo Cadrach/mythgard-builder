@@ -170,6 +170,17 @@ export const DeckStore = types
             self.selectedDeck = deck;
         },
 
+        /**
+         * Retrieve & select a deck using its id
+         * @param id
+         */
+        selectDeckById(id){
+            const deck = _.find(self.myDecks, {id: parseInt(id)})
+            if(deck){
+                self.selectDeck(deck);
+            }
+        },
+
         setViewedDeck(deck){
             self.viewedDeck = deck;
         },

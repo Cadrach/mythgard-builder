@@ -21,7 +21,11 @@ body, .with-background{
     background: transparent;
 }
 
-div.ant-modal-content, .ant-notification-notice, .ant-message-notice-content{
+div.ant-modal-content,
+.ant-notification-notice,
+.ant-message-notice-content,
+.ant-popover-inner
+{
     border: 3px solid rgba(255,255,255,.5);
 }
 

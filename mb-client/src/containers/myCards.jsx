@@ -47,7 +47,8 @@ export default class MyCards extends React.Component {
                 <li style={{marginTop: 10}}>Come back here and <b>paste!</b></li>
                 <li style={{marginTop: 10}}>Repeat with 2 other decks for your <Text code>Uncommons</Text> and <Text code>Commons</Text> (there is a limit of <Text type="danger">200 cards per deck</Text> in Mythgard so you might have to create more than 1 per rarity)</li>
             </ul>
-            <b>It is a small hassle but once it is done you will be able to have actual costs of decks based on your cards when you browse. You can also push for an export feature to Rhino developers :)</b>
+            <b>It is a small hassle but once it is done you will be able to have the actual cost of a deck based on your cards when you browse all decks. <br/><br/>You can also ask for an export feature to Rhino developers :-)</b>
+            <br/><br/>
         </span>
 
         return (

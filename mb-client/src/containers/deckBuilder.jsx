@@ -154,7 +154,7 @@ export default class DeckBuilder extends React.Component {
                 </Layout.Sider>
 
                 {/*CARDS LIST + FOOTER */}
-                <Layout style={{overflowY: 'hidden'}}>
+                <Layout className="with-background" style={{overflowY: 'hidden'}}>
                     <Layout.Header className="header" style={{height: 80}}>
                         {selectedDeck.dck_name}
                         &nbsp;
@@ -186,6 +186,7 @@ export default class DeckBuilder extends React.Component {
 
                 {/*RIGHT SIDER + DECK */}
                 <Layout.Sider
+                    className="with-background"
                     width={siderWidth}
                     collapsible={true}
                     collapsed={rightCollapsed}

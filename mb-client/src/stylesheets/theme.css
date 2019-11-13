@@ -1,3 +1,6 @@
+body, .with-background {
+  background-image: url(/images/footer_lodyas_colored.png) !important; }
+
 .ant-list[theme="dark"] {
   color: rgba(255, 255, 255, 0.65);
   background: #001529; }
@@ -13,3 +16,9 @@
 
 .ant-layout-transparent {
   background: transparent; }
+
+div.ant-modal-content, .ant-notification-notice, .ant-message-notice-content {
+  border: 3px solid rgba(255, 255, 255, 0.5); }
+
+.ant-table-wrapper {
+  background-color: #30303d; }

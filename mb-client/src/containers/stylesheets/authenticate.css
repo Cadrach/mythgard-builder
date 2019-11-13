@@ -1,0 +1,16 @@
+.btnFacebook {
+  line-height: 24px;
+  border-radius: 4px;
+  background: #3b5998;
+  color: white;
+  border: 0px transparent;
+  text-align: center;
+  margin: 5px; }
+
+.btnGoogle {
+  border-radius: 4px;
+  background: #db3236;
+  color: white;
+  border: 0px transparent;
+  text-align: center;
+  margin: 5px; }

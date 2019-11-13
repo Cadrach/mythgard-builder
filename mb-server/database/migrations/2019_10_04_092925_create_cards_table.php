@@ -26,6 +26,7 @@ class CreateCardsTable extends Migration
             $table->unsignedInteger('card_rarity_index');
 
             $table->string('card_name');
+            $table->mediumInteger('card_order')->default(0);
             $table->string('card_name_export');
             $table->string('card_name_clean');
             $table->string('card_image');
@@ -39,11 +40,14 @@ class CreateCardsTable extends Migration
             $table->unsignedTinyInteger('card_attack');
             $table->unsignedTinyInteger('card_health');
             $table->text('card_keywords')->nullable();
+            $table->tinyInteger('card_color_count')->default(1);
 
             $table->text('card_text');
             $table->text('card_text_flavor');
 
             $table->timestamps();
+
+            $table->index('card_order');
         });
     }
 

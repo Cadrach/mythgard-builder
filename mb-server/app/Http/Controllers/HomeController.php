@@ -70,9 +70,7 @@ class HomeController extends Controller
                 'created_at',
                 'updated_at',
             ], 'card_')
-                ->orderBy('ide_faction')
-                ->orderBy('card_cost')
-                ->orderBy('card_name')
+                ->orderBy('card_order')
                 ->get(),
 
             'factions' => $this->_dictionary(Faction::class, ['id', 'fac_code', 'fac_name'], 'fac_')->get(),

@@ -17,6 +17,7 @@ class CreateFactionsTable extends Migration
             $table->bigIncrements('id');
             $table->char('fac_code');
             $table->string('fac_name');
+            $table->tinyInteger('fac_order')->default(0);
             $table->timestamps();
         });
     }

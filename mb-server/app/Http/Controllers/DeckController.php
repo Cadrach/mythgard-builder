@@ -56,10 +56,21 @@ class DeckController extends Controller
      */
     public function getDetail($id){
         //TODO: allow to return a private deck, if we are the user logged-in
-        return Deck::with('user:id,name')
+        $req = Deck::with('user:id,name')
+            ->select('decks.*')
             ->where("dck_public", "=", 1)
-            ->where("id", "=", $id)
-            ->firstOrFail();
+            ->where("decks.id", "=", $id);
+
+        $user = $this->_user();
+        if($user){
+            $req->selectRaw('IF(favorites.id IS NULL, 0, 1) as is_favorite');
+            $req->leftJoin('favorites', function($join) use ($user){
+                $join->on('favorites.ide_deck', '=', 'decks.id');
+                $join->on('favorites.ide_user', '=', DB::raw($user->id));
+            });
+        }
+
+        return $req->firstOrFail();
     }
 
     /**
@@ -162,6 +173,7 @@ class DeckController extends Controller
     /**
      * Toggle favorite
      * @param Request $request
+     * @return array
      */
     public function postToggleFavorite(Request $request){
         $deckId = $request->get('id');
@@ -169,12 +181,14 @@ class DeckController extends Controller
         $deck = Deck::findOrFail($deckId);
         $favorite = Favorite::where('ide_user', '=', $userId)->where('ide_deck', '=', $deckId)->first();
 
+        $isFavorite = 0;
         if($favorite){
             $favorite->delete();
             $deck->dck_stars--;
             $deck->save();
         }
         else{
+            $isFavorite = 1;
             $favorite = new Favorite();
             $favorite->ide_user = $userId;
             $favorite->ide_deck = $deckId;
@@ -183,5 +197,9 @@ class DeckController extends Controller
             $deck->save();
         }
 
+        return [
+            'is_favorite' => $isFavorite,
+            'dck_stars' => $deck->dck_stars,
+        ];
     }
 }

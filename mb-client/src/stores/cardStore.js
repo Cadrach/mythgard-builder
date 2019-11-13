@@ -1,4 +1,4 @@
-import {observable, action, computed, autorun} from 'mobx';
+import {observable, action, computed, autorun, toJS} from 'mobx';
 import axios from '../axios';
 import _ from 'lodash';
 // import uuid from 'node-uuid';
@@ -58,7 +58,8 @@ class CardStore {
     }
 
     @action applyFilters(filters){
-        const {colors, types} = filters;
+        const {colors, types, search} = filters;
+        const regex = new RegExp(search, 'img');
         this.cardsRegistryFiltered = this.cardsRegistry.filter(card => {
             // console.log(_.intersection(card.card_gems.split(''), colors))
             if(! _.intersection(card.gems.split(''), colors).length){
@@ -67,8 +68,15 @@ class CardStore {
             if(types.indexOf(card.type)<0){
                 return false;
             }
+            if(search){
+                if( ! regex.test(card.name) && ! regex.test(card.text)){
+                    return false;
+                }
+            }
             return true;
         })
+        //console.log('OUT', filteredOut)
+        console.log('KEPT', toJS(this.cardsRegistryFiltered))
     }
 }
 

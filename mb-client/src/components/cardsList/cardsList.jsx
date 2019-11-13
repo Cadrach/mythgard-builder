@@ -24,7 +24,7 @@ const Cell = (props, { columnIndex, rowIndex, style }) => {
                 height: style.height - spacer
             }}
         >
-            <Card data={card} deck={props.deck}/>
+            {card ? <Card data={card} deck={props.deck}/>:null}
         </div>)
 }
 
@@ -44,7 +44,7 @@ const CardsList = (props) => {
         columnWidth={columnWidth + spacer}
         height={height - (props.shavedHeight?props.shavedHeight:0)}
         innerElementType={innerElementType}
-        rowCount={props.cards.length / columnCount}
+        rowCount={props.cards.length / columnCount + 1}
         rowHeight={cellHeight + spacer}
         width={widthModified}
         style={{overflowX: 'hidden'}}

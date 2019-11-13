@@ -1,7 +1,7 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
 import {withRouter} from "react-router-dom";
-import {Drawer, Layout, Button, Menu, Icon as AntIcon, Divider, List} from "antd";
+import {Drawer, Layout, Button, Menu, Icon as AntIcon, Divider, List, Input} from "antd";
 import DeckContent from "../components/deck/deckContent";
 import DeckHeader from "../components/deck/deckHeader";
 import CardsList from "../components/cardsList/cardsList"
@@ -26,7 +26,8 @@ class DeckBuilder extends React.Component {
         //Original filters
         this.defaultFilters = {
             colors: Object.keys(constants.colors).map(c => c[0]),
-            types: ['Creature', 'Spell', 'LaneEnchantment', 'Artifact']
+            types: ['Creature', 'Spell', 'LaneEnchantment', 'Artifact'],
+            search: '',
         }
 
         //Current filters
@@ -84,6 +85,11 @@ class DeckBuilder extends React.Component {
             //Otherwise it is a classic toggle on/off
             !isActive ? this.filters[type].push(key) : this.filters[type].splice(this.filters[type].indexOf(key), 1)
         }
+        this.props.dictionary.cards.applyFilters(this.filters);
+    }
+
+    onChangeFilterSearch(event){
+        this.filters.search = event.target.value;
         this.props.dictionary.cards.applyFilters(this.filters);
     }
 
@@ -183,11 +189,17 @@ class DeckBuilder extends React.Component {
                         {Object.keys(constants.colors).map(key => (
                             <FilterColor key={key} color={key} onChange={() => this.onChangeFilter('colors', key[0])}  value={this.filters.colors.indexOf(key[0])>=0 ? 1:0}/>
                         ))}
+
                         <Divider type="vertical"/>
-                        <FilterIcon icon={<Icon name="male" size="2x"/>} color="#000" onChange={() => this.onChangeFilter('types', 'Creature')} value={this.filters.types.indexOf('Creature')>=0 ? 1:0}/>
-                        <FilterIcon icon={<Icon name="magic" size="2x"/>} color="#000" onChange={() => this.onChangeFilter('types', 'Spell')} value={this.filters.types.indexOf('Spell')>=0 ? 1:0}/>
-                        <FilterIcon icon={<Icon name="bookmark" size="2x"/>} color="#000" onChange={() => this.onChangeFilter('types', 'LaneEnchantment')} value={this.filters.types.indexOf('LaneEnchantment')>=0 ? 1:0}/>
-                        <FilterIcon icon={<Icon name="trophy" size="2x"/>} color="#000" onChange={() => this.onChangeFilter('types', 'Artifact')} value={this.filters.types.indexOf('Artifact')>=0 ? 1:0}/>
+
+                        <FilterIcon icon={<Icon name="male" size="2x"/>} color="#fff" onChange={() => this.onChangeFilter('types', 'Creature')} value={this.filters.types.indexOf('Creature')>=0 ? 1:0}/>
+                        <FilterIcon icon={<Icon name="magic" size="2x"/>} color="#fff" onChange={() => this.onChangeFilter('types', 'Spell')} value={this.filters.types.indexOf('Spell')>=0 ? 1:0}/>
+                        <FilterIcon icon={<Icon name="bookmark" size="2x"/>} color="#fff" onChange={() => this.onChangeFilter('types', 'LaneEnchantment')} value={this.filters.types.indexOf('LaneEnchantment')>=0 ? 1:0}/>
+                        <FilterIcon icon={<Icon name="trophy" size="2x"/>} color="#fff" onChange={() => this.onChangeFilter('types', 'Artifact')} value={this.filters.types.indexOf('Artifact')>=0 ? 1:0}/>
+
+                        <Divider type="vertical"/>
+
+                        <Input placeholder="Search..." size="large" style={{width: 300, position: 'relative', top:-7}} onChange={(value) => this.onChangeFilterSearch(value)}/>
                     </Layout.Footer>
                 </Layout>
 

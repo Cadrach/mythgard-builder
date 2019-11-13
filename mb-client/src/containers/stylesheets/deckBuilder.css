@@ -12,3 +12,9 @@
 .footer {
   padding: 20px 40px;
   background: rgba(0, 0, 0, 0.01); }
+
+.ant-divider-vertical {
+  background: #fff;
+  height: 30px;
+  position: relative;
+  top: -10px; }

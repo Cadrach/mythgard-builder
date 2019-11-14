@@ -24,11 +24,14 @@ class App extends React.Component {
     render(){
         const rootPathName = '/' + this.props.location.pathname.split('/')[1];
         const {isConnected} = this.props.dictionary;
+        const styleIcon = {
+            width: 32,
+            marginRight: 5,
+        }
 
         return (<Layout className="ant-layout-transparent">
             <Affix>
                 <Header style={{position: 'fixed', zIndex: 1, width: '100%', paddingLeft: 0, paddingRight: 0}}>
-                    <div className="logo"/>
                     <Menu
                         theme="dark"
                         mode="horizontal"
@@ -36,19 +39,31 @@ class App extends React.Component {
                         style={{lineHeight: '64px'}}
                     >
                         <Menu.Item key="/">
-                            <NavLink to="/">Home</NavLink>
+                            <NavLink to="/">
+                                <img src="/images/logo2.png" style={styleIcon}/>
+                                Home
+                            </NavLink>
                         </Menu.Item>
                         <Menu.Item key="/decks">
-                            <NavLink to="/decks">Decks</NavLink>
+                            <NavLink to="/decks">
+                                <img src="/images/icons/decks-2.png" style={styleIcon}/>
+                                Decks
+                            </NavLink>
                         </Menu.Item>
                         {isConnected ?
                             <Menu.Item key="/cards">
-                                <NavLink to="/cards">My Cards</NavLink>
+                                <NavLink to="/cards">
+                                    <img src="/images/icons/my-cards-2.png" style={styleIcon}/>
+                                    My Cards
+                                </NavLink>
                             </Menu.Item>
                             :null}
                         {isConnected ?
                             <Menu.Item key="/deck-builder">
-                                <NavLink to="/deck-builder">My Decks</NavLink>
+                                <NavLink to="/deck-builder">
+                                    <img src="/images/icons/my-decks-2.png" style={styleIcon}/>
+                                    My Decks
+                                </NavLink>
                             </Menu.Item>
                             :null}
                         { ! isConnected ?

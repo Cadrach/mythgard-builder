@@ -10,7 +10,6 @@ applet,
 article,
 aside,
 audio,
-b,
 big,
 blockquote,
 body,
@@ -49,7 +48,6 @@ ins,
 kbd,
 label,
 legend,
-li,
 mark,
 menu,
 nav,
@@ -107,10 +105,6 @@ section {
 body {
   line-height: 1; }
 
-ol,
-ul {
-  list-style: none; }
-
 blockquote,
 q {
   quotes: none; }
@@ -134,12 +128,15 @@ table {
   padding: 0;
   box-sizing: border-box; }
 
+ol,
+ul {
+  padding: 25px; }
+
 body {
   background-color: #f4f2f2;
   font-family: 'Open Sans';
   font-size: 15px;
-  line-height: 1.4;
-  color: #101113; }
+  line-height: 1.4; }
 
 .blue {
   color: #01bded; }
@@ -160,10 +157,9 @@ body {
   color: #e3e410; }
 
 .logo {
-  float: left;
   height: 100%;
   width: 79px;
   background-size: 48px;
   background-repeat: no-repeat;
   background-position: center center;
-  background-image: url(/images/logo.png); }
+  background-image: url(/images/logo2.png); }

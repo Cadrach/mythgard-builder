@@ -87,21 +87,22 @@ class Authenticate extends React.Component {
                                         />,
                                     )}
                                 </Form.Item>
-                                <Form.Item>
-                                    {getFieldDecorator('remember', {
-                                        valuePropName: 'checked',
-                                        initialValue: true,
-                                    })(<div><Switch/> Remember me</div>)}
-                                    <div>
-                                        <a href="">
-                                            Forgot password
-                                        </a>
-                                    </div>
-                                    <br/>
-                                    <Button block type="primary" htmlType="submit" onClick={this.submit.bind(this, 'login')}>
-                                        Log in
-                                    </Button>
-                                </Form.Item>
+                                {/*<Form.Item>*/}
+                                {/*    {getFieldDecorator('remember', {*/}
+                                {/*        valuePropName: 'checked',*/}
+                                {/*        initialValue: true,*/}
+                                {/*    })(<div><Switch/> Remember me</div>)}*/}
+                                {/*    <div>*/}
+                                {/*        <a href="">*/}
+                                {/*            Forgot password*/}
+                                {/*        </a>*/}
+                                {/*    </div>*/}
+                                {/*    <br/>*/}
+                                {/*</Form.Item>*/}
+
+                                <Button block type="primary" htmlType="submit" onClick={this.submit.bind(this, 'login')}>
+                                    Log in
+                                </Button>
                             </Form>
 
                             <Divider>OR</Divider>
@@ -162,7 +163,6 @@ class Authenticate extends React.Component {
                                         />,
                                     )}
                                 </Form.Item>
-                                <br/>
                                 <Button block type="primary" htmlType="submit" onClick={this.submit.bind(this, 'register')}>
                                     Register
                                 </Button>

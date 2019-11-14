@@ -40,6 +40,12 @@ export const Deck = types
         },
         get colors(){
             return _.chain(self.cards).map('card').map('gems').join('').split('').uniq().join('').value();
+        },
+        get power(){
+            return self.ide_power ? getEnv(self).powersById[self.ide_power] : {};
+        },
+        get path(){
+            return self.ide_path ? getEnv(self).pathsById[self.ide_path] : {};
         }
     }))
     .actions(self => ({

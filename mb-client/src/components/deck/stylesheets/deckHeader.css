@@ -1,0 +1,7 @@
+.deck-header {
+  padding: 10px; }
+  .deck-header .deck-header-badge {
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: bold;
+    color: #fff; }

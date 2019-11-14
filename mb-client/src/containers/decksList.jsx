@@ -1,6 +1,6 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
-import {Layout} from "antd";
+import {Alert, Layout} from "antd";
 import DecksListTable from "../components/decksList/decksListTable";
 
 import './stylesheets/deckBuilder.scss';
@@ -24,9 +24,13 @@ export default class DecksList extends React.Component {
     }
 
     render() {
+        const {isConnected, userHasCards} = this.props.dictionary;
+        const alertStyle = {marginBottom: 20};
         return (
             <Layout className="ant-layout-transparent" style={{padding: 20}}>
                 <DecksListFilters onSubmit={this.onFiltersSubmit.bind(this)}/>
+                { ! isConnected ? <Alert message={<span>If you <b><a href="/auth">register</a></b> you can have the decks' essence cost displayed based on the cards you own.</span>} showIcon style={alertStyle}/> : null}
+                { isConnected && ! userHasCards ? <Alert message={<span>If you <b><a href="/cards">setup your cards</a></b> you can have the decks' essence cost displayed based what you own.</span>} showIcon style={alertStyle}/> : null}
                 <DecksListTable filters={this.state.filters}/>
             </Layout>
         );

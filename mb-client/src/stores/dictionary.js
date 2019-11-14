@@ -60,8 +60,11 @@ class Dictionary {
      * Save user cards
      * @param cards
      */
-    saveUserCards(cards){
-        axios.post('json/save-user-cards', cards).then(() => notification.success({message: "Your cards have been saved"}));
+    @action saveUserCards(cards){
+        axios.post('json/save-user-cards', cards).then(() => {
+            notification.success({message: "Your cards have been saved"});
+            this.user.cards = [...cards];
+        });
     }
 }
 

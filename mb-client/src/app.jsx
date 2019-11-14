@@ -15,6 +15,7 @@ import DecksList from "./containers/decksList";
 import DeckDetail from "./containers/deckDetail";
 import {Icon} from "react-fa/lib";
 import Authenticate from "./containers/authenticate";
+import Home from "./containers/home";
 
 @inject('dictionary')
 @observer
@@ -71,6 +72,7 @@ class App extends React.Component {
                     <Route exact path="/decks" component={DecksList}/>
                     <Route exact path="/decks/:id" component={DeckDetail}/>
                     <Route exact path="/auth" component={Authenticate}/>
+                    <Route exact path="/" component={Home}/>
                 </div>
             </Layout>
         </Layout>)

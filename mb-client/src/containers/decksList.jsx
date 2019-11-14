@@ -20,7 +20,6 @@ export default class DecksList extends React.Component {
     }
 
     onFiltersSubmit(filters){
-        console.log(filters);
         this.setState({filters});
     }
 

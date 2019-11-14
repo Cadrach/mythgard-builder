@@ -75,8 +75,6 @@ class CardStore {
             }
             return true;
         })
-        //console.log('OUT', filteredOut)
-        console.log('KEPT', toJS(this.cardsRegistryFiltered))
     }
 }
 

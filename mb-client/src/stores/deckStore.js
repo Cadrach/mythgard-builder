@@ -145,8 +145,8 @@ export const Deck = types
 
 export const DeckStore = types
     .model('DeckStore', {
-        myDecks: types.optional(types.array(Deck), [{id: 0, dck_name: 'New Deck', saved: false}]),
-        viewedDeck: types.maybeNull(Deck),
+        loadedDecks: types.optional(types.array(Deck), [{id: 0, dck_name: 'New Deck', saved: false}]),
+        myDecks: types.optional(types.array(types.safeReference(Deck)), [0]),
         selectedDeck: types.optional(types.safeReference(Deck), 0), //default selected deck is an empty deck
         loaded: types.optional(types.boolean, false),
         saving: types.optional(types.boolean, false),
@@ -157,8 +157,25 @@ export const DeckStore = types
         fetchMyDecks: flow(function* fetchMyDecks(){
             if(self.loaded === false){
                 self.loaded = true;
-                const myDecks = yield axios.get('json/my-decks').then(({data}) => (data));
-                self.myDecks = [...self.myDecks, ...myDecks];
+                const fetchedDecks = yield axios.get('json/my-decks').then(({data}) => (data));
+                self.loadedDecks = [...self.loadedDecks, ...fetchedDecks];
+                const fetchedIds = _.map(fetchedDecks, 'id');
+                self.myDecks = [0, ...fetchedIds];
+            }
+        }),
+
+        fetchDeckDetails: flow(function* fetchDeckDetails(deckId){
+            //Fetch the deck details
+            const fetchedDeck = yield axios.get('json/deck/' + deckId).then(({data}) => (data));
+            const found = _.find(self.loadedDecks, {id: fetchedDeck.id});
+
+            //Extend existing deck
+            if(found){
+                _.extend(found, fetchedDeck);
+            }
+            //Or add it to our list
+            else{
+                self.loadedDecks = [...self.loadedDecks, fetchedDeck];
             }
         }),
 
@@ -175,14 +192,10 @@ export const DeckStore = types
          * @param id
          */
         selectDeckById(id){
-            const deck = _.find(self.myDecks, {id: parseInt(id)})
+            const deck = _.find(self.loadedDecks, {id: parseInt(id)})
             if(deck){
                 self.selectDeck(deck);
             }
-        },
-
-        setViewedDeck(deck){
-            self.viewedDeck = deck;
         },
 
         /**
@@ -209,7 +222,7 @@ export const DeckStore = types
 
                 //The deck is new, add it and select it
                 const deck = Deck.create(deckData);
-                self.myDecks.push(deck);
+                self.loadedDecks.push(deck);
                 self.selectDeck(deck);
             }
             else{

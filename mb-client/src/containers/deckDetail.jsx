@@ -24,12 +24,10 @@ class DeckDetail extends React.Component {
 
     componentDidMount(){
         const deckId = this.props.match.params.id;
+        console.log("DID MOUNT");
         this.props.dictionary.promise.then(() => {
-            axios.get('json/deck/' + deckId).then(({data})=> {
-                this.previousDeck = this.props.deckStore.selectedDeck;
-                this.props.deckStore.setViewedDeck(data);
-                this.props.deckStore.selectDeck(this.props.deckStore.viewedDeck);
-            });
+            console.log('RESOLVED')
+            this.props.deckStore.fetchDeckDetails(deckId).then(() => this.props.deckStore.selectDeckById(deckId));
         })
     }
 

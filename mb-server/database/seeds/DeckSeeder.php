@@ -38,7 +38,7 @@ class DeckSeeder extends Seeder
             $deckCards = [];
             foreach($json['cards'][0]['data']['deck']['cardDecks']['nodes'] as $card){
                 $name = Helper::normalizeName($card['card']['name']);
-                $deckCards[] = ['id' => $cards[$name], 'count' => $card['quantity']];
+                $deckCards[] = ['id' => $cards[$name], 'count' => min($card['quantity'], 4)];
             }
 
             //Data from the deck

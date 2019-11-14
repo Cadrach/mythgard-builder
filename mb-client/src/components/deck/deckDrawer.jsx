@@ -5,6 +5,8 @@ import {Button, Drawer} from "antd";
 import DeckForm from "./deckForm";
 import TextEditor from "../textEditor/textEditor";
 
+import './stylesheets/deckDrawer.scss';
+
 @inject('dictionary', 'deckStore')
 @observer
 export default class DeckDrawer extends React.Component {
@@ -37,7 +39,9 @@ export default class DeckDrawer extends React.Component {
         </div>
 
         //Our Drawer
-        return <Drawer title={drawerTitle}
+        return <Drawer
+                className="deck-drawer"
+                title={drawerTitle}
                 placement="top"
                 closable={false}
                 maskClosable={false}
@@ -47,7 +51,7 @@ export default class DeckDrawer extends React.Component {
                 onClose={onClose}
         >
             <DeckForm wrappedComponentRef={(ref) => this.formRef = ref}/>
-            <TextEditor onTextChange={this.onEditorStateChange.bind(this)} content={content}/>
+            <TextEditor className="" onTextChange={this.onEditorStateChange.bind(this)} content={content}/>
         </Drawer>
     }
 

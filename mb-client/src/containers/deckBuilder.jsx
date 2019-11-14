@@ -15,6 +15,7 @@ import './stylesheets/deckBuilder.scss';
 import DeckDrawer from "../components/deck/deckDrawer";
 import {Scrollbars} from "react-custom-scrollbars";
 import DeckImportButton from "../components/deck/deckImportButton";
+import Gem from "../components/gem/gem";
 
 @inject('dictionary', 'deckStore')
 @observer
@@ -158,7 +159,13 @@ class DeckBuilder extends React.Component {
                                     renderItem={deck =>
                                         <List.Item key={deck.id} onClick={() => this.onSelectDeck(deck)}>
                                             <span className={(!deck.id ? 'empty':'')+ ' ' + (deck===selectedDeck?'selected':'')}>
-                                                &nbsp;&nbsp;&nbsp;{deck.id ? deck.name:<span><AntIcon type="plus-square"/> New Deck</span>}
+                                                &nbsp;&nbsp;&nbsp;
+                                                {
+                                                    deck.id ?
+                                                    <span><Gem string={deck.colors}/>{deck.name}</span>
+                                                    :
+                                                    <span><AntIcon type="plus-square"/> New Deck</span>
+                                                }
                                             </span>
                                         </List.Item>
                                     }/>

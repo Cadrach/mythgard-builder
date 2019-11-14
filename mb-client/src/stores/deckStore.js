@@ -223,6 +223,7 @@ export const DeckStore = types
                 //The deck is new, add it and select it
                 const deck = Deck.create(deckData);
                 self.loadedDecks.push(deck);
+                self.myDecks.push(deck.id);
                 self.selectDeck(deck);
             }
             else{

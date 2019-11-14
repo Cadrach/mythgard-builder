@@ -1,3 +1,7 @@
+.deck-content .rdw-editor-wrapper .rdw-editor-main {
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  padding: 5px 20px; }
+
 .deck-content .deck-line {
   position: relative;
   height: 48px;

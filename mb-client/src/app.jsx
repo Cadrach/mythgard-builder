@@ -36,7 +36,7 @@ class App extends React.Component {
                         theme="dark"
                         mode="horizontal"
                         selectedKeys={[rootPathName]}
-                        style={{lineHeight: '64px'}}
+                        style={{lineHeight: '64px', borderBottom: '1px solid rgba(255,255,255,.5)'}}
                     >
                         <Menu.Item key="/">
                             <NavLink to="/">

@@ -229,6 +229,7 @@ class DecksListTable extends React.Component {
                 dataSource={data}
                 pagination={pagination}
                 loading={loading}
+                scroll={{x: true}}
                 onChange={this.handleTableChange}
                 />
             </div>

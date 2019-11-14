@@ -34,7 +34,7 @@ class SocialController extends Controller
                 'provider_id'   => $userSocial->getId(),
                 'provider'      => $provider,
             ]);
-            return redirect()->route('home');
+            return redirect('/');
         }
     }
 }

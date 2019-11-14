@@ -13,28 +13,34 @@ class FactionSeeder extends Seeder
     {
         $factions = [[
             'fac_code' => 'b',
-            'fac_name' => 'blue',
+            'fac_name' => 'Norden',
             'fac_order' => 1,
+            'fac_image' => 'factions/blue.png',
         ],[
             'fac_code' => 'g',
-            'fac_name' => 'green',
+            'fac_name' => 'Dreni',
             'fac_order' => 4,
+            'fac_image' => 'factions/green.png',
         ],[
             'fac_code' => 'o',
-            'fac_name' => 'orange',
+            'fac_name' => 'Parsa',
             'fac_order' => 5,
+            'fac_image' => 'factions/orange.png',
         ],[
             'fac_code' => 'p',
-            'fac_name' => 'purple',
+            'fac_name' => 'Harmony',
             'fac_order' => 6,
+            'fac_image' => 'factions/purple.png',
         ],[
             'fac_code' => 'r',
-            'fac_name' => 'red',
+            'fac_name' => 'Orboros',
             'fac_order' => 3,
+            'fac_image' => 'factions/red.png',
         ],[
             'fac_code' => 'y',
-            'fac_name' => 'yellow',
+            'fac_name' => 'Aztlan',
             'fac_order' => 2,
+            'fac_image' => 'factions/yellow.png',
         ],];
 
         //Sort cards

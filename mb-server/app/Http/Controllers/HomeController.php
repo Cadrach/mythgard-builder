@@ -73,7 +73,7 @@ class HomeController extends Controller
                 ->orderBy('card_order')
                 ->get(),
 
-            'factions' => $this->_dictionary(Faction::class, ['id', 'fac_code', 'fac_name'], 'fac_')->get(),
+            'factions' => $this->_dictionary(Faction::class, ['id', 'fac_code', 'fac_name', 'fac_image',], 'fac_')->get(),
             'powers' => $this->_dictionary(Power::class, ['id', 'pow_name', 'pow_icon', 'pow_image',], 'pow_')->get(),
             'paths' => $this->_dictionary(Path::class, ['id', 'pth_name', 'pth_icon', 'pth_image',], 'pth_')->get(),
         ];

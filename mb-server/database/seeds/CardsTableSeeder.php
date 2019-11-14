@@ -19,7 +19,7 @@ class CardsTableSeeder extends Seeder
         $json = json_decode(file_get_contents($file));
 
         $factions = Faction::all();
-        $factionsByName = $factions->keyBy('fac_name')->toArray();
+        $factionsByName = $factions->keyBy('fac_color_name')->toArray();
         $factionsById = $factions->keyBy('id')->toArray();
 
         //Default values

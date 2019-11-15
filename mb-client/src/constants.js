@@ -20,6 +20,12 @@ const constants = {
         g: '#29ba7a',
         o: '#ff7d00',
         p: '#bd4cf8',
-    }
+    },
+    styleSelect:  {
+        control: base => ({...base, minHeight: 40 }),
+        container: base => ({...base}),
+        menu: base => ({...base, color: '#000', zIndex: 100}),
+        multiValue: base => ({...base, color: '#000', fontSize: 18}),
+    },
 }
 export default constants;

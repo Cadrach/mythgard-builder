@@ -6,6 +6,7 @@ import Select, {components} from 'react-select';
 import _ from 'lodash';
 import './stylesheets/decksListFilters.scss'
 import Gem from "../gem/gem";
+import constants from "../../constants";
 
 /**
  * Option line for faction
@@ -79,12 +80,7 @@ class DecksListFilters extends React.Component {
         const factions = this.props.dictionary.factions;
 
         const colProps = {span: 8};
-        const styleSelect = {
-            control: base => ({...base, minHeight: 40 }),
-            container: base => ({...base, zIndex: 100}),
-            menu: base => ({...base, color: '#000'}),
-            multiValue: base => ({...base, color: '#000', fontSize: 18}),
-        }
+        const styleSelect = constants.styleSelect;
 
         return (
             <Form className="decks-list-filters">

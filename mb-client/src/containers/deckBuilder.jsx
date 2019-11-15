@@ -1,7 +1,7 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
 import {withRouter} from "react-router-dom";
-import {Drawer, Layout, Button, Menu, Icon as AntIcon, Divider, List, Input} from "antd";
+import {Layout, Button, Menu, Icon as AntIcon, Divider, List, Input} from "antd";
 import DeckContent from "../components/deck/deckContent";
 import DeckHeader from "../components/deck/deckHeader";
 import CardsList from "../components/cardsList/cardsList"
@@ -10,12 +10,14 @@ import FilterColor from "../components/filters/filterColor";
 import FilterIcon from "../components/filters/filterIcon";
 import Icon from 'react-fa';
 import _ from 'lodash';
+import Select, {components} from 'react-select';
 
 import './stylesheets/deckBuilder.scss';
 import DeckDrawer from "../components/deck/deckDrawer";
 import {Scrollbars} from "react-custom-scrollbars";
 import DeckImportButton from "../components/deck/deckImportButton";
 import Gem from "../components/gem/gem";
+import {OptionCard} from "../components/decksList/decksListFilters";
 
 @inject('dictionary', 'deckStore')
 @observer
@@ -119,11 +121,11 @@ class DeckBuilder extends React.Component {
     };
 
     render() {
-        const {cards} = this.props.dictionary;
+        const {cards, paths, powers} = this.props.dictionary;
         const {myDecks, selectedDeck} = this.props.deckStore;
         const {leftCollapsed, rightCollapsed, siderCollapsedWidth, siderWidth, deckDrawerVisible} = this.state;
         const height = 'calc(100vh - 80px - 80px - 64px)';
-
+        const styleSelect = {...constants.styleSelect};
         return (
             <Layout>
                 {/* DRAWER SHOWING DESCRIPTION FORM */}
@@ -225,8 +227,38 @@ class DeckBuilder extends React.Component {
                         <Button type="primary" icon="form" size="large" onClick={this.setDrawerVisible.bind(this, true)} style={{marginRight: 10}}> Configure</Button>
                         <Button type="primary" icon="save" size="large" disabled={selectedDeck.saved} onClick={this.props.deckStore.saveSelectedDeck}>Save</Button>
                     </div>
-                    <DeckHeader/>
-                    <DeckContent height="calc(100vh - 64px - 80px - 128px - 80px)"/>
+                    <DeckHeader withoutPowerAndPath/>
+                    <div style={{height: 100, padding: '0 10px'}}>
+                        <div style={{marginBottom: 10}}>
+                            <Select
+                                placeholder="Select Path..."
+                                options={paths}
+                                getOptionValue={option => option.id}
+                                getOptionLabel={option => option.name}
+                                styles={styleSelect}
+                                value ={selectedDeck.path}
+                                onChange={({id}) => selectedDeck.setFormValues({ide_path: id})}
+                                components={{
+                                    // Option: OptionCard
+                                }}
+                            />
+                        </div>
+                        <div style={{marginBottom: 10}}>
+                            <Select
+                                placeholder="Select Power..."
+                                options={powers}
+                                getOptionValue={option => option.id}
+                                getOptionLabel={option => option.name}
+                                styles={styleSelect}
+                                value={selectedDeck.power}
+                                onChange={({id}) => selectedDeck.setFormValues({ide_power: id})}
+                                components={{
+                                    // Option: OptionCard
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <DeckContent height="calc(100vh - 64px - 80px - 48px - 50px*2 - 80px)"/>
                 </Layout.Sider>
             </Layout>
         );

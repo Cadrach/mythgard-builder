@@ -7,7 +7,7 @@ chartDefaults.bars = {
         margin: [0,0,30,30],
         height: 250,
     },
-    title: {enabled: false},
+    title: {text: ''},
     credits: false,
     xAxis: {
         type: 'category',

@@ -17,6 +17,98 @@ class DeckSeeder extends Seeder
      */
     public function run()
     {
+        $description = '{
+	"blocks": [{
+			"key": "c6ati",
+			"text": "This deck is a courtesy of MythgardHub. If this is your deck, you can:",
+			"type": "unstyled",
+			"depth": 0,
+			"inlineStyleRanges": [{
+					"offset": 27,
+					"length": 11,
+					"style": "color-rgba(255,255,255,0.65)"
+				}, {
+					"offset": 27,
+					"length": 11,
+					"style": "bgcolor-rgb(35,35,46)"
+				}, {
+					"offset": 27,
+					"length": 11,
+					"style": "fontsize-14"
+				}, {
+					"offset": 27,
+					"length": 11,
+					"style": "fontfamily-Open Sans"
+				}, {
+					"offset": 27,
+					"length": 11,
+					"style": "color-rgb(24,144,255)"
+				}, {
+					"offset": 27,
+					"length": 11,
+					"style": "bgcolor-transparent"
+				}
+			],
+			"entityRanges": [{
+					"offset": 27,
+					"length": 11,
+					"key": 0
+				}
+			],
+			"data": {}
+		}, {
+			"key": "sn2",
+			"text": "Ask for it to be linked to your account (just send me its name on Discord or Reddit)",
+			"type": "unordered-list-item",
+			"depth": 0,
+			"inlineStyleRanges": [],
+			"entityRanges": [],
+			"data": {}
+		}, {
+			"key": "8cs3e",
+			"text": "Ask for it to be removed from here (I will need the same info)",
+			"type": "unordered-list-item",
+			"depth": 0,
+			"inlineStyleRanges": [],
+			"entityRanges": [],
+			"data": {}
+		}, {
+			"key": "2jq47",
+			"text": "This deck was created by %s.",
+			"type": "unstyled",
+			"depth": 0,
+			"inlineStyleRanges": [{
+					"offset": 25,
+					"length": 4,
+					"style": "BOLD"
+				}
+			],
+			"entityRanges": [],
+			"data": {}
+		}
+	],
+	"entityMap": {
+		"0": {
+			"type": "LINK",
+			"mutability": "MUTABLE",
+			"data": {
+				"url": "https://mythgardhub.com/deck?id=%d",
+				"title": "<span data-offset-key=\"c6ati-1-0\" style=\"box-sizing: border-box; margin: 0px; padding: 0px;\"><span data-text=\"true\" style=\"box-sizing: border-box; margin: 0px; padding: 0px;\">MythgardHub</span></span>",
+				"targetOption": "_blank",
+				"_map": {
+					"type": "LINK",
+					"mutability": "MUTABLE",
+					"data": {
+						"url": "https://mythgardhub.com/deck?id=%d",
+						"title": "<span data-offset-key=\"c6ati-1-0\" style=\"box-sizing: border-box; margin: 0px; padding: 0px;\"><span data-text=\"true\" style=\"box-sizing: border-box; margin: 0px; padding: 0px;\">MythgardHub</span></span>",
+						"targetOption": "_blank"
+					}
+				}
+			}
+		}
+	}
+}';
+
         //Clear current decks
         Deck::truncate();
 
@@ -44,14 +136,26 @@ class DeckSeeder extends Seeder
             //Data from the deck
             $deckData = $json['deck'][0]['data']['deck'];
 
+            $date = isset($deckData['deckPreviews']['nodes'][0]['deckCreated']) ? $deckData['deckPreviews']['nodes'][0]['deckCreated']:null;
+            $stars = isset($deckData['deckPreviews']['nodes'][0]['votes']) ? $deckData['deckPreviews']['nodes'][0]['votes']:0;
+            $author = isset($deckData['author']['username']) ? $deckData['author']['username']:'';
+
             $deck = new Deck();
-            $deck->ide_user = $deckData['author']['id'];
+            $deck->ide_user = 2;
             $deck->ide_power = $deckData['power']['id'];
             $deck->ide_path = $deckData['path']['id'];
-            $deck->dck_name = "{$deckData['name']} [{$deckData['id']}]";
+            $deck->dck_name = $deckData['name'];
             $deck->dck_cards = $deckCards;
-            $deck->dck_stars = rand(0, 5000);
+            $deck->dck_stars = $stars;
             $deck->dck_public = 1;
+            $deck->dck_description = sprintf($description, $author, $deckData['id'], $deckData['id']);
+
+            if($date){
+                $carbonDate = \Carbon\Carbon::createFromTimeString($date)->toDateTimeString();
+                $deck->created_at = $carbonDate;
+                $deck->updated_at = $carbonDate;
+            }
+
             $deck->save();
         }
     }

@@ -75,7 +75,7 @@ class DecksListFilters extends React.Component {
         const colProps = {span: 8};
         const styleSelect = {
             control: base => ({...base, minHeight: 40 }),
-            container: base => ({...base, zIndex: 2}),
+            container: base => ({...base, zIndex: 100}),
             menu: base => ({...base, color: '#000'}),
             multiValue: base => ({...base, color: '#000', fontSize: 18}),
         }

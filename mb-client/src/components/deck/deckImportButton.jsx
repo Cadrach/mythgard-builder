@@ -42,28 +42,28 @@ class DeckImportButton extends React.Component {
                 //Ignore empty lines
                 return;
             }
-            else if(line.search('name: ') === 0){
+            else if(line.search('name:') === 0){
                 //Update the name of the deck
-                values.dck_name = line.substring('name: '.length);
+                values.dck_name = line.substring('name: '.length).trim();
             }
-            else if(line.search('power: ') === 0){
-                const power = line.substring('power: '.length);
+            else if(line.search('power:') === 0){
+                const power = line.substring('power: '.length).trim();
                 const found = _.find(dictionary.powers, {name: power});
                 if(found){
                     values.ide_power = found.id;
                 }
                 else{
-                    lineIgnored(line);
+                    // lineIgnored(line);
                 }
             }
-            else if(line.search('path: ') === 0){
-                const path = line.substring('path: '.length);
+            else if(line.search('path:') === 0){
+                const path = line.substring('path:'.length).trim();
                 const found = _.find(dictionary.paths, {name: path});
                 if(found){
                     values.ide_path = found.id;
                 }
                 else{
-                    lineIgnored(line);
+                    // lineIgnored(line);
                 }
             }
             else{

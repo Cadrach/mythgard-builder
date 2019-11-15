@@ -51,7 +51,12 @@ const OptionCard = (props) => {
 @observer
 class DecksListFilters extends React.Component {
 
-    componentDidMount(){}
+    constructor(props){
+        super(props);
+
+        //Bindings
+        this.submit = this.submit.bind(this);
+    }
 
     submit(){
         //Retrieve values
@@ -85,7 +90,7 @@ class DecksListFilters extends React.Component {
                 <Row gutter={20}>
                     <Col {...colProps} span={6}>
                         <Form.Item>
-                            {getFieldDecorator('global')(<Input.Search placeholder="By deck name or description..." size="large"/>)}
+                            {getFieldDecorator('global')(<Input.Search placeholder="By deck name or description..." size="large" onPressEnter={this.submit}/>)}
                         </Form.Item>
                     </Col>
                     <Col {...colProps}>

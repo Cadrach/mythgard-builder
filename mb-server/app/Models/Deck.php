@@ -18,6 +18,8 @@ class Deck extends Model
     ];
 
     protected $fillable = [
+        'ide_path',
+        'ide_power',
         'dck_name',
         'dck_public',
         'dck_description',

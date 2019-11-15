@@ -30,8 +30,8 @@ class App extends React.Component {
         }
 
         return (<Layout className="ant-layout-transparent">
-            <Affix>
-                <Header style={{position: 'fixed', zIndex: 1, width: '100%', paddingLeft: 0, paddingRight: 0}}>
+            <Affix style={{zIndex: 200}}>
+                <Header style={{position: 'fixed', width: '100%', paddingLeft: 0, paddingRight: 0}}>
                     <Menu
                         theme="dark"
                         mode="horizontal"

@@ -46,6 +46,7 @@ const OptionCard = (props) => {
         {props.data.name}
     </div>
 }
+export {OptionCard};
 
 @inject('dictionary')
 @observer

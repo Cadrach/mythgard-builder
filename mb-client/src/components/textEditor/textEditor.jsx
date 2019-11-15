@@ -52,6 +52,7 @@ class TextEditor extends React.Component {
         const {editorState} = this.state;
         return (
             <Editor
+                toolbar={{options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'colorPicker', 'link', 'embedded', 'emoji', 'image', 'remove', 'history']}}
                 ref={ref => this.editor = ref}
                 editorState={editorState}
                 wrapperClassName="demo-wrapper"

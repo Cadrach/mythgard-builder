@@ -177,8 +177,6 @@ class DeckBuilder extends React.Component {
                 <Layout className="with-background" style={{overflowY: 'hidden'}}>
                     <Layout.Header className="header" style={{height: 80}}>
                         {selectedDeck.dck_name}
-                        &nbsp;
-                        <Button type="primary" shape="circle" icon="form" onClick={this.setDrawerVisible.bind(this, true)} />
                     </Layout.Header>
 
                     <Layout.Content style={{height}}>
@@ -224,6 +222,7 @@ class DeckBuilder extends React.Component {
                     style={{background: 'rgba(0,0,0,0.01)'}}
                 >
                     <div style={{padding: 20, textAlign: 'right'}}>
+                        <Button type="primary" icon="form" size="large" onClick={this.setDrawerVisible.bind(this, true)} style={{marginRight: 10}}> Configure</Button>
                         <Button type="primary" icon="save" size="large" disabled={selectedDeck.saved} onClick={this.props.deckStore.saveSelectedDeck}>Save</Button>
                     </div>
                     <DeckHeader/>

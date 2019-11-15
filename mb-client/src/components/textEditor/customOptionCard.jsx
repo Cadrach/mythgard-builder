@@ -7,6 +7,7 @@ import Gem from "../gem/gem";
 import constants from "../../constants";
 import {Popover} from "antd";
 import CardPopover from "../card/cardPopover";
+import {OptionCard} from "../decksList/decksListFilters";
 
 
 /**
@@ -133,6 +134,8 @@ export class CardToolbarButton extends Component {
         const styleSelect = {
             control: base => ({...base, width: 300, fontSize: 12}),
             container: base => ({...base, zIndex: 10, height: 36, position: 'relative', top: -4}),
+            menu: base => ({...base, color: '#000'}),
+            multiValue: base => ({...base, color: '#000', fontSize: 18}),
         }
 
         return (
@@ -144,6 +147,9 @@ export class CardToolbarButton extends Component {
                 getOptionValue={option => option.id}
                 getOptionLabel={option => option.name}
                 styles={styleSelect}
+                components={{
+                    Option: OptionCard
+                }}
             />
         );
     }

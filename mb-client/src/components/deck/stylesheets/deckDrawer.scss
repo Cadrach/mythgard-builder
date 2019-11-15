@@ -1,9 +1,22 @@
 .deck-drawer{
+    .ant-drawer-content{
+        background-image: url(/images/footer_lodyas_colored.png);
+    }
     .rdw-editor-wrapper{
         .rdw-editor-main{
+            background: #30303d;
             border: 3px solid rgba(255,255,255,.5);
             padding: 5px 20px;
             height: calc(100vh - 420px);
+        }
+        .rdw-dropdownoption-default, [class$='-input']{
+            color: #000;
+        }
+        [class$='-modal'], [class$='-modal-btn']{
+            background: #30303d;
+        }
+        [class$='-modal-btn']:hover{
+            background: #999;
         }
     }
 }

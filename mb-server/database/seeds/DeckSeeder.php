@@ -79,7 +79,7 @@ class DeckSeeder extends Seeder
 			"depth": 0,
 			"inlineStyleRanges": [{
 					"offset": 25,
-					"length": 4,
+					"length": %d,
 					"style": "BOLD"
 				}
 			],
@@ -148,7 +148,7 @@ class DeckSeeder extends Seeder
             $deck->dck_cards = $deckCards;
             $deck->dck_stars = $stars;
             $deck->dck_public = 1;
-            $deck->dck_description = sprintf($description, $author, $deckData['id'], $deckData['id']);
+            $deck->dck_description = sprintf($description, $author, strlen($author), $deckData['id'], $deckData['id']);
 
             if($date){
                 $carbonDate = \Carbon\Carbon::createFromTimeString($date)->toDateTimeString();

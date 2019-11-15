@@ -50,7 +50,7 @@ class HubFetch extends Command
 
         $folder = storage_path('hub_data');
         @mkdir($folder);
-        for($i=1; $i<700; $i++){
+        for($i=1; $i<1200; $i++){
             $file = "$folder/$i.json";
             if( ! file_exists($file)){
                 echo "Fetch $i\n";
@@ -58,7 +58,7 @@ class HubFetch extends Command
                     'body' => '[{"operationName":"deck","variables":{"id":'.$i.'},"query":"query deck($id: Int!) {\n  deck(id: $id) {\n    id\n    name\n    author {\n      id\n      username\n      __typename\n    }\n    power {\n      id\n      name\n      __typename\n    }\n    path {\n      id\n      name\n      __typename\n    }\n    deckPreviews {\n      nodes {\n        deckName\n        deckCreated\n        factions\n        essenceCost\n        votes\n        deck {\n          id\n          author {\n            username\n            id\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"}]',
                 ]);
                 $response2 = $guzzle->post('/graphql', [
-                    'body' => '[{"operationName":null,"variables":{"id":'.$i.'},"query":"query ($id: Int!) {\n  deck(id: $id) {\n    id\n    name\n    cardDecks {\n      nodes {\n        quantity\n        card {\n          name\n          id\n          mana\n          gem\n          cardFactions {\n            nodes {\n              faction {\n                name\n                __typename\n              }\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"}]',
+                    'body' => '[{"operationName":null,"variables":{"id":'.$i.'},"query":"query ($id: Int!) {\n  deck(id: $id) {\n    id\n    name\n    cardDecks {\n      nodes {\n        quantity\n        card {\n          name\n          id\n          mana\n          gem\n          supertype\n          rarity\n          cardFactions {\n            nodes {\n              faction {\n                name\n                __typename\n              }\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"}]',
                 ]);
                 $bodyDeck = $response1->getBody();
                 $bodyCards = $response2->getBody();

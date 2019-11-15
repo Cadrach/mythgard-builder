@@ -44,15 +44,17 @@ class CardEditorComponent extends React.Component{
             background: '#666',
             color: '#fff',
             paddingRight: 8,
+            lineHeight: '12px',
+            height: 22,
         }
 
         const rarityStyle = {
             background: constants.rarities[card.rarity],
             width: 10,
-            height: 21,
+            height: 18,
             position: 'relative',
-            left: 5,
-            top: 1,
+            left: 8,
+            top: -2,
             display: 'inline-block',
             border: '1px solid rgba(255,255,255,.25)',
             borderTopRightRadius: 99,
@@ -118,7 +120,7 @@ export class CardToolbarButton extends Component {
             id: card.id,
             name_export: card.name_export,
         });
-        const textWithEntity = Modifier.insertText(currentContent, selection, ' ', null, entityKey);
+        const textWithEntity = Modifier.replaceText(currentContent, selection, ' ', null, entityKey);
 
         onChange(EditorState.push(editorState, textWithEntity, 'insert-characters'))
 

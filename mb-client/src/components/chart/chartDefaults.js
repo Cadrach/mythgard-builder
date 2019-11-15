@@ -4,7 +4,7 @@ chartDefaults.bars = {
     chart: {
         type: 'column',
         backgroundColor: 'transparent',
-        margin: [0,0,30,30],
+        margin: [10,0,30,30],
         height: 250,
     },
     title: {text: ''},

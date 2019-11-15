@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router} from 'react-router-dom';
 import { Provider } from 'mobx-react';
+import { Helmet } from 'react-helmet';
 // Service Worker for PWA
 import serviceWorkerRegister from './registerServiceWorker';
 // Import our Stores Here
@@ -36,11 +37,16 @@ const store = {
 };
 
 const router = (
-  <Provider {...store}>
-      <Router>
-          <App/>
-      </Router>
-  </Provider>
+<div>
+    <Helmet>
+        <title>Mythgard-Decks</title>
+    </Helmet>
+    <Provider {...store}>
+        <Router>
+            <App/>
+        </Router>
+    </Provider>
+</div>
 );
 
 render(router, document.getElementById('root'));

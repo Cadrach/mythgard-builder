@@ -1,5 +1,13 @@
-.deck-detail-header {
-  padding: 20px;
-  height: 84px; }
-  .deck-detail-header button {
+.deck-detail .deck-detail-header {
+  z-index: 100;
+  padding: 0px;
+  height: 70px;
+  text-transform: capitalize;
+  font-size: 24px; }
+  .deck-detail .deck-detail-header h1 {
+    text-align: center; }
+  .deck-detail .deck-detail-header button {
     margin-right: 20px; }
+
+.deck-detail .deck-detail-content {
+  box-shadow: inset 0px 0px 35px 0px rgba(0, 0, 0, 0.75); }

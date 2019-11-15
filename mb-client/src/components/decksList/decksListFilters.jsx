@@ -87,7 +87,7 @@ class DecksListFilters extends React.Component {
         }
 
         return (
-            <Form>
+            <Form className="decks-list-filters">
                 <Row gutter={20}>
                     <Col {...colProps} span={6}>
                         <Form.Item>

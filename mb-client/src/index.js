@@ -17,7 +17,7 @@ import App from './app';
 import Dictionary from "./stores/dictionary";
 
 // Execute the ServiceWorker
-serviceWorkerRegister();
+// serviceWorkerRegister();
 
 // Because they're classes, we have to instantiate them here :)
 const languageStore = LanguageStore.create({ language: 'en' });

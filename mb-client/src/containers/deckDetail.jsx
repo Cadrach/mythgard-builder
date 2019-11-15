@@ -55,8 +55,9 @@ class DeckDetail extends React.Component {
         if( ! deck || ! deck.id) return <div></div>
 
         return (
-            <Layout className="ant-layout-transparent">
-                <Layout.Header className="header deck-detail-header">
+            <Layout className="deck-detail ant-layout-transparent">
+                <Affix offsetTop={64}>
+                <Layout.Header className="deck-detail-header with-background">
                     <h1>
                         {deck.dck_name}
                         <div style={{float: 'right'}}>
@@ -71,16 +72,19 @@ class DeckDetail extends React.Component {
                         </div>
                     </h1>
                 </Layout.Header>
-                <Layout className="ant-layout-transparent">
+                </Affix>
+                <Layout className="deck-detail-content">
                     <Row>
-                        <Col span={18} style={{height: 300}}>
-                            <TextEditorReadonly content={content}/>
+                        <Col className="col-container-text" xs={{span: 12}} md={{span: 14}} lg={{span: 18}}>
+                            <Layout className="ant-layout-transparent" style={{padding: 20}}>
+                                <TextEditorReadonly content={content}/>
+                            </Layout>
                         </Col>
-                        <Col span={6}>
-                            {deck ? <Affix offsetTop={64}>
+                        <Col xs={{span: 12}} md={{span: 10}} lg={{span: 6}}>
+                            {deck ? <Affix offsetTop={64+70}>
                                 <div>
                                     <DeckHeader deck={deck}/>
-                                    <DeckContent height="calc(100vh - 64px - 84px - 128px - 64px)"/>
+                                    <DeckContent height="calc(100vh - 64px - 70px - 128px)"/>
                                 </div>
                             </Affix> : null}
                         </Col>

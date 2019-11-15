@@ -1,4 +1,17 @@
+.deck-drawer .ant-drawer-content {
+  background-image: url(/images/footer_lodyas_colored.png); }
+
 .deck-drawer .rdw-editor-wrapper .rdw-editor-main {
+  background: #30303d;
   border: 3px solid rgba(255, 255, 255, 0.5);
   padding: 5px 20px;
   height: calc(100vh - 420px); }
+
+.deck-drawer .rdw-editor-wrapper .rdw-dropdownoption-default, .deck-drawer .rdw-editor-wrapper [class$='-input'] {
+  color: #000; }
+
+.deck-drawer .rdw-editor-wrapper [class$='-modal'], .deck-drawer .rdw-editor-wrapper [class$='-modal-btn'] {
+  background: #30303d; }
+
+.deck-drawer .rdw-editor-wrapper [class$='-modal-btn']:hover {
+  background: #999; }

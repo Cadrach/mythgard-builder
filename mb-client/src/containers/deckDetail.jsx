@@ -8,6 +8,7 @@ import DeckHeader from "../components/deck/deckHeader";
 
 import './stylesheets/deckDetail.scss';
 import TextEditorReadonly from "../components/textEditor/textEditorReadonly";
+import ChartContainer from "../components/chart/chartContainer";
 
 @inject('dictionary', 'deckStore')
 @observer
@@ -24,9 +25,7 @@ class DeckDetail extends React.Component {
 
     componentDidMount(){
         const deckId = this.props.match.params.id;
-        console.log("DID MOUNT");
         this.props.dictionary.promise.then(() => {
-            console.log('RESOLVED')
             this.props.deckStore.fetchDeckDetails(deckId).then(() => this.props.deckStore.selectDeckById(deckId));
         })
     }
@@ -77,6 +76,7 @@ class DeckDetail extends React.Component {
                     <Row>
                         <Col className="col-container-text" xs={{span: 12}} md={{span: 14}} lg={{span: 18}}>
                             <Layout className="ant-layout-transparent" style={{padding: 20}}>
+                                <ChartContainer deck={deck}/>
                                 <TextEditorReadonly content={content}/>
                             </Layout>
                         </Col>

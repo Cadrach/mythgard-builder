@@ -1,8 +1,10 @@
 import {flow, resolveIdentifier, getEnv, types} from 'mobx-state-tree';
 import axios from '../axios';
 import _ from 'lodash';
-import {message} from "antd";
+import {Icon, message} from "antd";
 import copy from 'copy-to-clipboard';
+import {toJS} from "mobx";
+import constants from "../constants";
 
 /**
  * Mobx State Tree Store
@@ -11,6 +13,30 @@ import copy from 'copy-to-clipboard';
  *  2nd is an object with the Props and Computed values
  *  3rd is and object with the Actions
  **/
+
+const chartMaker = (stats, serie, x, y, defaultSerie) => {
+    let foundSerie = _.find(stats, {name: serie});
+
+    //If not found, we must create the serie
+    if( ! foundSerie){
+        foundSerie = {
+            name: serie,
+            data:[...defaultSerie],
+            color: constants.gems[serie],
+        }
+        stats.push(foundSerie);
+    }
+
+    //Add the value
+    let foundValue = _.find(foundSerie.data, {x});
+    if( ! foundValue){
+        foundValue = {x,y};
+        foundSerie.data.push(foundValue);
+    }
+    else{
+        foundValue.y+=y;
+    }
+}
 
 const DeckLine = types.model('DeckLine',{
     id: types.number,
@@ -46,6 +72,36 @@ export const Deck = types
         },
         get path(){
             return self.ide_path ? getEnv(self).pathsById[self.ide_path] : {};
+        },
+        get stats(){
+            const stats = {
+                costs: [],
+                types: [],
+            };
+            const cs = getEnv(self).cardStore;
+            const types = ['Creature', 'Spell', 'LaneEnchantment', 'Artifact'];
+
+            //Create the stats
+            self.cards.forEach(({id, count}) => {
+                const card = cs.cardById(id);
+                const y = 0;
+                if(card.cost){
+                    //Ignore 0 cost cards for the costs chart
+                    chartMaker(stats.costs, card.gems[0], Math.min(card.cost, 6), count, [{x: 1, y},{x: 2, y},{x: 3, y},{x: 4, y},{x: 5, y},{x: 6, y, name:'6+'},]);
+                }
+                //Types chart
+                chartMaker(stats.types, card.gems[0], types.indexOf(card.type), count,
+                    [
+                        {name: '<i class="fa fa-male fa-2x"/>', x:0, y},
+                        {name: '<i class="fa fa-magic fa-2x"/>', x:1, y},
+                        {name: '<i class="fa fa-bookmark fa-2x"/>', x:2, y},
+                        {name: '<i class="fa fa-trophy fa-2x"/>', x:3, y}
+                    ]
+                );
+
+            })
+
+            return stats;
         }
     }))
     .actions(self => ({

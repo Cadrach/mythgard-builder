@@ -17,7 +17,12 @@ import DeckDrawer from "../components/deck/deckDrawer";
 import {Scrollbars} from "react-custom-scrollbars";
 import DeckImportButton from "../components/deck/deckImportButton";
 import Gem from "../components/gem/gem";
-import {OptionCard} from "../components/decksList/decksListFilters";
+
+const SingleValueWithImage = ({ children, ...props }) => (
+    <components.SingleValue {...props}>
+        {props.data.icon ? <img src={'/images/' + props.data.icon} style={{width: 32, marginRight: 6}}/>:null} {children}
+    </components.SingleValue>
+);
 
 @inject('dictionary', 'deckStore')
 @observer
@@ -236,10 +241,10 @@ class DeckBuilder extends React.Component {
                                 getOptionValue={option => option.id}
                                 getOptionLabel={option => option.name}
                                 styles={styleSelect}
-                                value ={selectedDeck.path}
+                                value ={selectedDeck.ide_path ? selectedDeck.path:null}
                                 onChange={({id}) => selectedDeck.setFormValues({ide_path: id})}
                                 components={{
-                                    // Option: OptionCard
+                                    SingleValue: SingleValueWithImage
                                 }}
                             />
                         </div>
@@ -250,10 +255,10 @@ class DeckBuilder extends React.Component {
                                 getOptionValue={option => option.id}
                                 getOptionLabel={option => option.name}
                                 styles={styleSelect}
-                                value={selectedDeck.power}
+                                value={selectedDeck.ide_power ? selectedDeck.power:null}
                                 onChange={({id}) => selectedDeck.setFormValues({ide_power: id})}
                                 components={{
-                                    // Option: OptionCard
+                                    SingleValue: SingleValueWithImage
                                 }}
                             />
                         </div>

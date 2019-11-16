@@ -1,5 +1,8 @@
-.border-left {
+.decks-list-table tr {
+  cursor: pointer; }
+
+.decks-list-table .border-left {
   border-left: 1px solid #17171f; }
 
-.text-center, .ant-table-thead > tr > th.text-center {
+.decks-list-table .text-center, .decks-list-table .ant-table-thead > tr > th.text-center {
   text-align: center; }

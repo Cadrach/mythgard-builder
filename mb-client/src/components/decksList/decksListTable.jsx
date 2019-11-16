@@ -1,6 +1,6 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
-import {NavLink} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import axios from '../../axios';
 import { Table, Icon as AntIcon, Tooltip, Button } from "antd";
 import Icon from 'react-fa';
@@ -20,7 +20,7 @@ const columns = [
         dataIndex: 'dck_name',
         ellipsis: true,
         sorter: true,
-        render: (dck_name, row) => (<span><b>{dck_name}</b> {row.user ? <span style={{fontStyle:'italic'}}> by {row.user.name}</span> : null}</span>),
+        render: (dck_name, row) => (<span><b style={{fontSize: 16}}>{dck_name}</b> {row.user ? <span style={{fontStyle:'italic'}}> by {row.user.name}</span> : null}</span>),
     },
     {
         className: 'border-left text-center',
@@ -53,7 +53,7 @@ const columns = [
     },
     {
         className: 'border-left text-center',
-        title: <Tooltip title="Commons"><Icon name="square" style={{fontSize: 16, color: constants.rarities.common}}/></Tooltip>,
+        title: <Tooltip title="Commons"><img src="/images/icons/rarity_common.png" width={24}/></Tooltip>,
         dataIndex: 'dck_nb_commons',
         sorter: true,
         render: (value, row) => <DecksColumnRarity row={row} rarity="common"/>,
@@ -61,7 +61,7 @@ const columns = [
     },
     {
         className: 'text-center',
-        title: <Tooltip title="Uncommons"><Icon name="square" style={{fontSize: 16, color: constants.rarities.uncommon}}/></Tooltip>,
+        title: <Tooltip title="Uncommons"><img src="/images/icons/rarity_uncommon.png" width={24}/></Tooltip>,
         dataIndex: 'dck_nb_uncommons',
         sorter: true,
         render: (value, row) => <DecksColumnRarity row={row} rarity="uncommon"/>,
@@ -69,7 +69,7 @@ const columns = [
     },
     {
         className: 'text-center',
-        title: <Tooltip title="Rares"><Icon name="square" style={{fontSize: 16, color: constants.rarities.rare}}/></Tooltip>,
+        title: <Tooltip title="Rares"><img src="/images/icons/rarity_rare.png" width={24}/></Tooltip>,
         dataIndex: 'dck_nb_rares',
         sorter: true,
         render: (value, row) => <DecksColumnRarity row={row} rarity="rare"/>,
@@ -77,7 +77,7 @@ const columns = [
     },
     {
         className: 'text-center',
-        title: <Tooltip title="Mythics"><Icon name="square" style={{fontSize: 16, color: constants.rarities.mythic}}/></Tooltip>,
+        title: <Tooltip title="Mythics"><img src="/images/icons/rarity_mythic.png" width={24}/></Tooltip>,
         dataIndex: 'dck_nb_mythics',
         sorter: true,
         render: (value, row) => <DecksColumnRarity row={row} rarity="mythic"/>,
@@ -136,11 +136,11 @@ const columns = [
         sorter: true,
         width,
     },
-    {
-        dataIndex: 'id',
-        render: id => <NavLink to={"/decks/" + id}><Button type="primary">Details <AntIcon type="right"/></Button></NavLink>,
-        width: 65,
-    },
+    // {
+    //     dataIndex: 'id',
+    //     render: id => <NavLink to={"/decks/" + id}><Button type="primary">Details <AntIcon type="right"/></Button></NavLink>,
+    //     width: 65,
+    // },
 ];
 
 @inject('dictionary')
@@ -178,6 +178,11 @@ class DecksListTable extends React.Component {
         if( ! _.isEqual(prevProps.filters, this.props.filters)){
             this.fetchDecks(1);
         }
+    }
+
+    onRowClick(record){
+        //console.log(record)
+        this.props.history.push('/decks/' + record.id);
     }
 
     /**
@@ -225,7 +230,7 @@ class DecksListTable extends React.Component {
         const { data, loading, pagination } = this.state;
 
         return (
-            <div>
+            <div className="decks-list-table">
 
                 <Table
                 columns={columns}
@@ -235,6 +240,7 @@ class DecksListTable extends React.Component {
                 loading={loading}
                 scroll={{x: true}}
                 onChange={this.handleTableChange}
+                onRow={(record) => ({onClick: this.onRowClick.bind(this, record)})}
                 />
             </div>
         );
@@ -243,4 +249,4 @@ class DecksListTable extends React.Component {
 
 }
 
-export default DecksListTable;
+export default withRouter(DecksListTable);

@@ -118,6 +118,7 @@ export const Deck = types
             if(line && line.count >= card.max_in_deck) return false; //cannot add, exit false
             else if( ! line) self.dck_cards.push({id: card.id, count: 1}); //create line
             else line.count++; //add count
+            self.sort();
             return true;
         },
 
@@ -133,6 +134,7 @@ export const Deck = types
             if( ! line) return false; //no card, nothing to remove
             else if(line && line.count > 1) line.count--; //decrease
             else self.dck_cards.splice(self.dck_cards.indexOf(line), 1) //last card, remove
+            self.sort();
             return true;
         },
 
@@ -196,6 +198,15 @@ export const Deck = types
             self.dck_stars = dck_stars;
         },
 
+        sort(){
+            const colors = self.colors.split('');
+            const cs = getEnv(self).cardStore;
+            self.dck_cards = _.sortBy(self.dck_cards, ({id, count}) => {
+                const card = cs.cardById(id);
+                return colors.indexOf(card.gems[0]) + ' ' + card.cost;
+            })
+        },
+
         /**
          * Count occurences of a specific card in the deck
          * @param card
@@ -248,6 +259,7 @@ export const DeckStore = types
          * @param deck
          */
         selectDeck(deck) {
+            deck.sort();
             self.selectedDeck = deck;
         },
 

@@ -56,31 +56,31 @@ class DeckDetail extends React.Component {
         return (
             <Layout className="deck-detail ant-layout-transparent">
                 <Affix offsetTop={64}>
-                <Layout.Header className="deck-detail-header with-background">
-                    <h1>
-                        {deck.dck_name}
-                        <div style={{float: 'right'}}>
-                            {isConnected ?
-                                <Button type="primary" size="large" onClick={this.onClickFavorite.bind(this)}>
-                                    <AntIcon type="star" theme={deck.is_favorite?'filled':null}/> Favorite
-                                </Button>
-                                :
-                                <Tooltip title="You muse be logged-in to favorite a deck"><Button icon="star" type="primary" size="large" disabled>Favorite</Button></Tooltip>
-                            }
-                            <Button icon="download" type="primary" size="large" onClick={this.onClickExport.bind(this)}>Export</Button>
-                        </div>
-                    </h1>
-                </Layout.Header>
+                    <Layout.Header className="deck-detail-header with-background">
+                        <h1>
+                            {deck.dck_name}
+                            <div style={{float: 'right'}}>
+                                {isConnected ?
+                                    <Button type="primary" size="large" onClick={this.onClickFavorite.bind(this)}>
+                                        <AntIcon type="star" theme={deck.is_favorite?'filled':null}/> Favorite
+                                    </Button>
+                                    :
+                                    <Tooltip title="You muse be logged-in to favorite a deck"><Button icon="star" type="primary" size="large" disabled>Favorite</Button></Tooltip>
+                                }
+                                <Button icon="download" type="primary" size="large" onClick={this.onClickExport.bind(this)}>Export</Button>
+                            </div>
+                        </h1>
+                    </Layout.Header>
                 </Affix>
                 <Layout className="deck-detail-content">
                     <Row>
-                        <Col className="col-container-text" xs={{span: 12}} md={{span: 14}} lg={{span: 18}}>
+                        <Col className="col-container-text" xs={{span: 24}} sm={{span: 12}} md={{span: 14}} lg={{span: 18}}>
                             <Layout className="ant-layout-transparent" style={{padding: 20}}>
                                 <ChartContainer deck={deck}/>
                                 <TextEditorReadonly content={content}/>
                             </Layout>
                         </Col>
-                        <Col xs={{span: 12}} md={{span: 10}} lg={{span: 6}}>
+                        <Col xs={{span: 24}} sm={{span: 12}} md={{span: 10}} lg={{span: 6}}>
                             {deck ? <Affix offsetTop={64+70}>
                                 <div>
                                     <DeckHeader deck={deck}/>

@@ -259,7 +259,9 @@ export const DeckStore = types
          * @param deck
          */
         selectDeck(deck) {
-            deck.sort();
+            if(deck){
+                deck.sort();
+            }
             self.selectedDeck = deck;
         },
 

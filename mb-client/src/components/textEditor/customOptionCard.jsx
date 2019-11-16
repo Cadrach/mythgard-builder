@@ -26,6 +26,7 @@ const styles = {
         borderRadius: 99,
         textTransform: 'capitalize',
         fontWeight: 'bold',
+        cursor: 'pointer',
     },
     gem: {
     }

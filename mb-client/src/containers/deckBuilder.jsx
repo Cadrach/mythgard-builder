@@ -169,7 +169,7 @@ class DeckBuilder extends React.Component {
                                                 &nbsp;&nbsp;&nbsp;
                                                 {
                                                     deck.id ?
-                                                    <span><Gem string={deck.colors}/>{deck.name}</span>
+                                                    <span><Gem string={deck.colors} inline style={{marginRight: 2}}/>{deck.name}</span>
                                                     :
                                                     <span><AntIcon type="plus-square"/> New Deck</span>
                                                 }

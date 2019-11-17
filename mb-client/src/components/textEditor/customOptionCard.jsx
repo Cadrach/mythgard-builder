@@ -53,9 +53,10 @@ class CardEditorComponent extends React.Component{
             background: constants.rarities[card.rarity],
             width: 10,
             height: 18,
+            lineHeight: '14px',
             position: 'relative',
             left: 8,
-            top: -2,
+            //top: -1,
             display: 'inline-block',
             border: '1px solid rgba(255,255,255,.25)',
             borderTopRightRadius: 99,
@@ -65,7 +66,7 @@ class CardEditorComponent extends React.Component{
         return (
             <CardPopover card={card}>
                 <span style={cardStyle}>
-                    <Gem string={card.gems} styleGem={styles.gem}/>
+                    <Gem string={card.gems} inline styleGem={styles.gem} style={{marginRight: 4}}/>
                     {card.name}
                     <span style={{display: 'none'}}>{this.props.children}</span>
                     <span style={rarityStyle}>&nbsp;</span>

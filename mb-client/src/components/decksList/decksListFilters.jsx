@@ -41,8 +41,8 @@ const MultiValueLabelFaction = props => {
 const OptionCard = (props) => {
     const style = props.getStyles('option', props);
     return <div {...props.innerProps} style={{...style, fontSize: 18, lineHeight: '24px'}}>
-        <div style={{width: 50, textAlign: "center", display: "inline-block", position: 'relative', top: -3}}>
-            <Gem string={props.data.gems} styleGem={{fontSize: 8}}/>
+        <div style={{width: 25, height: 18, display: 'inline-block', position: 'relative', top: -5}}>
+            <Gem string={props.data.gems} size={5}/>
         </div>
         {props.data.name}
     </div>

@@ -1,8 +1,17 @@
+.gem > .fa {
+  height: 19px;
+  font-size: 22px;
+  -webkit-text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.75);
+  -moz-text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.75);
+  text-shadow: 0px 0px 2px black, 0px 0px 2px black; }
+
 .gem {
-  margin: 2px 2px;
-  display: inline-block; }
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: auto;
+  align-content: center; }
   .gem > .fa {
-    margin: 0 2px;
-    -webkit-text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.75);
-    -moz-text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.75);
-    text-shadow: 0px 0px 2px black, 0px 0px 2px black; }
+    flex: 0 0 auto;
+    margin: 1px; }

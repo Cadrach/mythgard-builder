@@ -40,7 +40,7 @@ const columns = [
         className: 'text-center',
         title: <Tooltip title="Colors"><Icon name="tint" style={{fontSize: 16}}/></Tooltip>,
         dataIndex: 'dck_colors',
-        render: gems => <Gem string={gems} style={{fontSize: 22, lineHeight: '23px'}}/>,
+        render: gems => <Gem string={gems} size={20}/>,
         width: 120,
     },
     {

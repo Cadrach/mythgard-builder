@@ -19,7 +19,7 @@ export default class DeckHeader extends React.Component {
             <div className="deck-header" style={{height}}>
                 <img src="/images/icons/cards.png" width="32" style={{float: 'left', marginRight: 8}}/>
                 <Statistic value={deck.sum} suffix="/ 40" style={{float: 'left'}}/>
-                <Gem string={deck.colors} size="2x" style={{marginTop: 4, marginLeft: 8}}/>
+                <Gem string={deck.colors} size={24} style={{justifyContent: 'start', paddingLeft: 8, paddingTop: 4}}/>
                 <div className="clearfix"/>
                 {withoutPowerAndPath ? null :
                     <div className="deck-header-badge"><BadgePath id={deck.ide_path} withName/></div>

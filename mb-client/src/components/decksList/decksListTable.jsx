@@ -167,7 +167,13 @@ class DecksListTable extends React.Component {
      * LIFECYCLE - triggered once after mounting component
      */
     componentDidMount(){
-        this.fetchDecks(1)
+        if(this.props.dictionary.interface.decksListCache){
+            this.setState(this.props.dictionary.interface.decksListCache);
+        }
+        else{
+            this.fetchDecks(1)
+        }
+
     }
 
     /**
@@ -204,8 +210,7 @@ class DecksListTable extends React.Component {
             //We must have a loaded dictionary to continue
             dictionary.promise.then(() => {
                 decks.map(deck => deck.stats = cardsStore.computeStats(deck.dck_cards))
-
-                this.setState({
+                const state = {
                     data: decks,
                     pagination: {
                         current: data.current_page,
@@ -213,7 +218,11 @@ class DecksListTable extends React.Component {
                         total: data.total,
                     },
                     loading: false,
-                })
+                }
+
+                this.props.dictionary.interface.decksListCache = state;
+
+                this.setState(state)
             })
         })
     }

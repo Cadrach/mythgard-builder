@@ -9,6 +9,7 @@ class Dictionary {
 
     @observable cards = {};
     @observable user = {};
+    @observable interface = {};
     @observable factions;
     @observable powers;
     @observable paths;

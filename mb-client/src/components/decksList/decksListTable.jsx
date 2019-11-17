@@ -186,9 +186,13 @@ class DecksListTable extends React.Component {
         }
     }
 
-    onRowClick(record){
-        //console.log(record)
-        this.props.history.push('/decks/' + record.id);
+    onRowClick(record, {ctrlKey}){
+        if(ctrlKey){
+            window.open('/decks/' + record.id)
+        }
+        else{
+            this.props.history.push('/decks/' + record.id);
+        }
     }
 
     /**

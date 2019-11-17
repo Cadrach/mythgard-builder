@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { Router} from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import { Helmet } from 'react-helmet';
 // Service Worker for PWA
@@ -15,6 +15,7 @@ import {DeckStore, Deck} from "./stores/deckStore";
 // Import Components
 import App from './app';
 import Dictionary from "./stores/dictionary";
+import history from "./analytics";
 
 // Execute the ServiceWorker
 // serviceWorkerRegister();
@@ -42,7 +43,7 @@ const router = (
         <title>Mythgard-Decks</title>
     </Helmet>
     <Provider {...store}>
-        <Router>
+        <Router history={history}>
             <App/>
         </Router>
     </Provider>

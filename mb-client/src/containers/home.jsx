@@ -10,6 +10,7 @@ const Home = (props) => (
                 height: 400,
                 marginBottom: 20,
                 backgroundSize: 'cover',
+                backgroundPosition: 'center',
                 boxShadow: 'inset 0px 0px 40px 50px rgb(35, 35, 46)',
             }}/>
             Hail, Mythgardian!

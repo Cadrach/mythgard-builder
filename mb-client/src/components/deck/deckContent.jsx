@@ -88,16 +88,22 @@ class DeckContent extends React.Component {
             top: 0,
             left: 0,
             right: 0,
-            height: 20,
-            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%)'
+            height: 40,
+            background: 'url(/images/icons/arrow-up.png), linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            backgroundSize: 'contain',
         };
         const shadowBottomStyle = {
             position: 'absolute',
             bottom: 0,
             left: 0,
             right: 0,
-            height: 20,
-            background: 'linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%)'
+            height: 40,
+            background: 'url(/images/icons/arrow-down.png), linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            backgroundSize: 'contain',
         };
 
         return (

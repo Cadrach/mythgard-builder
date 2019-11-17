@@ -40,8 +40,7 @@ class App extends React.Component {
                     >
                         <Menu.Item key="/">
                             <NavLink to="/">
-                                <img src="/images/logo2.png" style={styleIcon}/>
-                                Mythgard-Decks
+                                <img src="/images/logo-text.png" style={{...styleIcon, width:300}}/>
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item key="/decks">

@@ -233,7 +233,7 @@ export const DeckStore = types
             if(self.loaded === false){
                 self.loaded = true;
                 const fetchedDecks = yield axios.get('json/my-decks').then(({data}) => (data));
-                self.loadedDecks = [...self.loadedDecks, ...fetchedDecks];
+                self.mergeDecks(fetchedDecks);
                 const fetchedIds = _.map(fetchedDecks, 'id');
                 self.myDecks = [0, ...fetchedIds];
             }
@@ -242,17 +242,23 @@ export const DeckStore = types
         fetchDeckDetails: flow(function* fetchDeckDetails(deckId){
             //Fetch the deck details
             const fetchedDeck = yield axios.get('json/deck/' + deckId).then(({data}) => (data));
-            const found = _.find(self.loadedDecks, {id: fetchedDeck.id});
-
-            //Extend existing deck
-            if(found){
-                _.extend(found, fetchedDeck);
-            }
-            //Or add it to our list
-            else{
-                self.loadedDecks = [...self.loadedDecks, fetchedDeck];
-            }
+            self.mergeDecks([fetchedDeck]);
         }),
+
+        mergeDecks: (fetchedDecks) => {
+            fetchedDecks.forEach((fetchedDeck) => {
+                const found = _.find(self.loadedDecks, {id: fetchedDeck.id});
+
+                //Extend existing deck
+                if(found){
+                    _.extend(found, fetchedDeck);
+                }
+                //Or add it to our list
+                else{
+                    self.loadedDecks = [...self.loadedDecks, fetchedDeck];
+                }
+            })
+        },
 
         /**
          * Select a deck and make it the current deck

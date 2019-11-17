@@ -20,7 +20,9 @@ export default class MyCards extends React.Component {
         dictionary.promise.then(() => {
             if(dictionary.isConnected){
                 const userCards = dictionary.user.cards ? toJS(dictionary.user.cards):[];
-                this.deck = Deck.create({id: 0, dck_cards: userCards});
+                this.deck = Deck.create({id: 0, dck_cards: userCards}, {
+                    cardStore: dictionary.cards
+                });
             }
         })
     }

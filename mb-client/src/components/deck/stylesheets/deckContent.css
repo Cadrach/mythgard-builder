@@ -24,6 +24,11 @@
     font-size: 18px;
     font-weight: bold;
     color: #fff; }
+  .deck-content .deck-line .deck-line-gems {
+    margin-left: 4px;
+    position: relative;
+    top: -1px;
+    display: inline-block; }
   .deck-content .deck-line .ant-badge-count {
     position: relative;
     top: -2px;

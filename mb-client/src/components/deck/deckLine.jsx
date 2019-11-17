@@ -4,6 +4,7 @@ import constants from "../../constants";
 import BadgeCardType from "../badge/badgeCardType";
 import CardPopover from "../card/cardPopover";
 import {isWebpSupported} from "react-image-webp/dist/utils";
+import Gem from "../gem/gem";
 
 export default class DeckLine extends React.Component {
 
@@ -24,6 +25,9 @@ export default class DeckLine extends React.Component {
                         </span>&nbsp;
                         <span className="name">
                             <BadgeCardType type={card.type}/>&nbsp;&nbsp;{card.name}
+                        </span>
+                        <span className="deck-line-gems">
+                            <Gem string={card.gems} inline size={10}/>
                         </span>
                         <span className="occurences">
                             <Badge count={"x " + count} />

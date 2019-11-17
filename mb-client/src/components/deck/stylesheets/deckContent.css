@@ -24,6 +24,8 @@
     font-size: 18px;
     font-weight: bold;
     color: #fff; }
+    .deck-content .deck-line .name.missing {
+      color: #fa3c02; }
   .deck-content .deck-line .deck-line-gems {
     margin-left: 4px;
     position: relative;
@@ -59,3 +61,5 @@
     .deck-content .deck-line .occurences .ant-badge-count {
       font-size: 18px;
       height: 22px; }
+    .deck-content .deck-line .occurences.missing .ant-badge-count {
+      color: #fa3c02; }

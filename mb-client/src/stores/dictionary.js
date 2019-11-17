@@ -33,6 +33,23 @@ class Dictionary {
         return this.user && this.user.cards && this.user.cards.length;
     }
 
+    /**
+     * Returns TRUE if the user is connected and has the card
+     * If the user is connected and has no cards at all, will return FALSE for all cards
+     * @param id
+     * @param count
+     * @returns {boolean}
+     */
+    userHasCard(id, count){
+        if( ! this.isConnected){
+            return true;
+        }
+        else{
+            const found = _.find(this.user.cards, {id});
+            return !!found && found.count >= count;
+        }
+    };
+
     $req = async () => {
         const {data} = await axios.get('json/dictionaries');
         return data;

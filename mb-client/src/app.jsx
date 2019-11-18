@@ -23,7 +23,7 @@ class App extends React.Component {
 
     render(){
         const rootPathName = '/' + this.props.location.pathname.split('/')[1];
-        const {isConnected} = this.props.dictionary;
+        const {isConnected, isLoading} = this.props.dictionary;
         const styleIcon = {
             width: 32,
             marginRight: 5,
@@ -49,7 +49,7 @@ class App extends React.Component {
                                 Decks
                             </NavLink>
                         </Menu.Item>
-                        {isConnected ?
+                        {isConnected && !isLoading ?
                             <Menu.Item key="/cards">
                                 <NavLink to="/cards">
                                     <img src="/images/icons/my-cards-2.png" style={styleIcon}/>
@@ -57,7 +57,7 @@ class App extends React.Component {
                                 </NavLink>
                             </Menu.Item>
                             :null}
-                        {isConnected ?
+                        {isConnected && !isLoading ?
                             <Menu.Item key="/deck-builder">
                                 <NavLink to="/deck-builder">
                                     <img src="/images/icons/my-decks-2.png" style={styleIcon}/>
@@ -65,12 +65,12 @@ class App extends React.Component {
                                 </NavLink>
                             </Menu.Item>
                             :null}
-                        { ! isConnected ?
+                        { ! isConnected && !isLoading ?
                             <Menu.Item key="/auth" style={{float: 'right'}}>
                                 <NavLink to="/auth"><Icon name="sign-in"/> Login/Register</NavLink>
                             </Menu.Item>
                             :null}
-                        {isConnected ?
+                        { isConnected && !isLoading ?
                             <Menu.SubMenu title={<div><Icon name="caret-down"/> {this.props.dictionary.user.name}</div>} style={{float: 'right'}}>
                                 {/*<Menu.Item key="logout"><Icon name="sign-out"/> Logout</Menu.Item>*/}
                                 <Menu.Item key="logout"><a href={process.env.REACT_APP_SERVER_ROOT + 'logout'}><Icon name="sign-out"/> Logout</a></Menu.Item>

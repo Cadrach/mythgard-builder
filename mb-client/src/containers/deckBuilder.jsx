@@ -1,7 +1,7 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
 import {withRouter} from "react-router-dom";
-import {Layout, Button, Menu, Icon as AntIcon, Divider, List, Input} from "antd";
+import {Layout, Button, Menu, Icon as AntIcon, Divider, List, Input, Tooltip} from "antd";
 import DeckContent from "../components/deck/deckContent";
 import DeckHeader from "../components/deck/deckHeader";
 import CardsList from "../components/cardsList/cardsList"
@@ -184,6 +184,12 @@ class DeckBuilder extends React.Component {
                 <Layout className="with-background" style={{overflowY: 'hidden'}}>
                     <Layout.Header className="header" style={{height: 80}}>
                         {selectedDeck.dck_name}
+                        {
+                            selectedDeck.dck_public ?
+                                <Tooltip title="This deck is publicly visible on the decks page."><Icon name='eye' style={{color: constants.colors.blue}}/></Tooltip>
+                                :
+                                <Tooltip title="This deck is private and not visible on the decks page."><Icon name='eye-slash' style={{color: constants.colors.red}}/></Tooltip>
+                        }
                     </Layout.Header>
 
                     <Layout.Content style={{height}}>

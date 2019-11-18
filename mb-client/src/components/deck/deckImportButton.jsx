@@ -47,8 +47,8 @@ class DeckImportButton extends React.Component {
                 values.dck_name = line.substring('name: '.length).trim();
             }
             else if(line.search('power:') === 0){
-                const power = line.substring('power: '.length).trim();
-                const found = _.find(dictionary.powers, {name: power});
+                const power = line.substring('power: '.length).trim().toLowerCase();
+                const found = _.find(dictionary.powers, (v) => power == v.name.toLowerCase());
                 if(found){
                     values.ide_power = found.id;
                 }
@@ -57,8 +57,8 @@ class DeckImportButton extends React.Component {
                 }
             }
             else if(line.search('path:') === 0){
-                const path = line.substring('path:'.length).trim();
-                const found = _.find(dictionary.paths, {name: path});
+                const path = line.substring('path:'.length).trim().toLowerCase();
+                const found = _.find(dictionary.paths, (v) => path == v.name.toLowerCase());
                 if(found){
                     values.ide_path = found.id;
                 }

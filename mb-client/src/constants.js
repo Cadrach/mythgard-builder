@@ -13,6 +13,12 @@ const constants = {
         rare: '#fff300',
         mythic: '#2ec7f5',
     },
+    raritiesBackground: {
+        common: '#8f764c',
+        uncommon: '#adaca9',
+        rare: '#c9c201',
+        mythic: '#2ec7f5',
+    },
     gems: {
         b: '#01bded',
         y: '#e8e80e',

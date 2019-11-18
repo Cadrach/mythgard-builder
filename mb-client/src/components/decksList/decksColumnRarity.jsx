@@ -35,7 +35,7 @@ const DecksColumnRarity = (props) => {
         }
     }
     else{
-        return <Badge count={valueDck} style={{backgroundColor: '#555',  ...badgeStyle}}/>;
+        return <Badge count={valueDck} style={{backgroundColor: constants.raritiesBackground[props.rarity],  ...badgeStyle}}/>;
     }
 }
 

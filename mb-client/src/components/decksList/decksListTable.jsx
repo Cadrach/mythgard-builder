@@ -224,7 +224,8 @@ class DecksListTable extends React.Component {
                     loading: false,
                 }
 
-                this.props.dictionary.interface.decksListCache = state;
+                //Cache current setup
+                this.props.dictionary.interface.decksListCache = {...state, filters: this.props.filters};
 
                 this.setState(state)
             })

@@ -60,6 +60,18 @@ class DecksListFilters extends React.Component {
         this.submit = this.submit.bind(this);
     }
 
+    componentDidMount(){
+
+        const cache = this.props.dictionary.interface.decksListCache;
+
+        //Set the default fields values based on cache
+        if(cache){
+            const filters = {};
+            _.each(cache.filters, (value, key) => filters[key] = {value});
+            this.props.form.setFields(filters);
+        }
+    }
+
     submit(){
         //Retrieve values
         const values = this.props.form.getFieldsValue();
@@ -67,7 +79,7 @@ class DecksListFilters extends React.Component {
         //Format values
         const finalValues = {
             ...values,
-            cards: values.cards ? values.cards.map(c => ({id: c.id, count: 1})) : null,
+            cards: values.cards ? values.cards.map(c => ({id: c.id, count: 1, name: c.name})) : null,
         };
 
         //Send values to callback (removing the empty ones)
@@ -81,6 +93,7 @@ class DecksListFilters extends React.Component {
 
         const colProps = {span: 8};
         const styleSelect = constants.styleSelect;
+        const cache = this.props.dictionary.interface.decksListCache;
 
         return (
             <Form className="decks-list-filters">
@@ -100,6 +113,7 @@ class DecksListFilters extends React.Component {
                                     getOptionValue={option => option.id}
                                     getOptionLabel={option => option.name}
                                     styles={styleSelect}
+                                    defaultValue={cache ? cache.filters.cards:null}
                                     components={{
                                         Option: OptionCard
                                     }}
@@ -117,6 +131,7 @@ class DecksListFilters extends React.Component {
                                     getOptionValue={option => option.id}
                                     getOptionLabel={option => option.name}
                                     styles={styleSelect}
+                                    defaultValue={cache ? cache.filters.colors:null}
                                     components={{
                                         Option: OptionFaction,
                                         MultiValueLabel: MultiValueLabelFaction,

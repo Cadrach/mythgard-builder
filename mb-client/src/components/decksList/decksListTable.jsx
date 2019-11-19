@@ -159,8 +159,8 @@ class DecksListTable extends React.Component {
             data: [],
             pagination: {},
             loading: false,
+            filters: props.filters ? props.filters:{},
         }
-
     }
 
     /**
@@ -182,7 +182,8 @@ class DecksListTable extends React.Component {
      */
     componentDidUpdate(prevProps){
         if( ! _.isEqual(prevProps.filters, this.props.filters)){
-            this.fetchDecks(1);
+            const filters = {...this.props.filters};
+            this.setState({filters}, () => this.fetchDecks(1))            ;
         }
     }
 
@@ -202,9 +203,10 @@ class DecksListTable extends React.Component {
      * @param currentPage
      */
     fetchDecks(currentPage, sorter) {
+        const filters = this.state.filters;
         this.setState({loading: true});
         axios.post('json/decks?page=' + currentPage, {
-            filters: this.props.filters,
+            filters,
             sorter,
         }).then(({data}) => {
             const decks = data.data;
@@ -222,10 +224,11 @@ class DecksListTable extends React.Component {
                         total: data.total,
                     },
                     loading: false,
+                    filters,
                 }
 
                 //Cache current setup
-                this.props.dictionary.interface.decksListCache = {...state, filters: this.props.filters};
+                this.props.dictionary.interface.decksListCache = {...state};
 
                 this.setState(state)
             })

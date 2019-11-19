@@ -202,4 +202,22 @@ class DeckController extends Controller
             'dck_stars' => $deck->dck_stars,
         ];
     }
+
+    /**
+     * Tracks download of a deck
+     * @param Request $request
+     * @param $id
+     * @return array
+     */
+    public function getUpdateDeckDownload(Request $request, $id){
+        $session = $request->session();
+        $exported = $session->get('exportedDeck', []);
+        if( ! in_array($id, $exported)){
+            $exported[] = $id;
+            $session->put('exportedDeck', $exported);
+            DB::statement("UPDATE decks SET dck_downloads = dck_downloads+1 WHERE id = ?", [$id]);
+            return ['tracked' => true];
+        }
+        return ['tracked' => false];
+    }
 }

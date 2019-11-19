@@ -160,6 +160,9 @@ export const Deck = types
 
             //Notify user
             message.info("Deck exported to clipboard");
+
+            //Track export of this deck
+            axios.get('json/update-deck-download/' + self.id);
         },
 
         /**

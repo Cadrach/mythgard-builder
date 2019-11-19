@@ -122,13 +122,13 @@ const columns = [
         sorter: true,
         width,
     },
-    {
-        className: 'text-center',
-        title: <Tooltip title="Views"><AntIcon type="eye" style={{fontSize: 16}} theme="filled"/></Tooltip>,
-        dataIndex: 'dck_views',
-        sorter: true,
-        width,
-    },
+    // {
+    //     className: 'text-center',
+    //     title: <Tooltip title="Views"><AntIcon type="eye" style={{fontSize: 16}} theme="filled"/></Tooltip>,
+    //     dataIndex: 'dck_views',
+    //     sorter: true,
+    //     width,
+    // },
     {
         className: 'text-center',
         title: <Tooltip title="Downloads"><AntIcon type="cloud-download" style={{fontSize: 16}}/></Tooltip>,

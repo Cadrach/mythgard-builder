@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom'
 import axios from '../../axios';
 import { Table, Icon as AntIcon, Tooltip, Button } from "antd";
 import Icon from 'react-fa';
-import constants from "../../constants";
+import moment from "moment";
 import './stylesheets/decksListTable.scss';
 import Gem from "../gem/gem";
 import BadgePower from "../badge/badgePower";
@@ -135,6 +135,14 @@ const columns = [
         dataIndex: 'dck_downloads',
         sorter: true,
         width,
+    },
+    {
+        className: 'text-center',
+        title: <Tooltip title="Last Updated"><AntIcon type="clock-circle" style={{fontSize: 16}}/></Tooltip>,
+        dataIndex: 'updated_at',
+        sorter: true,
+        render: (value) => <span style={{fontSize: 14}}>{moment(value, 'YYYY-MM-DD HH:mm:ss').fromNow()}</span>,
+        width: 120,
     },
     // {
     //     dataIndex: 'id',

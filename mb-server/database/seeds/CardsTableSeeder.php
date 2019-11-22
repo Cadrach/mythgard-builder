@@ -15,8 +15,12 @@ class CardsTableSeeder extends Seeder
      */
     public function run()
     {
-        $file = database_path('seeds/mythgard-0.16.2.json');
+        $file = database_path('seeds/mythgard-0.17.2.json');
         $json = json_decode(file_get_contents($file));
+
+        if(json_last_error()){
+            dd(json_last_error_msg());
+        }
 
         $factions = Faction::all();
         $factionsByName = $factions->keyBy('fac_color_name')->toArray();

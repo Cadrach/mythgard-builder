@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Button, Layout, Icon as AntIcon, Typography} from "antd";
+import {Form, Button, Layout, Row, Col, Icon as AntIcon, Typography} from "antd";
 const {Text} = Typography;
 import { observer, inject } from "mobx-react";
 import {toJS, observable} from "mobx";
@@ -56,7 +56,11 @@ export default class MyPuzzle extends React.Component {
 
         return (
             <Layout className="ant-layout-transparent">
-                {this.P1}
+                <Row>
+                    <Col span={12}>
+                        {this.P1}
+                    </Col>
+                </Row>
             </Layout>
         );
     }

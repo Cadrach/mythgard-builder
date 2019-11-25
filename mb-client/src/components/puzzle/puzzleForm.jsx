@@ -36,6 +36,14 @@ class PuzzleForm extends React.Component {
             labelCol: { span: 7 },
             wrapperCol: { span: 12 },
         };
+        const styleSelect = {
+            ...constants.styleSelect,
+            container: base => ({...base, minHeight: 28, lineHeight: 'normal'}),
+            control: base => ({...base, minHeight: 28 }),
+            input: base => ({...base, height: 28}),
+            singleValue: base => ({...base, height: 28}),
+            multiValue: base => ({...base}),
+        }
 
         return (
             <Form className="puzzle-form">
@@ -62,31 +70,31 @@ class PuzzleForm extends React.Component {
 
                 <Form.Item label="Path" {...formItemLayout}>
                     {getFieldDecorator('path',{valuePropName: 'state.value'})(
-                        <SingleValueWithImageSelect options={paths} placeholder="Select a Path"/>
+                        <SingleValueWithImageSelect styles={styleSelect} options={paths} placeholder="Select a Path"/>
                     )}
                 </Form.Item>
 
                 <Form.Item label="Power" {...formItemLayout}>
                     {getFieldDecorator('power',{valuePropName: 'state.value'})(
-                        <SingleValueWithImageSelect options={powers} placeholder="Select a Power"/>
+                        <SingleValueWithImageSelect styles={styleSelect} options={powers} placeholder="Select a Power"/>
                     )}
                 </Form.Item>
 
                 <Form.Item label="Hand" {...formItemLayout}>
                     {getFieldDecorator('hand', {valuePropName: 'state.value'})(
-                        <CardSelect defaultValue={this.props.values.hand}/>
+                        <CardSelect styles={styleSelect} defaultValue={this.props.values.hand}/>
                     )}
                 </Form.Item>
 
                 <Form.Item label="Deck" {...formItemLayout}>
                     {getFieldDecorator('deck', {valuePropName: 'state.value'})(
-                        <CardSelect defaultValue={this.props.values.deck}/>
+                        <CardSelect styles={styleSelect} defaultValue={this.props.values.deck}/>
                     )}
                 </Form.Item>
 
                 <Form.Item label="Boneyard" {...formItemLayout}>
                     {getFieldDecorator('boneyard', {valuePropName: 'state.value'})(
-                        <CardSelect defaultValue={this.props.values.deck}/>
+                        <CardSelect styles={styleSelect} defaultValue={this.props.values.deck}/>
                     )}
                 </Form.Item>
 
@@ -94,12 +102,12 @@ class PuzzleForm extends React.Component {
                     return (<div key={"lane"+n}>
                         <Form.Item label={"Lane " + n + " Creature"} {...formItemLayout}>
                             {getFieldDecorator('lane' + n + '.Creature', {valuePropName: 'state.value'})(
-                                <CardSelect defaultValue={this.props.values["lane"+n].Creature} isMulti={false} placeholder="Select one card" isClearable/>
+                                <CardSelect styles={styleSelect} defaultValue={this.props.values["lane"+n].Creature} isMulti={false} placeholder="Select one card" isClearable/>
                             )}
                         </Form.Item>
                         <Form.Item label={"Lane " + n + " Enchantment"} {...formItemLayout}>
                             {getFieldDecorator('lane' + n + '.LaneEnchantment', {valuePropName: 'state.value'})(
-                                <CardSelect defaultValue={this.props.values["lane"+n].LaneEnchantment} isMulti={false} placeholder="Select one card" isClearable/>
+                                <CardSelect styles={styleSelect} defaultValue={this.props.values["lane"+n].LaneEnchantment} isMulti={false} placeholder="Select one card" isClearable/>
                             )}
                         </Form.Item>
                     </div>)

@@ -8,6 +8,8 @@ import './stylesheets/decksListFilters.scss'
 import Gem from "../gem/gem";
 import constants from "../../constants";
 
+import CardSelect from '../card/cardSelect';
+
 /**
  * Option line for faction
  * @param props
@@ -31,23 +33,6 @@ const MultiValueLabelFaction = props => {
         </div>
     </components.MultiValueLabel>
 };
-
-/**
- * Option line for card
- * @param props
- * @returns {*}
- * @constructor
- */
-const OptionCard = (props) => {
-    const style = props.getStyles('option', props);
-    return <div {...props.innerProps} style={{...style, fontSize: 18, lineHeight: '24px'}}>
-        <div style={{width: 25, height: 18, display: 'inline-block', position: 'relative', top: -5}}>
-            <Gem string={props.data.gems} size={5}/>
-        </div>
-        {props.data.name}
-    </div>
-}
-export {OptionCard};
 
 @inject('dictionary')
 @observer
@@ -106,17 +91,9 @@ class DecksListFilters extends React.Component {
                     <Col {...colProps}>
                         <Form.Item>
                             {getFieldDecorator('cards', {valuePropName: 'state.value'})(
-                                <Select
+                                <CardSelect
                                     placeholder="By Cards..."
-                                    options={cards}
-                                    isMulti={true}
-                                    getOptionValue={option => option.id}
-                                    getOptionLabel={option => option.name}
-                                    styles={styleSelect}
                                     defaultValue={cache ? cache.filters.cards:null}
-                                    components={{
-                                        Option: OptionCard
-                                    }}
                                 />
                             )}
                         </Form.Item>

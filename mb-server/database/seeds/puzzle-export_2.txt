@@ -1,0 +1,29 @@
+intro: I need to figure out a way to win by the end of my turn!
+p1 life:3
+p1 path:Rainbow's End
+p1 power:Impel
+p1 mana:9
+p1 gems:ooooggr
+p1 burn:true
+p1 hand:dashing ringmaster; thieves bazaar; shadow trapeze; poxbringer; 
+p1 boneyard: yana virus; volition; rewind hex; wake the bones; detained;
+p1 deck:;
+p1 lane 1:
+p1 lane 3:bald mountain
+p1 lane 4:root of the world
+p1 lane 5:Bob "Banzai" Vaquero;"
+p1 lane 6:
+p1 lane 7:sand scout;
+
+p2 name:Zureiya
+p2 deck: 
+p2 path:Rainbow's End
+p2 power:Reconstruct
+p2 life:4
+p2 lane 1: thieves bazaar
+p2 lane 2: Brass Bouncer; thieves bazaar
+p2 lane 3: shadhavar beast; thieves bazaar
+p2 lane 5: 
+p2 lane 4: shadhavar beast; thieves bazaar
+p2 lane 6: shadhavar beast; 
+p2 lane 7:shadhavar beast; 

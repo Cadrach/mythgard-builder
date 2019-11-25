@@ -13,6 +13,7 @@ import DeckBuilder from "./containers/deckBuilder";
 import MyCards from "./containers/myCards";
 import DecksList from "./containers/decksList";
 import DeckDetail from "./containers/deckDetail";
+import MyPuzzle from "./containers/myPuzzle";
 import {Icon} from "react-fa/lib";
 import Authenticate from "./containers/authenticate";
 import Home from "./containers/home";
@@ -65,6 +66,14 @@ class App extends React.Component {
                                 </NavLink>
                             </Menu.Item>
                             :null}
+                        {isConnected && !isLoading ?
+                            <Menu.Item key="/puzzle">
+                                <NavLink to="/puzzle">
+                                    <Icon name="puzzle-piece" size="2x" style={{...styleIcon, position: 'relative', top:5}}/>
+                                    Puzzle Maker
+                                </NavLink>
+                            </Menu.Item>
+                            :null}
                         { ! isConnected && !isLoading ?
                             <Menu.Item key="/auth" style={{float: 'right'}}>
                                 <NavLink to="/auth"><Icon name="sign-in"/> Login/Register</NavLink>
@@ -86,6 +95,7 @@ class App extends React.Component {
                     <Route exact path="/decks" component={DecksList}/>
                     <Route exact path="/decks/:id" component={DeckDetail}/>
                     <Route exact path="/auth" component={Authenticate}/>
+                    <Route exact path="/puzzle/:id?" component={MyPuzzle}/>
                     <Route exact path="/" component={Home}/>
                 </div>
             </Layout>

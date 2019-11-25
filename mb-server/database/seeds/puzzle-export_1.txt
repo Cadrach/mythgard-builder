@@ -1,0 +1,22 @@
+intro:Can you beat rhino_paxton this turn?
+p1 portrait:percy
+p1 life:3
+p1 path:Journey of Souls
+p1 power:Impel
+p1 mana:8
+p1 gems:rrrrrbbb
+p1 burn:true
+p1 hand:Minitaur; Magmataur; Loki's Veil; Re:Spawn
+p1 boneyard:Wings of Abaddon; Ourania Muse
+p1 deck:Shroud of the Pit; Volition
+p1 artifacts:Matryoshka
+p1 lane 3:Minitaur; Cairnhenge
+p1 lane 4:Baku Bogeyman
+p1 lane 5:Bob "Banzai" Vaquero
+
+p2 name:rhino_paxton
+p2 portrait:fen
+p2 path:Rainbow's End
+p2 power:Reconstruct
+p2 life:5
+p2 lane 4:Magmataur

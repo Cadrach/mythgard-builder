@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
+import {toJS} from "mobx";
 import PropTypes from 'prop-types';
 import { EditorState, Modifier, Entity } from 'draft-js';
 import Select from 'react-select';
@@ -7,7 +8,7 @@ import Gem from "../gem/gem";
 import constants from "../../constants";
 import {Popover} from "antd";
 import CardPopover from "../card/cardPopover";
-import {OptionCard} from "../decksList/decksListFilters";
+import CardSelect from "../card/cardSelect";
 
 
 /**
@@ -91,6 +92,13 @@ function findCardEditorComponents(contentBlock, callback) {
     }, callback);
 }
 
+const styleSelect = {
+    control: base => ({...base, width: 300, fontSize: 12}),
+    container: base => ({...base, zIndex: 10, height: 36, position: 'relative', top: -4}),
+    menu: base => ({...base, color: '#000'}),
+    multiValue: base => ({...base, color: '#000', fontSize: 18}),
+}
+
 /**
  * **********************************************************************
  * **********************************************************************
@@ -135,25 +143,13 @@ export class CardToolbarButton extends Component {
     render() {
         const cards = this.props.dictionary.cards.all;
 
-        const styleSelect = {
-            control: base => ({...base, width: 300, fontSize: 12}),
-            container: base => ({...base, zIndex: 10, height: 36, position: 'relative', top: -4}),
-            menu: base => ({...base, color: '#000'}),
-            multiValue: base => ({...base, color: '#000', fontSize: 18}),
-        }
-
         return (
-            <Select
+            <CardSelect
                 placeholder="Add a Card"
-                options={cards}
                 value={this.state.value}
                 onChange={this.onSelect.bind(this)}
-                getOptionValue={option => option.id}
-                getOptionLabel={option => option.name}
                 styles={styleSelect}
-                components={{
-                    Option: OptionCard
-                }}
+                isMulti={false}
             />
         );
     }

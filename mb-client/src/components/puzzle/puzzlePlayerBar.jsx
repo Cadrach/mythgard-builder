@@ -24,7 +24,7 @@ class PuzzlePlayerBar extends React.Component {
                     {data.mana}
                 </div>
                 <div className="puzzle-gem-bar">
-                    <Gem string={data.gems} size={40} inline styleGem={{marginRight: 4}}/>
+                    <Gem string={data.gems.toLowerCase()} size={40} inline styleGem={{marginRight: 4}}/>
                     {/*empty gem to keep in place this bar*/}
                     <span className="fa fa-circle" style={{height: 40, fontSize: 43, marginRight: 4, color: 'transparent'}}></span>
                 </div>

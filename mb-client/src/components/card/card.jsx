@@ -12,9 +12,6 @@ class Card extends React.Component {
     constructor(props) {
         super(props);
         this.state = {animatedCards: []};
-        this.card = props.data;
-        const url = isWebpSupported() ? '/images/cards/webp/'+this.card.image.replace('.png', '.webp') : '/images/cards/s/'+this.card.image;
-        this.cardImage = <div className="card-image" style={{backgroundImage: 'url('+url+')'}}></div>;
 
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
@@ -70,6 +67,10 @@ class Card extends React.Component {
     render(){
         const {animatedCards} = this.state;
         let rate;
+
+        this.card = this.props.data;
+        const url = isWebpSupported() ? '/images/cards/webp/'+this.card.image.replace('.png', '.webp') : '/images/cards/s/'+this.card.image;
+        this.cardImage = <div className="card-image" style={{backgroundImage: 'url('+url+')'}}></div>;
 
         //Display number of cards (if deckStore provided)
         if(this.props.deck){

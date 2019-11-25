@@ -70,7 +70,7 @@ class App extends React.Component {
                             <Menu.Item key="/puzzle">
                                 <NavLink to="/puzzle">
                                     <Icon name="puzzle-piece" size="2x" style={{...styleIcon, position: 'relative', top:5}}/>
-                                    Puzzle Maker
+                                    Puzzle Maker (Beta)
                                 </NavLink>
                             </Menu.Item>
                             :null}

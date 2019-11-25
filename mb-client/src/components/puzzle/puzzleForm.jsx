@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {inject, observer} from "mobx-react";
-import {Form, Input, Switch, InputNumber, Button, Col, Row} from "antd";
+import {Form, Input, Switch, InputNumber, Button, Col, Row, Badge} from "antd";
 import SingleValueWithImageSelect from "../select/singleValueWithImageSelect";
 import _ from 'lodash';
 
@@ -24,61 +24,100 @@ class PuzzleForm extends React.Component {
         let fields = {};
         _.each(_.keys(this.props.values), key => fields[key] = {value: this.props.values[key]});
 
+        fields.lane = {};
+        [1,2,3,4,5,6,7].forEach((n) => {
+            fields.lane[n] = {
+                creature: {value: this.props.values.lane[n].creature},
+                enchant: {value: this.props.values.lane[n].enchant},
+            }
+        })
+
         //Set the default fields values
         this.props.form.setFields(fields);
-        console.log('MOUN')
     }
 
     render(){
         const { getFieldDecorator } = this.props.form;
         const {paths, powers} = this.props.dictionary;
+        const cards = this.props.dictionary.cards.all;
+        const cardsCreature = _.filter(cards, {type: 'Creature'});
+        const cardsEnchant = _.filter(cards, {type: 'LaneEnchantment'});
+
+
         const formItemLayout = {
-            labelCol: { span: 7 },
-            wrapperCol: { span: 12 },
+            labelCol: { span: 6 },
+            wrapperCol: { span: 18 },
         };
+        const formItemDualColumn = {
+            labelCol: {span: 12},
+            wrapperCol: {span: 12},
+        }
         const styleSelect = {
             ...constants.styleSelect,
             container: base => ({...base, minHeight: 28, lineHeight: 'normal'}),
             control: base => ({...base, minHeight: 28 }),
             input: base => ({...base, height: 28}),
-            singleValue: base => ({...base, height: 28}),
+            singleValue: base => ({...base, }),
             multiValue: base => ({...base}),
         }
 
         return (
             <Form className="puzzle-form">
-
-                <Form.Item label="Life" {...formItemLayout}>
-                    {getFieldDecorator('life')(<InputNumber placeholder="Life"/>)}
-                </Form.Item>
-
-                <Form.Item label="Mana" {...formItemLayout}>
-                    {getFieldDecorator('mana')(<InputNumber placeholder="Mana"/>)}
-                </Form.Item>
-
-                <Form.Item label="Gems" {...formItemLayout}>
-                    {getFieldDecorator('gems')(
-                        <Input placeholder="Gems, use letters: byrgop"/>
+                <Form.Item label="Name" {...formItemLayout}>
+                    {getFieldDecorator('name')(
+                        <Input placeholder="Name"/>
                     )}
                 </Form.Item>
 
-                <Form.Item label="Can burn 1 card" {...formItemLayout}>
-                    {getFieldDecorator('burn',{valuePropName: 'checked'})(
-                        <Switch/>
-                    )}
-                </Form.Item>
+                <Row>
+                    <Col span={12}>
+                        <Form.Item label="Mana" {...formItemDualColumn}>
+                            {getFieldDecorator('mana')(<InputNumber placeholder="Mana"/>)}
+                        </Form.Item>
+                    </Col>
 
-                <Form.Item label="Path" {...formItemLayout}>
-                    {getFieldDecorator('path',{valuePropName: 'state.value'})(
-                        <SingleValueWithImageSelect styles={styleSelect} options={paths} placeholder="Select a Path"/>
-                    )}
-                </Form.Item>
+                    <Col span={12}>
+                        <Form.Item label="Life" {...formItemDualColumn}>
+                            {getFieldDecorator('life')(<InputNumber placeholder="Life"/>)}
+                        </Form.Item>
+                    </Col>
+                </Row>
 
-                <Form.Item label="Power" {...formItemLayout}>
-                    {getFieldDecorator('power',{valuePropName: 'state.value'})(
-                        <SingleValueWithImageSelect styles={styleSelect} options={powers} placeholder="Select a Power"/>
-                    )}
-                </Form.Item>
+                <Row>
+                    <Col span={12}>
+                        <Form.Item label="Gems" {...formItemDualColumn}>
+                            {getFieldDecorator('gems')(
+                                <Input placeholder="Gems, use letters: byrgop"/>
+                            )}
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={12}>
+                        <Form.Item label="Burn used" {...formItemDualColumn}>
+                            {getFieldDecorator('burn',{valuePropName: 'checked'})(
+                                <Switch/>
+                            )}
+                        </Form.Item>
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col span={12}>
+                        <Form.Item label="Power" {...formItemDualColumn}>
+                            {getFieldDecorator('power',{valuePropName: 'state.value'})(
+                                <SingleValueWithImageSelect styles={styleSelect} options={powers} defaultValue={this.props.values.power} placeholder="Select a Power"/>
+                            )}
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={12}>
+                        <Form.Item label="Path" {...formItemDualColumn}>
+                            {getFieldDecorator('path',{valuePropName: 'state.value'})(
+                                <SingleValueWithImageSelect styles={styleSelect} options={paths} defaultValue={this.props.values.path} placeholder="Select a Path"/>
+                            )}
+                        </Form.Item>
+                    </Col>
+                </Row>
 
                 <Form.Item label="Hand" {...formItemLayout}>
                     {getFieldDecorator('hand', {valuePropName: 'state.value'})(
@@ -94,25 +133,34 @@ class PuzzleForm extends React.Component {
 
                 <Form.Item label="Boneyard" {...formItemLayout}>
                     {getFieldDecorator('boneyard', {valuePropName: 'state.value'})(
-                        <CardSelect styles={styleSelect} defaultValue={this.props.values.deck}/>
+                        <CardSelect styles={styleSelect} defaultValue={this.props.values.boneyard}/>
                     )}
                 </Form.Item>
 
+                Lanes:
                 {_.map([1,2,3,4,5,6,7], (n) => {
-                    return (<div key={"lane"+n}>
-                        <Form.Item label={"Lane " + n + " Creature"} {...formItemLayout}>
-                            {getFieldDecorator('lane' + n + '.Creature', {valuePropName: 'state.value'})(
-                                <CardSelect styles={styleSelect} defaultValue={this.props.values["lane"+n].Creature} isMulti={false} placeholder="Select one card" isClearable/>
-                            )}
-                        </Form.Item>
-                        <Form.Item label={"Lane " + n + " Enchantment"} {...formItemLayout}>
-                            {getFieldDecorator('lane' + n + '.LaneEnchantment', {valuePropName: 'state.value'})(
-                                <CardSelect styles={styleSelect} defaultValue={this.props.values["lane"+n].LaneEnchantment} isMulti={false} placeholder="Select one card" isClearable/>
-                            )}
-                        </Form.Item>
-                    </div>)
+                    return (
+                        <Row key={"lane"+n} gutter={20}>
+                            <Col style={{fontSize: 24, textAlign: 'center'}} span={2}>
+                                {n}
+                            </Col>
+                            <Col span={11}>
+                                <Form.Item>
+                                    {getFieldDecorator('lane.' + n + '.creature', {valuePropName: 'state.value'})(
+                                        <CardSelect styles={styleSelect} options={cardsCreature} defaultValue={this.props.values.lane[n].creature} isMulti={false} placeholder="Select one card" isClearable/>
+                                    )}
+                                </Form.Item>
+                            </Col>
+                            <Col span={11}>
+                                <Form.Item>
+                                    {getFieldDecorator('lane.' + n + '.enchant', {valuePropName: 'state.value'})(
+                                        <CardSelect styles={styleSelect} options={cardsEnchant} defaultValue={this.props.values.lane[n].enchant} isMulti={false} placeholder="Select one card" isClearable/>
+                                    )}
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                    )
                 })}
-                
             </Form>
         )
 

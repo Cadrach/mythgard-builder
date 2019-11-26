@@ -66,7 +66,7 @@ class App extends React.Component {
                                 </NavLink>
                             </Menu.Item>
                             :null}
-                        {isConnected && !isLoading ?
+                        { !isLoading ?
                             <Menu.Item key="/puzzle">
                                 <NavLink to="/puzzle">
                                     <Icon name="puzzle-piece" size="2x" style={{...styleIcon, position: 'relative', top:5}}/>

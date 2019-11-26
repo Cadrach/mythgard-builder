@@ -147,14 +147,14 @@ class PuzzleForm extends React.Component {
                             <Col span={11}>
                                 <Form.Item>
                                     {getFieldDecorator('lane.' + n + '.creature', {valuePropName: 'state.value'})(
-                                        <CardSelect styles={styleSelect} options={cardsCreature} defaultValue={this.props.values.lane[n].creature} isMulti={false} placeholder="Select one card" isClearable/>
+                                        <CardSelect styles={styleSelect} options={cardsCreature} defaultValue={this.props.values.lane[n].creature} isMulti={false} placeholder="Select Creature" isClearable/>
                                     )}
                                 </Form.Item>
                             </Col>
                             <Col span={11}>
                                 <Form.Item>
                                     {getFieldDecorator('lane.' + n + '.enchant', {valuePropName: 'state.value'})(
-                                        <CardSelect styles={styleSelect} options={cardsEnchant} defaultValue={this.props.values.lane[n].enchant} isMulti={false} placeholder="Select one card" isClearable/>
+                                        <CardSelect styles={styleSelect} options={cardsEnchant} defaultValue={this.props.values.lane[n].enchant} isMulti={false} placeholder="Select Enchantment" isClearable/>
                                     )}
                                 </Form.Item>
                             </Col>

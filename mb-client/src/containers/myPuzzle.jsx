@@ -61,7 +61,9 @@ export default class MyPuzzle extends React.Component {
                         exp.push(pfx + value.map(card => card.name_export).join("; ")); break;
                     case 'lane':
                         _.each(value, (v, k) => {
-                            exp.push(player + " lane " + k + ": " + (v.creature ? v.creature.name_export:'') + ";" + (v.enchant ? v.enchant.name_export:''));
+                            if(v){
+                                exp.push(player + " lane " + k + ": " + (v.creature ? v.creature.name_export:'') + ";" + (v.enchant ? v.enchant.name_export:''));
+                            }
                         })
                     break;
                     default:

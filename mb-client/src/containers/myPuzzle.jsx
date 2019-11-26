@@ -87,7 +87,7 @@ export default class MyPuzzle extends React.Component {
         const cards = this.props.dictionary.cards.all;
 
         return (
-            <Layout className="ant-layout-transparent my-puzzle">
+            <Layout className="my-puzzle">
                 <Row>
                     <Col span={8}>
                         <div style={{marginTop: 20, marginLeft: 20}}>

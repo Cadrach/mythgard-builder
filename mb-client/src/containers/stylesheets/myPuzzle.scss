@@ -1,10 +1,17 @@
 .my-puzzle{
+    padding-left: 20px;
+
+    min-height: calc(100vh - 64px);
+
   .ant-tabs{
     overflow: visible;
   }
   .ant-tabs-nav{
     width: 100%;
   }
+    .ant-tabs-bar{
+        margin-bottom: 0;
+    }
   .ant-tabs-tab{
     width: calc(50% - 16px);
     text-align: center;
@@ -16,67 +23,93 @@
 
   .puzzle-form {
     padding: 20px;
+
+      background-image: url('/images/footer_lodyas_colored.png');
+
+
+      box-shadow: inset 0px 0px 20px 9px rgba(0,0,0,0.75);
   }
 
   .puzzle-render{
-    background: #30303d;
-    padding: 20px;
+    padding: 10px 0px;
+      z-index: 1;
+      background: #30303d;
   }
 
   .puzzle-divider{
     height: 10px;
-    background: #000;
-    opacity: 0.5;
-    width: 90%;
-    margin-left: 5%;
-    border-radius: 10px;
+    //background: #000;
+    //opacity: 0.5;
+    //width: 90%;
+    //margin-left: 5%;
+    //border-radius: 10px;
   }
+
+    .puzzle-played-cards{
+        box-shadow: inset 0px 0px 20px 9px rgba(0,0,0,0.75);
+        margin: 5px 0;
+        border-radius: 5px;
+        padding: 5px;
+
+        width: calc((100vw * .63 - 40px));
+        margin: 10px auto;
+
+        background-image: url('/images/background/office.png');
+    }
 
   .puzzle-played-slot{
     display: block;
     float: left;
-    padding: 5px;
 
-    width: calc((100vw * .65 - 40px) / 7);
-    height: calc((100vw * .65 - 40px) / 7 * 1.42 * 1.5);
+      padding: 0 0.26%;
 
+    width: 14.25%;
+    height: calc((100vw * .63 - 40px) / 7 * 1.42 * 1.5 - 10px);
+      border-right: 3px solid rgba(0,0,0, 0.25);
+
+      &:nth-child(7){
+          border-right: 0;
+      }
 
     .puzzle-played-creature{
       position: relative;
-      top: calc(-1 * (100vw * .65 - 40px) / 7 * 1.42 / 2);
+      top: calc(-1 * (100vw * .63 - 40px) / 7 * 1.42 / 2);
     }
     .puzzle-played-enchant{
-      height: calc((100vw * .65 - 40px) / 7 * 1.42);
+      height: calc((100vw * .63 - 40px) / 7 * 1.42);
       padding: 10px;
     }
   }
 
   .puzzle-player-bar{
     .puzzle-circle{
-      width: 80px;
-      height: 80px;
+      width: 50px;
+      height: 50px;
       border-radius: 100px;
       margin: 0 5px;
-      border: 5px solid rgba(255,255,255, 0.5);
+      border: 3px solid rgba(255,255,255, 0.5);
       background: rgba(0,0,0,0.5);
 
       display: inline-block;
 
       text-align: center;
-      line-height: 70px;
-      font-size: 40px;
+      line-height: 43px;
+      font-size: 28px;
+
+        box-shadow: inset 0px 0px 10px 5px rgba(0,0,0,1);
 
     }
     .puzzle-gem-bar{
       display: inline-block;
-      width: calc(100% - 110px*4);
+      width: calc(100% - 65px*4);
       margin: 0 10px;
-      height: 55px;
+      height: 44px;
 
       padding: 4px 8px;
       border-radius: 100px;
       border: 2px solid rgba(255,255,255, 0.5);
       background: rgba(0,0,0,0.5);
+        box-shadow: inset 0px 0px 10px 5px rgba(0,0,0,1);
     }
   }
 }

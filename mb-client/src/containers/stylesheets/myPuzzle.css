@@ -1,63 +1,70 @@
-.my-puzzle .ant-tabs {
-  overflow: visible; }
-
-.my-puzzle .ant-tabs-nav {
-  width: 100%; }
-
-.my-puzzle .ant-tabs-tab {
-  width: calc(50% - 16px);
-  text-align: center;
-  font-size: 24px; }
-
-.my-puzzle .ant-row.ant-form-item {
-  margin-bottom: 2px; }
-
-.my-puzzle .puzzle-form {
-  padding: 20px; }
-
-.my-puzzle .puzzle-render {
-  background: #30303d;
-  padding: 20px; }
-
-.my-puzzle .puzzle-divider {
-  height: 10px;
-  background: #000;
-  opacity: 0.5;
-  width: 90%;
-  margin-left: 5%;
-  border-radius: 10px; }
-
-.my-puzzle .puzzle-played-slot {
-  display: block;
-  float: left;
-  padding: 5px;
-  width: calc((100vw * .65 - 40px) / 7);
-  height: calc((100vw * .65 - 40px) / 7 * 1.42 * 1.5); }
-  .my-puzzle .puzzle-played-slot .puzzle-played-creature {
-    position: relative;
-    top: calc(-1 * (100vw * .65 - 40px) / 7 * 1.42 / 2); }
-  .my-puzzle .puzzle-played-slot .puzzle-played-enchant {
-    height: calc((100vw * .65 - 40px) / 7 * 1.42);
-    padding: 10px; }
-
-.my-puzzle .puzzle-player-bar .puzzle-circle {
-  width: 80px;
-  height: 80px;
-  border-radius: 100px;
-  margin: 0 5px;
-  border: 5px solid rgba(255, 255, 255, 0.5);
-  background: rgba(0, 0, 0, 0.5);
-  display: inline-block;
-  text-align: center;
-  line-height: 70px;
-  font-size: 40px; }
-
-.my-puzzle .puzzle-player-bar .puzzle-gem-bar {
-  display: inline-block;
-  width: calc(100% - 110px*4);
-  margin: 0 10px;
-  height: 55px;
-  padding: 4px 8px;
-  border-radius: 100px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  background: rgba(0, 0, 0, 0.5); }
+.my-puzzle {
+  padding-left: 20px;
+  min-height: calc(100vh - 64px); }
+  .my-puzzle .ant-tabs {
+    overflow: visible; }
+  .my-puzzle .ant-tabs-nav {
+    width: 100%; }
+  .my-puzzle .ant-tabs-bar {
+    margin-bottom: 0; }
+  .my-puzzle .ant-tabs-tab {
+    width: calc(50% - 16px);
+    text-align: center;
+    font-size: 24px; }
+  .my-puzzle .ant-row.ant-form-item {
+    margin-bottom: 2px; }
+  .my-puzzle .puzzle-form {
+    padding: 20px;
+    background-image: url("/images/footer_lodyas_colored.png");
+    box-shadow: inset 0px 0px 20px 9px rgba(0, 0, 0, 0.75); }
+  .my-puzzle .puzzle-render {
+    padding: 10px 0px;
+    z-index: 1;
+    background: #30303d; }
+  .my-puzzle .puzzle-divider {
+    height: 10px; }
+  .my-puzzle .puzzle-played-cards {
+    box-shadow: inset 0px 0px 20px 9px rgba(0, 0, 0, 0.75);
+    margin: 5px 0;
+    border-radius: 5px;
+    padding: 5px;
+    width: calc((100vw * .63 - 40px));
+    margin: 10px auto;
+    background-image: url("/images/background/office.png"); }
+  .my-puzzle .puzzle-played-slot {
+    display: block;
+    float: left;
+    padding: 0 0.26%;
+    width: 14.25%;
+    height: calc((100vw * .63 - 40px) / 7 * 1.42 * 1.5 - 10px);
+    border-right: 3px solid rgba(0, 0, 0, 0.25); }
+    .my-puzzle .puzzle-played-slot:nth-child(7) {
+      border-right: 0; }
+    .my-puzzle .puzzle-played-slot .puzzle-played-creature {
+      position: relative;
+      top: calc(-1 * (100vw * .63 - 40px) / 7 * 1.42 / 2); }
+    .my-puzzle .puzzle-played-slot .puzzle-played-enchant {
+      height: calc((100vw * .63 - 40px) / 7 * 1.42);
+      padding: 10px; }
+  .my-puzzle .puzzle-player-bar .puzzle-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    margin: 0 5px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    text-align: center;
+    line-height: 43px;
+    font-size: 28px;
+    box-shadow: inset 0px 0px 10px 5px black; }
+  .my-puzzle .puzzle-player-bar .puzzle-gem-bar {
+    display: inline-block;
+    width: calc(100% - 65px*4);
+    margin: 0 10px;
+    height: 44px;
+    padding: 4px 8px;
+    border-radius: 100px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0px 0px 10px 5px black; }

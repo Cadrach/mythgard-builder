@@ -179,7 +179,9 @@ class DeckController extends Controller
         $deckId = $request->get('id');
         $userId = $this->_user()->id;
         $deck = Deck::findOrFail($deckId);
+        $deck->timestamps = false;
         $favorite = Favorite::where('ide_user', '=', $userId)->where('ide_deck', '=', $deckId)->first();
+
 
         $isFavorite = 0;
         if($favorite){

@@ -551,6 +551,7 @@ const playerDefaults = {
     hand: [],
     boneyard: [],
     deck: [],
+    artifacts: [],
     lane: {
         "1": {creature: null, enchant: null},
         "2": {creature: null, enchant: null},

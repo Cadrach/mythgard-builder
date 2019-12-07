@@ -74,7 +74,7 @@ class PuzzleImportButton extends React.Component {
                 const found = _.find(dictionary.powers, (v) => value == v.name.toLowerCase());
                 if(found){result[player][key] = toJS(found);}
             }
-            else if(['hand', 'deck', 'boneyard'].indexOf(key) >= 0){
+            else if(['hand', 'deck', 'boneyard', 'artifacts'].indexOf(key) >= 0){
                 value.split(";").forEach((cName) => {
                     if( ! cName.trim()){return}
                     const card = cardStore.cardByName(cName.trim());

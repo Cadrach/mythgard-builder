@@ -42,6 +42,7 @@ class PuzzleForm extends React.Component {
         const cards = this.props.dictionary.cards.all;
         const cardsCreature = _.filter(cards, {type: 'Creature'});
         const cardsEnchant = _.filter(cards, {type: 'LaneEnchantment'});
+        const cardsArtifacts = _.filter(cards, {type: 'Artifact'});
 
 
         const formItemLayout = {
@@ -134,6 +135,12 @@ class PuzzleForm extends React.Component {
                 <Form.Item label="Boneyard" {...formItemLayout}>
                     {getFieldDecorator('boneyard', {valuePropName: 'state.value'})(
                         <CardSelect styles={styleSelect} defaultValue={this.props.values.boneyard}/>
+                    )}
+                </Form.Item>
+
+                <Form.Item label="Artifacts" {...formItemLayout}>
+                    {getFieldDecorator('artifacts', {valuePropName: 'state.value'})(
+                        <CardSelect styles={styleSelect} options={cardsArtifacts} defaultValue={this.props.values.artifacts}/>
                     )}
                 </Form.Item>
 

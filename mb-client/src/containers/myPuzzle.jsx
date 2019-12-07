@@ -57,7 +57,7 @@ export default class MyPuzzle extends React.Component {
                 switch(key){
                     case 'path': case 'power':
                         exp.push(pfx + value.name); break;
-                    case 'hand': case 'boneyard': case 'deck':
+                    case 'hand': case 'boneyard': case 'deck': case 'artifacts':
                         exp.push(pfx + value.map(card => card.name_export).join("; ")); break;
                     case 'lane':
                         _.each(value, (v, k) => {

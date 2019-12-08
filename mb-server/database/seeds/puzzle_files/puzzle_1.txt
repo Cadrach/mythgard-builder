@@ -1,0 +1,36 @@
+intro: Sapo isn't the biggest fish in the sea!
+p1 mana: 9
+p1 life: 17
+p1 gems: BBBYYYOOO
+p1 burn: true
+p1 power: Reconstruct
+p1 path: Rainbow's End
+p1 artifacts: ollama ring
+p1 hand: serpent den; Bragi Runesinger;goliath's web;Soma Oasis;Root of the World;freki sidecar
+p1 deck: Oil Field;Eager Recruit; Scion of the Pride
+p1 boneyard: 
+p1 lane 1: ;
+p1 lane 2: Thieves Bazaar
+p1 lane 3: Raziel,Keeper of Secrets;Serpent Den
+p1 lane 4: Sapo,the Devourer;To Heaven and Back;
+p1 lane 5: Eager Recruit;
+p1 lane 6: ;
+p1 lane 7: ;
+p2 name: NomNomNom
+p2 portrait: ariel
+p2 mana: 10
+p2 life: 13
+p2 gems: GGGGGGRRBB
+p2 burn: false
+p2 power: Impel
+p2 path: Rainbow's End
+p2 hand: 
+p2 deck: 
+p2 boneyard: Magmataur
+p2 lane 1: Hopeless Necromanti;Odinthrone
+p2 lane 2: Ravine Guardian;Ruslan's Bight;
+p2 lane 3: ;
+p2 lane 4: iku-turso;Orpheum of Horrors
+p2 lane 5: Grinning Kolobok;
+p2 lane 6: Ravine Guardian;SeaHaven
+p2 lane 7: Ensnaring Serpent;

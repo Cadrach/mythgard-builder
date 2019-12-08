@@ -32,6 +32,7 @@ Route::prefix('json')->group(function(){
     Route::get('/deck/{id}', 'DeckController@getDetail');
     Route::get('/dictionaries', 'HomeController@getDictionaries');
     Route::get('/update-deck-download/{id}', 'DeckController@getUpdateDeckDownload');
+    Route::post('/puzzles', 'PuzzleController@getList');
 });
 
 //Authenticated pages under "json" prefix

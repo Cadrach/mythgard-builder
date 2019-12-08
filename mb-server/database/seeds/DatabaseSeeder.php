@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PowerSeeder::class);
         $this->call(PathSeeder::class);
         $this->call(DeckSeeder::class);
+        $this->call(PuzzleSeeder::class);
     }
 }

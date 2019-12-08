@@ -1,0 +1,36 @@
+intro: So you think you can Loop?
+p1 name: Minmaxer
+p1 mana: 10
+p1 life: 17
+p1 gems: BBYYYOOOO
+p1 burn: true
+p1 power: Reconstruct
+p1 path: Rainbow's End
+p1 artifacts: singing stone
+p1 hand: freki sidecar; eager recruit; serpent den; singing stone; demolition speedway; scion of the pride; beimeni falls; Soma Oasis;Bragi Runesinger
+p1 deck: 
+p1 boneyard: Eager Recruit;
+p1 lane 1: ;Root of the World
+p1 lane 2: ;Oil Field
+p1 lane 3: ;
+p1 lane 4: ;goliath's web
+p1 lane 5: ;
+p1 lane 6: ;beimeni falls
+p1 lane 7: fire eater;demolition speedway
+p2 name: rhino_rhino
+p2 mana: 6
+p2 life: 29
+p2 gems: BYOGRP
+p2 burn: false
+p2 power: Impel
+p2 path: Rainbow's End
+p2 hand: 
+p2 deck: 
+p2 boneyard: 
+p2 lane 1: ;
+p2 lane 2: ;
+p2 lane 3: ;
+p2 lane 4: ;
+p2 lane 5: ;
+p2 lane 6: ;
+p2 lane 7: ;

@@ -1,0 +1,36 @@
+intro: Angels and Demons
+p1 mana: 9
+p1 life: 17
+p1 gems: BBYYYOOOO
+p1 burn: true
+p1 power: Reconstruct
+p1 path: Rainbow's End
+p1 artifacts: Norn Datacore
+p1 hand: beimeni falls; Demolition Speedway;goliath's web;Root of the World;Soma Oasis;Rune of Denial;sandscape
+p1 deck: Eager Recruit;
+p1 boneyard:
+p1 lane 1: ;
+p1 lane 2: ;To Heaven and Back;
+p1 lane 3: ;freki sidecar;
+p1 lane 4: Scion of the Pride;Beimeni Falls;
+p1 lane 5: ;Demolition Speedway;
+p1 lane 6: ;
+p1 lane 7: ;
+p2 name: Necroakmantic
+p2 portrait: Gamayun
+p2 mana: 10
+p2 life: 9
+p2 gems: GGGGGYYYBB
+p2 burn: false
+p2 power: Impel
+p2 path: Disk of Circadia
+p2 hand:
+p2 deck:
+p2 boneyard: Sapo, the devourer
+p2 lane 1: Ensnaring Serpent;Ruslan's Bight;
+p2 lane 2: Hopeless Necromantic;Odinthrone;
+p2 lane 3: Grinning Kolobok;
+p2 lane 4: iku-turso;The Invisible City
+p2 lane 5: Grinning Kolobok;
+p2 lane 6: Ravine Guardian;SeaHaven
+p2 lane 7: Ensnaring Serpent;

@@ -1,0 +1,35 @@
+intro: Can you pass your initiation ritual into clan Urdnot?
+p1 name: Urdnot Wannabe
+p1 mana: 10
+p1 life: 19
+p1 gems: OOOOPPPPP
+p1 burn: true
+p1 power: Impel
+p1 path: Journey of Souls
+p1 hand: dark passenger; kite glider; seal of exile; scion of pride; spirit away; temptation; whitemoon arena;
+p1 deck: 
+p1 boneyard: 
+p1 lane 1: ;
+p1 lane 2: 
+p1 lane 3: kushiel the unforgiving;
+p1 lane 4: ;
+p1 lane 5: ;
+p1 lane 6: ;
+p1 lane 7: ;
+p2 name: Your Victim
+p2 mana: 10
+p2 life: 9
+p2 gems: BBBBYYYYYY
+p2 burn: false
+p2 power: Impel
+p2 path: Rainbow's End
+p2 hand: 
+p2 deck: godsbane transport
+p2 boneyard: 
+p2 lane 1: magpyre commando;
+p2 lane 2: godsbane transport;goliath's web
+p2 lane 3: magpyre commando;
+p2 lane 4: ;
+p2 lane 5: ;
+p2 lane 6: twin blanque;giant's stairway
+p2 lane 7: ;goliath's web

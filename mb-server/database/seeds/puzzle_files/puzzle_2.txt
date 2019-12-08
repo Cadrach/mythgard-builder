@@ -1,0 +1,38 @@
+intro: Dude, where's YOUR sidecar?
+p1 name: TuneStar
+p1 portrait: ariel
+p1 mana: 10
+p1 life: 17
+p1 gems: BBBYYYOOO
+p1 burn: true
+p1 power: Reconstruct
+p1 path: Rainbow's End
+p1 artifacts: singing stone
+p1 hand: serpent den; demolition speedway; clay effigy;goliath's web;thieves bazaar;xerxian observer
+p1 deck: Twin Junah;freki sidecar;
+p1 boneyard: 
+p1 lane 1: ;
+p1 lane 2: ;To Heaven and Back
+p1 lane 3: ;
+p1 lane 4: ;
+p1 lane 5: xerxian observer;Serpent Den
+p1 lane 6: ;Root of the World
+p1 lane 7: Eager Recruit
+p2 name: TuneStar
+p2 portrait: ariel
+p2 mana: 10
+p2 life: 3
+p2 gems: OOOOOBBBPP
+p2 burn: false
+p2 power: Impel
+p2 path: Rainbow's End
+p2 hand: 
+p2 deck: 
+p2 boneyard: 
+p2 lane 1: Zen archer;
+p2 lane 2: ;goliath's web
+p2 lane 3: Faceless Construct;
+p2 lane 4: lavish proxy;seahaven
+p2 lane 5: Faceless Construct;
+p2 lane 6: ensnaring serpent;goliath's web
+p2 lane 7: Zen archer;Treasury of Petra

@@ -1,0 +1,11 @@
+.decks-list-table{
+  tr{
+    cursor: pointer;
+  }
+  .border-left{
+    border-left: 1px solid #17171f;
+  }
+  .text-center, .ant-table-thead>tr>th.text-center{
+    text-align: center;
+  }
+}

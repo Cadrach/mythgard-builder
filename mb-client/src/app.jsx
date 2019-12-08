@@ -17,6 +17,7 @@ import MyPuzzle from "./containers/myPuzzle";
 import {Icon} from "react-fa/lib";
 import Authenticate from "./containers/authenticate";
 import Home from "./containers/home";
+import PuzzlesList from "./containers/puzzlesList";
 
 @inject('dictionary')
 @observer
@@ -67,6 +68,14 @@ class App extends React.Component {
                             </Menu.Item>
                             :null}
                         { !isLoading ?
+                            <Menu.Item key="/puzzles">
+                                <NavLink to="/puzzles">
+                                    <Icon name="puzzle-piece" size="2x" style={{...styleIcon, position: 'relative', top:5}}/>
+                                    Puzzles
+                                </NavLink>
+                            </Menu.Item>
+                            :null}
+                        { !isLoading ?
                             <Menu.Item key="/puzzle">
                                 <NavLink to="/puzzle">
                                     <Icon name="puzzle-piece" size="2x" style={{...styleIcon, position: 'relative', top:5}}/>
@@ -96,6 +105,7 @@ class App extends React.Component {
                     <Route exact path="/decks/:id" component={DeckDetail}/>
                     <Route exact path="/auth" component={Authenticate}/>
                     <Route exact path="/puzzle/:id?" component={MyPuzzle}/>
+                    <Route exact path="/puzzles" component={PuzzlesList}/>
                     <Route exact path="/" component={Home}/>
                 </div>
             </Layout>
